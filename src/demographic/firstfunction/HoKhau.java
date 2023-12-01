@@ -428,25 +428,25 @@ public class HoKhau extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
-    
+
     // ------------- DISPLAY PEOPLE ---------------------
-    private void displayHoKhau(){
+    private void displayHoKhau() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
             st = conn.createStatement();
-            rs = st.executeQuery("SELECT \n" +
-"    so_ho_khau AS 'Số hộ khẩu',\n" +
-"    khu_vuc AS 'Khu vực',\n" +
-"    dia_chi AS 'Địa chỉ',\n" +
-"    ngay_lap AS 'Ngày lập',\n" +
-"    id_chu_ho AS 'Chủ hộ'\n" +
-"FROM ho_khau;");
+            rs = st.executeQuery("SELECT \n"
+                    + "    so_ho_khau AS 'Số hộ khẩu',\n"
+                    + "    khu_vuc AS 'Khu vực',\n"
+                    + "    dia_chi AS 'Địa chỉ',\n"
+                    + "    ngay_lap AS 'Ngày lập',\n"
+                    + "    id_chu_ho AS 'Chủ hộ'\n"
+                    + "FROM ho_khau;");
             tHoKhau.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-            
+
         }
     }
-    
+
     // ------------ CLEAR TEXT FIELD AFTER ADDING PEOPLE -------------
     private void clearAfterAdding() {
         tfKhuVuc.setText("");
@@ -455,20 +455,19 @@ public class HoKhau extends javax.swing.JFrame {
         tfIdChuHo.setText("");
         tfNgayLap.setText("");
     }
-    
+
     // ------------- Save the data --------------------
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
         // TODO add your handling code here:
-        if (tfKhuVuc.getText().isEmpty() ||
-                tfSoHoKhau.getText().isEmpty() ||
-                tfDiaChi.getText().isEmpty() ||
-                tfNgayLap.getText().isEmpty() ||
-                tfIdChuHo.getText().isEmpty()) {
+        if (tfKhuVuc.getText().isEmpty()
+                || tfSoHoKhau.getText().isEmpty()
+                || tfDiaChi.getText().isEmpty()
+                || tfNgayLap.getText().isEmpty()
+                || tfIdChuHo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Missing information");
-        }
-        else {
+        } else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
                 PreparedStatement add = conn.prepareStatement("INSERT INTO ho_khau VALUES (?,?,?,?,?) ");
                 add.setString(1, tfSoHoKhau.getText());
                 add.setString(2, tfKhuVuc.getText());
@@ -476,12 +475,11 @@ public class HoKhau extends javax.swing.JFrame {
                 add.setString(4, tfNgayLap.getText());
                 add.setString(5, tfIdChuHo.getText());
                 int row = add.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Đã thêm." );
+                JOptionPane.showMessageDialog(this, "Đã thêm.");
                 conn.close();
                 displayHoKhau();
                 clearAfterAdding();
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
         }
@@ -496,44 +494,42 @@ public class HoKhau extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (key.equals("")) {
             JOptionPane.showMessageDialog(this, "Select a person");
-        }
-        else {
+        } else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
                 String query = "Delete From ho_khau where so_ho_khau = \"" + key + "\"";
                 Statement deletePerson = conn.createStatement();
                 deletePerson.executeUpdate(query);
                 JOptionPane.showMessageDialog(this, "Deleted!");
                 displayHoKhau();
-            } catch (Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
         }
     }//GEN-LAST:event_btnXoaMouseClicked
 
-    
     // ----------------- EXTRACT DATA FROM CLICK ON TABLE -----------------
     String key = "";
     private void tHoKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tHoKhauMouseClicked
-        DefaultTableModel model = (DefaultTableModel)tHoKhau.getModel();
+        DefaultTableModel model = (DefaultTableModel) tHoKhau.getModel();
         int indexRow = tHoKhau.getSelectedRow();
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-                String query = "SELECT * FROM ho_khau where so_ho_khau = \"" + key + "\"";
-                Statement statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
-                while (resultSet.next()) {
-                    tfSoHoKhau.setText(resultSet.getString("so_ho_khau"));
-                    tfKhuVuc.setText(resultSet.getString("khu_vuc"));
-                    tfDiaChi.setText(resultSet.getString("dia_chi"));
-                    tfNgayLap.setText(resultSet.getString("ngay_lap"));
-                    tfIdChuHo.setText(resultSet.getString("id_chu_ho"));
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
+            String query = "SELECT * FROM ho_khau where so_ho_khau = \"" + key + "\"";
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                tfSoHoKhau.setText(resultSet.getString("so_ho_khau"));
+                tfKhuVuc.setText(resultSet.getString("khu_vuc"));
+                tfDiaChi.setText(resultSet.getString("dia_chi"));
+                tfNgayLap.setText(resultSet.getString("ngay_lap"));
+                tfIdChuHo.setText(resultSet.getString("id_chu_ho"));
 
-                }
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(this, e);
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
     }//GEN-LAST:event_tHoKhauMouseClicked
 
     // -------------------- BACK TO MAIN FORM ----------------------------
@@ -543,16 +539,14 @@ public class HoKhau extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lbThoatMouseClicked
 
-    
     // -------------------------- EDIT DATA --------------------------------
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
         if (key.equals("")) {
             JOptionPane.showMessageDialog(this, "Select a person to edit");
-        }
-        else {
+        } else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
                 String query = "Update ho_khau Set so_ho_khau = ?, "
                         + "khu_vuc = ?, "
                         + "dia_chi = ?, "
@@ -570,8 +564,7 @@ public class HoKhau extends javax.swing.JFrame {
                 conn.close();
                 displayHoKhau();
                 clearAfterAdding();
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
         }
@@ -580,29 +573,29 @@ public class HoKhau extends javax.swing.JFrame {
     private void btnTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimMouseClicked
         // TODO add your handling code here:
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
             st = conn.createStatement();
             String soHoKhau = tfSoHoKhau.getText();
             String khuVuc = tfKhuVuc.getText();
             String diaChi = tfDiaChi.getText();
             String ngayLap = tfNgayLap.getText();
             String chuHoKhau = tfIdChuHo.getText();
-            String sql ="SELECT \n" +
-"    so_ho_khau AS 'Số hộ khẩu',\n" +
-"    khu_vuc AS 'Khu vực',\n" +
-"    dia_chi AS 'Địa chỉ',\n" +
-"    ngay_lap AS 'Ngày lập',\n" +
-"    id_chu_ho AS 'Chủ hộ'\n" +
-"FROM ho_khau \n"+
-                    "WHERE (so_ho_khau = \"" + soHoKhau + "\" or \"\" = \"" + soHoKhau + "\") " + 
-                    "AND (khu_vuc = \"" + khuVuc + "\" or \"\" = \"" + khuVuc + "\") " +
-                    "AND (dia_chi = \"" + diaChi + "\" or \"\" = \"" + diaChi + "\") " +
-                    "AND (ngay_lap = \"" + ngayLap + "\" or \"\" = \"" + ngayLap + "\") " +
-                    "AND (id_chu_ho = \"" + chuHoKhau + "\" or \"\" = \"" + chuHoKhau + "\") " ;
-            rs = st.executeQuery(sql) ;
+            String sql = "SELECT \n"
+                    + "    so_ho_khau AS 'Số hộ khẩu',\n"
+                    + "    khu_vuc AS 'Khu vực',\n"
+                    + "    dia_chi AS 'Địa chỉ',\n"
+                    + "    ngay_lap AS 'Ngày lập',\n"
+                    + "    id_chu_ho AS 'Chủ hộ'\n"
+                    + "FROM ho_khau \n"
+                    + "WHERE (so_ho_khau = \"" + soHoKhau + "\" or \"\" = \"" + soHoKhau + "\") "
+                    + "AND (khu_vuc = \"" + khuVuc + "\" or \"\" = \"" + khuVuc + "\") "
+                    + "AND (dia_chi = \"" + diaChi + "\" or \"\" = \"" + diaChi + "\") "
+                    + "AND (ngay_lap = \"" + ngayLap + "\" or \"\" = \"" + ngayLap + "\") "
+                    + "AND (id_chu_ho = \"" + chuHoKhau + "\" or \"\" = \"" + chuHoKhau + "\") ";
+            rs = st.executeQuery(sql);
             tHoKhau.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-            
+
         }
     }//GEN-LAST:event_btnTimMouseClicked
 
@@ -627,7 +620,7 @@ public class HoKhau extends javax.swing.JFrame {
 
     private void lbHoKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHoKhauMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_lbHoKhauMouseClicked
 
     private void lbTamVangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTamVangMouseClicked
@@ -645,7 +638,7 @@ public class HoKhau extends javax.swing.JFrame {
     private void lbKhaiTuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbKhaiTuMouseClicked
         // TODO add your handling code here:
         new KhaiTu().setVisible(true);
-        this.dispose();        
+        this.dispose();
     }//GEN-LAST:event_lbKhaiTuMouseClicked
 
     /**
@@ -655,7 +648,7 @@ public class HoKhau extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

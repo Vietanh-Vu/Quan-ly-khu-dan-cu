@@ -412,27 +412,27 @@ public class KhaiTu extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
-    
+
     // ------------- DISPLAY PEOPLE ---------------------
-    private void displayKhaiTu(){
+    private void displayKhaiTu() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
             st = conn.createStatement();
-            String sql = "SELECT\n" +
-"    so_giay_khai_tu AS 'Số giấy khai tử',\n" +
-"    khai_tu.so_CMND AS 'Số CMND',\n" +
-"    nhan_khau.ho_ten AS 'Họ và tên',\n" +
-"    thoi_gian AS 'Thời gian',\n" +
-"    li_do AS 'Lý do' \n" +
-"FROM khai_tu JOIN nhan_khau ON khai_tu.so_CMND = nhan_khau.so_CMND;";
+            String sql = "SELECT\n"
+                    + "    so_giay_khai_tu AS 'Số giấy khai tử',\n"
+                    + "    khai_tu.so_CMND AS 'Số CMND',\n"
+                    + "    nhan_khau.ho_ten AS 'Họ và tên',\n"
+                    + "    thoi_gian AS 'Thời gian',\n"
+                    + "    li_do AS 'Lý do' \n"
+                    + "FROM khai_tu JOIN nhan_khau ON khai_tu.so_CMND = nhan_khau.so_CMND;";
             System.out.println(sql);
             rs = st.executeQuery(sql);
             tKhaiTu.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-            
+
         }
     }
-    
+
     // ------------ CLEAR TEXT FIELD AFTER ADDING PEOPLE -------------
     private void clearAfterAdding() {
         tfCMND.setText("");
@@ -440,31 +440,29 @@ public class KhaiTu extends javax.swing.JFrame {
         tfIdKhaiTu.setText("");
         tfLyDo.setText("");
     }
-    
+
     // ------------- Save the data --------------------
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
         // TODO add your handling code here:
-        if (tfCMND.getText().isEmpty() ||
-                tfIdKhaiTu.getText().isEmpty() ||
-                tfThoigian.getText().isEmpty() ||
-                tfLyDo.getText().isEmpty()) {
+        if (tfCMND.getText().isEmpty()
+                || tfIdKhaiTu.getText().isEmpty()
+                || tfThoigian.getText().isEmpty()
+                || tfLyDo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Missing information");
-        }
-        else {
+        } else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
                 PreparedStatement add = conn.prepareStatement("INSERT INTO khai_tu VALUES (?,?,?,?) ");
                 add.setString(1, tfIdKhaiTu.getText());
                 add.setString(2, tfCMND.getText());
                 add.setString(3, tfThoigian.getText());
                 add.setString(4, tfLyDo.getText());
                 int row = add.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Đã thêm." );
+                JOptionPane.showMessageDialog(this, "Đã thêm.");
                 conn.close();
                 displayKhaiTu();
                 clearAfterAdding();
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
         }
@@ -479,44 +477,42 @@ public class KhaiTu extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (key.equals("")) {
             JOptionPane.showMessageDialog(this, "Select a person");
-        }
-        else {
+        } else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
                 String query = "Delete From khai_tu where so_giay_khai_tu = \"" + key + "\"";
                 Statement deletePerson = conn.createStatement();
                 deletePerson.executeUpdate(query);
                 JOptionPane.showMessageDialog(this, "Deleted!");
                 displayKhaiTu();
-            } catch (Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
         }
     }//GEN-LAST:event_btnXoaMouseClicked
 
-    
     // ----------------- EXTRACT DATA FROM CLICK ON TABLE -----------------
     String key = "";
     private void tKhaiTuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tKhaiTuMouseClicked
-        DefaultTableModel model = (DefaultTableModel)tKhaiTu.getModel();
+        DefaultTableModel model = (DefaultTableModel) tKhaiTu.getModel();
         int indexRow = tKhaiTu.getSelectedRow();
         // column 1 cause the key is column 1
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-                String query = "SELECT * FROM khai_tu where so_giay_khai_tu = \"" + key + "\"";
-                Statement statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
-                while (resultSet.next()) {
-                    tfIdKhaiTu.setText(resultSet.getString("so_giay_khai_tu"));
-                    tfCMND.setText(resultSet.getString("so_CMND"));
-                    tfThoigian.setText(resultSet.getString("thoi_gian"));
-                    tfLyDo.setText(resultSet.getString("li_do"));
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
+            String query = "SELECT * FROM khai_tu where so_giay_khai_tu = \"" + key + "\"";
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                tfIdKhaiTu.setText(resultSet.getString("so_giay_khai_tu"));
+                tfCMND.setText(resultSet.getString("so_CMND"));
+                tfThoigian.setText(resultSet.getString("thoi_gian"));
+                tfLyDo.setText(resultSet.getString("li_do"));
 
-                }
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(this, e);
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
     }//GEN-LAST:event_tKhaiTuMouseClicked
 
     // -------------------- BACK TO MAIN FORM ----------------------------
@@ -526,16 +522,14 @@ public class KhaiTu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lbThoatMouseClicked
 
-    
     // -------------------------- EDIT DATA --------------------------------
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
         if (key.equals("")) {
             JOptionPane.showMessageDialog(this, "Select a person to edit");
-        }
-        else {
+        } else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
                 String query = "Update khai_tu Set so_giay_khai_tu = ?, "
                         + "so_CMND = ?, "
                         + "thoi_gian = ?, "
@@ -551,8 +545,7 @@ public class KhaiTu extends javax.swing.JFrame {
                 conn.close();
                 displayKhaiTu();
                 clearAfterAdding();
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
         }
@@ -561,27 +554,27 @@ public class KhaiTu extends javax.swing.JFrame {
     private void btnTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimMouseClicked
         // TODO add your handling code here:
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic", "root", "");
             st = conn.createStatement();
             String idKhaiTu = tfIdKhaiTu.getText();
             String CMND = tfCMND.getText();
             String thoiGian = tfThoigian.getText();
             String lyDo = tfLyDo.getText();
-            String sql ="SELECT \n" +
-"    so_giay_khai_tu AS 'Số giấy khai tử',\n" +
-"    so_CMND AS 'Số CMND',\n" +
-"    thoi_gian AS 'Thời gian',\n" +
-"    li_do AS 'Lý do',\n" +
-"FROM khai_tu \n"+
-                    "WHERE (so_giay_khai_tu = \"" + idKhaiTu + "\" or \"\" = \"" + idKhaiTu + "\") " + 
-                    "AND (so_CMND = \"" + CMND + "\" or \"\" = \"" + CMND + "\") " +
-                    "AND (thoi_gian = \"" + thoiGian + "\" or \"\" = \"" + thoiGian + "\") " +
-                    "AND (li_do = \"" + lyDo + "\" or \"\" = \"" + lyDo + "\") " ;
+            String sql = "SELECT \n"
+                    + "    so_giay_khai_tu AS 'Số giấy khai tử',\n"
+                    + "    so_CMND AS 'Số CMND',\n"
+                    + "    thoi_gian AS 'Thời gian',\n"
+                    + "    li_do AS 'Lý do',\n"
+                    + "FROM khai_tu \n"
+                    + "WHERE (so_giay_khai_tu = \"" + idKhaiTu + "\" or \"\" = \"" + idKhaiTu + "\") "
+                    + "AND (so_CMND = \"" + CMND + "\" or \"\" = \"" + CMND + "\") "
+                    + "AND (thoi_gian = \"" + thoiGian + "\" or \"\" = \"" + thoiGian + "\") "
+                    + "AND (li_do = \"" + lyDo + "\" or \"\" = \"" + lyDo + "\") ";
             System.out.println(sql);
-            rs = st.executeQuery(sql) ;
+            rs = st.executeQuery(sql);
             tKhaiTu.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-            
+
         }
     }//GEN-LAST:event_btnTimMouseClicked
 
@@ -629,7 +622,7 @@ public class KhaiTu extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

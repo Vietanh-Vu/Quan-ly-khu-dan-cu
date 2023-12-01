@@ -222,7 +222,8 @@ public class Login extends javax.swing.JFrame {
     private User getAuthenticatedUser(String username, String password) {
         User user = null;
 
-        final String DB_URL = "jdbc:mysql://localhost/demographic";
+//        final String DB_URL = "jdbc:mysql://localhost/demographic";
+        final String DB_URL = "jdbc:mysql://localhost:3306/demographic";
         final String USER_NAME = "root";
         final String PASSWORD = "";
 
