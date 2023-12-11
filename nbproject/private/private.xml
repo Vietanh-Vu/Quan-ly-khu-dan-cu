@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Demographic/src/demographic/loginsection/Login.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Demographic/src/demographic/firstfunction/NhanKhau.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Demographic/src/demographic/firstfunction/KhaiTu.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Demographic/src/demographic/User.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/ThemSuaXoaNhanKhauForm.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/quanlynhankhau/HoKhauMainPage.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/SuaXoaHoKhau.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/NhanKhauMainPage.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/HoKhauMainPage.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/Splash.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/ThemHoKhauForm.java</file>
         </group>
     </open-files>
 </project-private>
