@@ -9,6 +9,7 @@ import demographic.quanlynhankhau.*;
 import demographic.User;
 import demographic.login.MainFormForAdmin;
 import demographic.login.MainFormForUser;
+import demographic.models.NhanKhau;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,12 +30,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class NhanKhauMainPage extends javax.swing.JFrame {
 
+    NhanKhau nhanKhau = null;
+    
     /**
      * Creates new form NhanKhauMainPage
      */
     public NhanKhauMainPage() {
         initComponents();
-        displayHoKhau();
+        displayNhanKhau();
     }
 
     /**
@@ -62,7 +65,8 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
         tNhanKhau = new javax.swing.JTable();
         btnTrinhBanGhi = new javax.swing.JButton();
         In = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        tfTim = new javax.swing.JTextField();
+        btnThem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,7 +76,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
 
         lbHoKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbHoKhau.setForeground(new java.awt.Color(255, 255, 255));
-        lbHoKhau.setText("Hộ khẩu");
+        lbHoKhau.setText("Nhân khẩu");
         lbHoKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbHoKhauMouseClicked(evt);
@@ -81,7 +85,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
 
         lbNhanKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbNhanKhau.setForeground(new java.awt.Color(255, 255, 255));
-        lbNhanKhau.setText("Nhân khẩu");
+        lbNhanKhau.setText("Hộ khẩu");
         lbNhanKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbNhanKhauMouseClicked(evt);
@@ -181,7 +185,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
 
         btnTim.setBackground(new java.awt.Color(0, 51, 51));
         btnTim.setForeground(new java.awt.Color(255, 255, 255));
-        btnTim.setText("Tìm");
+        btnTim.setText("Tìm theo số CMND");
         btnTim.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTimMouseClicked(evt);
@@ -259,10 +263,24 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setForeground(new java.awt.Color(0, 102, 102));
-        jTextField1.setText("Nhập thông tin");
-        jTextField1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        jTextField1.setSelectedTextColor(new java.awt.Color(102, 102, 102));
+        tfTim.setForeground(new java.awt.Color(0, 102, 102));
+        tfTim.setText("Nhập số CMND");
+        tfTim.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        tfTim.setSelectedTextColor(new java.awt.Color(102, 102, 102));
+
+        btnThem.setBackground(new java.awt.Color(0, 51, 51));
+        btnThem.setForeground(new java.awt.Color(255, 255, 255));
+        btnThem.setText("Thêm");
+        btnThem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnThemMouseClicked(evt);
+            }
+        });
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout nhanKhauPanelLayout = new javax.swing.GroupLayout(nhanKhauPanel);
         nhanKhauPanel.setLayout(nhanKhauPanelLayout);
@@ -281,13 +299,15 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(btnTrinhBanGhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(In, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
-                        .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                        .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfTim, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44))))
         );
         nhanKhauPanelLayout.setVerticalGroup(
@@ -302,10 +322,10 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
                     .addComponent(btnSua)
                     .addComponent(In)
                     .addComponent(btnTim)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(tfTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThem))
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -325,6 +345,41 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
     private void InActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InActionPerformed
         // TODO add your handling code here:
         try {
+            // ----- set table ----
+             try {
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+                st = conn.createStatement();
+                String sql ="SELECT \n" +
+                    "  nhan_khau_id AS 'Nhân khẩu ID',\n" +
+                    "  CONVERT(ho_ten USING utf8) AS 'Họ tên',\n" +
+                    "  CONVERT(biet_danh USING utf8) AS 'Biệt danh',\n" +
+                    "  gioi_tinh AS 'Giới tính',\n" +
+                    "  ngay_sinh AS 'Ngày sinh',\n" +
+                    "  so_CMND AS 'Số CMND',\n" +
+                    "  ngay_cap_CMND AS 'Ngày cấp CMND',\n" +
+                    "  CONVERT(noi_cap_CMND USING utf8) AS 'Nơi cấp CMND',\n" +
+                    "  CONVERT(noi_sinh USING utf8) AS 'Nơi sinh',\n" +
+                    "  CONVERT(nguyen_quan USING utf8) AS 'Nguyên quán',\n" +
+                    "  CONVERT(dan_toc USING utf8) AS 'Dân tộc',\n" +
+                    "  CONVERT(nghe_nghiep USING utf8) AS 'Nghề nghiệp',\n" +
+                    "  CONVERT(noi_lam_viec USING utf8) AS 'Nơi làm việc',\n" +
+                    "  quan_he_voi_chu_ho AS 'Quan hệ với chủ hộ',\n" +
+                    "  ngay_dang_ky_thuong_tru AS 'Ngày đăng ký thường trú',\n" +
+                    "  CONVERT(dia_chi_truoc_khi_chuyen USING utf8) AS 'Địa chỉ trước khi chuyển',\n" +
+                    "  chuyen_di AS 'Chuyển đi',\n" +
+                    "  deleted AS 'Đã xóa',\n" +
+                    "  so_ho_khau AS 'Số hộ khẩu',\n" +
+                    "  qua_doi AS 'Qua đời'\n" +
+                    "FROM nhan_khau\n" +
+                    "ORDER BY so_ho_khau;";
+                rs = st.executeQuery(sql);
+                tNhanKhau.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+                displayNhanKhau();
+
+            }
             JFileChooser jFileChooser = new JFileChooser();
             jFileChooser.showSaveDialog(this);
             File saveFile = jFileChooser.getSelectedFile();
@@ -349,15 +404,20 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
                         }
                     }
                 }
+                
+                displayNhanKhau();
 
                 FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
                 wb.write(out);
                 wb.close();
                 out.close();
+                conn.close();
                 openFile(saveFile.toString());
             }
             else {
-                JOptionPane.showMessageDialog(null, "Error");
+                JOptionPane.showMessageDialog(null, "Lỗi kết nối");
+                displayNhanKhau();
+
             }
         } catch (Exception e) {
         }
@@ -374,7 +434,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
 
     private void btnTrinhBanGhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrinhBanGhiMouseClicked
         // TODO add your handling code here:
-        displayHoKhau();
+        displayNhanKhau();
     }//GEN-LAST:event_btnTrinhBanGhiMouseClicked
 
     private void tNhanKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tNhanKhauMouseClicked
@@ -382,58 +442,56 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
         int indexRow = tNhanKhau.getSelectedRow();
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-            String query = "SELECT * FROM ho_khau where so_ho_khau = \"" + key + "\"";
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+            String query = "SELECT * FROM nhan_khau where nhan_khau_id = " + key + ";";
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
+            NhanKhau nhanKhauMoi = new NhanKhau();
             while (resultSet.next()) {
-//                tfSoHoKhau.setText(resultSet.getString("so_ho_khau"));
-//                tfKhuVuc.setText(resultSet.getString("khu_vuc"));
-//                tfDiaChi.setText(resultSet.getString("dia_chi"));
-//                tfNgayLap.setText(resultSet.getString("ngay_lap"));
-//                tfIdChuHo.setText(resultSet.getString("id_chu_ho"));
-
+                nhanKhauMoi.setNhanKhauId(resultSet.getInt("nhan_khau_id"));
+                nhanKhauMoi.setHoTen(resultSet.getString("ho_ten"));
+                nhanKhauMoi.setBietDanh(resultSet.getString("biet_danh"));
+                nhanKhauMoi.setGioiTinh(resultSet.getString("gioi_tinh"));
+                nhanKhauMoi.setNgaySinh(resultSet.getString("ngay_sinh"));
+                nhanKhauMoi.setSoCMND(resultSet.getString("so_CMND"));
+                nhanKhauMoi.setNgayCapCMND(resultSet.getString("ngay_cap_CMND"));
+                nhanKhauMoi.setNoiCapCMND(resultSet.getString("noi_cap_CMND"));
+                nhanKhauMoi.setNoiSinh(resultSet.getString("noi_sinh"));
+                nhanKhauMoi.setNguyenQuan(resultSet.getString("nguyen_quan"));
+                nhanKhauMoi.setDanToc(resultSet.getString("dan_toc"));
+                nhanKhauMoi.setNgheNghiep(resultSet.getString("nghe_nghiep"));
+                nhanKhauMoi.setNoiLamViec(resultSet.getString("noi_lam_viec"));
+                nhanKhauMoi.setQuanHeVoiChuHo(resultSet.getString("quan_he_voi_chu_ho"));
+                nhanKhauMoi.setNgayDangKyThuongTru(resultSet.getString("ngay_dang_ky_thuong_tru"));
+                nhanKhauMoi.setDiaChiTruocKhiChuyen(resultSet.getString("dia_chi_truoc_khi_chuyen"));
+                nhanKhauMoi.setChuyenDi(resultSet.getString("chuyen_di"));
+                nhanKhauMoi.setDeleted(resultSet.getInt("deleted"));
+                nhanKhauMoi.setSoHoKhau(resultSet.getString("so_ho_khau"));
+                nhanKhauMoi.setQuaDoi(resultSet.getString("qua_doi"));
             }
+            nhanKhau = nhanKhauMoi;
+            
         } catch (Exception e){
-            JOptionPane.showMessageDialog(this, e);
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
         }
     }//GEN-LAST:event_tNhanKhauMouseClicked
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     // -------------------------- EDIT DATA --------------------------------
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
-        if (key.equals("")) {
-            JOptionPane.showMessageDialog(this, "Select a person to edit");
+                // ------ kiểm tra xem đã chọn hộ khẩu chưa
+        if (key.equals("") || nhanKhau == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một nhân khẩu trong bảng\n"
+                    + "để theo dõi thêm thông tin về nhân khẩu đó.");
+            return;
         }
-        else {
-            try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-                String query = "Update ho_khau Set so_ho_khau = ?, "
-                + "khu_vuc = ?, "
-                + "dia_chi = ?, "
-                + "ngay_lap = ?, "
-                + "id_chu_ho = ? "
-                + "where so_ho_khau = \"" + key + "\"";
-                PreparedStatement update = conn.prepareStatement(query);
-//                update.setString(1, tfSoHoKhau.getText());
-//                update.setString(2, tfKhuVuc.getText());
-//                update.setString(3, tfDiaChi.getText());
-//                update.setString(4, tfNgayLap.getText());
-//                update.setString(5, tfIdChuHo.getText());
-                int row = update.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Đã sửa thông tin của hộ khẩu");
-                conn.close();
-                displayHoKhau();
-                clearAfterAdding();
-            }
-            catch (Exception e){
-                JOptionPane.showMessageDialog(this, e);
-            }
-        }
+        // ------ truyền vào form sửa hộ khẩu khẩu
+        SuaXoaNhanKhauForm newForm =  new SuaXoaNhanKhauForm(nhanKhau);
+        newForm.setVisible(true);
     }//GEN-LAST:event_btnSuaMouseClicked
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
@@ -443,29 +501,40 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
     private void btnTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimMouseClicked
         // TODO add your handling code here:
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
             st = conn.createStatement();
-//            String soHoKhau = tfSoHoKhau.getText();
-//            String khuVuc = tfKhuVuc.getText();
-//            String diaChi = tfDiaChi.getText();
-//            String ngayLap = tfNgayLap.getText();
-//            String chuHoKhau = tfIdChuHo.getText();
-//            String sql ="SELECT \n" +
-//            "    so_ho_khau AS 'Số hộ khẩu',\n" +
-//            "    khu_vuc AS 'Khu vực',\n" +
-//            "    dia_chi AS 'Địa chỉ',\n" +
-//            "    ngay_lap AS 'Ngày lập',\n" +
-//            "    id_chu_ho AS 'Chủ hộ'\n" +
-//            "FROM ho_khau \n"+
-//            "WHERE (so_ho_khau = \"" + soHoKhau + "\" or \"\" = \"" + soHoKhau + "\") " +
-//            "AND (khu_vuc = \"" + khuVuc + "\" or \"\" = \"" + khuVuc + "\") " +
-//            "AND (dia_chi = \"" + diaChi + "\" or \"\" = \"" + diaChi + "\") " +
-//            "AND (ngay_lap = \"" + ngayLap + "\" or \"\" = \"" + ngayLap + "\") " +
-//            "AND (id_chu_ho = \"" + chuHoKhau + "\" or \"\" = \"" + chuHoKhau + "\") " ;
-//            rs = st.executeQuery(sql) ;
-//            tHoKhau.setModel(DbUtils.resultSetToTableModel(rs));
+            String thongTin = tfTim.getText();
+            String sql = "SELECT \n" +
+                    "  nhan_khau_id AS 'Nhân khẩu ID',\n" +
+                    "  CONVERT(ho_ten USING utf8) AS 'Họ tên',\n" +
+    //                "  CONVERT(biet_danh USING utf8) AS 'Biệt danh',\n" +
+                    "  gioi_tinh AS 'Giới tính',\n" +
+                    "  ngay_sinh AS 'Ngày sinh',\n" +
+                    "  so_CMND AS 'Số CMND',\n" +
+    //                "  ngay_cap_CMND AS 'Ngày cấp CMND',\n" +
+    //                "  CONVERT(noi_cap_CMND USING utf8) AS 'Nơi cấp CMND',\n" +
+                    "  CONVERT(noi_sinh USING utf8) AS 'Nơi sinh',\n" +
+                    "  CONVERT(nguyen_quan USING utf8) AS 'Nguyên quán',\n" +
+                    "  CONVERT(dan_toc USING utf8) AS 'Dân tộc',\n" +
+                    "  CONVERT(nghe_nghiep USING utf8) AS 'Nghề nghiệp',\n" +
+                    "  CONVERT(noi_lam_viec USING utf8) AS 'Nơi làm việc',\n" +
+                    "  quan_he_voi_chu_ho AS 'Quan hệ với chủ hộ',\n" +
+    //                "  ngay_dang_ky_thuong_tru AS 'Ngày đăng ký thường trú',\n" +
+    //                "  CONVERT(dia_chi_truoc_khi_chuyen USING utf8) AS 'Địa chỉ trước khi chuyển',\n" +
+                    "  chuyen_di AS 'Chuyển đi',\n" +
+    //                "  deleted AS 'Đã xóa',\n" +
+                    "  so_ho_khau AS 'Số hộ khẩu',\n" +
+                    "  qua_doi AS 'Qua đời'\n" +
+                    "FROM nhan_khau\n" +
+                    "WHERE nhan_khau.so_CMND = '" + thongTin + "'\n" +
+                    "ORDER BY so_ho_khau;";
+            
+            rs = st.executeQuery(sql) ;
+            tNhanKhau.setModel(DbUtils.resultSetToTableModel(rs));
+            tfTim.setText("Nhập số CMND");
         } catch (Exception e) {
-
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu.");
         }
     }//GEN-LAST:event_btnTimMouseClicked
 
@@ -491,6 +560,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
         }
         this.dispose();
     }//GEN-LAST:event_lbThoatMouseClicked
+
 
     private void lbKhaiTuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbKhaiTuMouseClicked
         // TODO add your handling code here:
@@ -532,6 +602,16 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lbKhaiTu1MouseClicked
 
+    private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
+        // TODO add your handling code here:
+        ThemNhanKhauForm newForm = new ThemNhanKhauForm();
+        newForm.setVisible(true);
+    }//GEN-LAST:event_btnThemMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThemActionPerformed
+
     // ------------ START TO CODE HERE -----------------
     // ------------- User parameter --------------------
     public User user;
@@ -541,36 +621,46 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
     ResultSet rs = null;
     Statement st = null;
     
-    // ------------- DISPLAY PEOPLE ---------------------
-    private void displayHoKhau(){
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-            st = conn.createStatement();
-            rs = st.executeQuery("SELECT \n" +
-"    so_ho_khau AS 'Số hộ khẩu',\n" +
-"    khu_vuc AS 'Khu vực',\n" +
-"    dia_chi AS 'Địa chỉ',\n" +
-"    ngay_lap AS 'Ngày lập',\n" +
-"    id_chu_ho AS 'Chủ hộ'\n" +
-"FROM ho_khau;");
-            tNhanKhau.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e) {
-            
-        }
-    }
-    
-    // ------------ CLEAR TEXT FIELD AFTER ADDING PEOPLE -------------
-    private void clearAfterAdding() {
-//        tfKhuVuc.setText("");
-//        tfDiaChi.setText("");
-//        tfSoHoKhau.setText("");
-//        tfIdChuHo.setText("");
-//        tfNgayLap.setText("");
-    }
-    
-    
     // ----------------- EXTRACT DATA FROM CLICK ON TABLE -----------------
     String key = "";
+    
+    // -------------- display Nhân khẩu -----------------
+    private void displayNhanKhau(){
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+            st = conn.createStatement();
+            String sql ="SELECT \n" +
+                        "  nhan_khau_id AS 'Nhân khẩu ID',\n" +
+                        "  CONVERT(ho_ten USING utf8) AS 'Họ tên',\n" +
+        //                "  CONVERT(biet_danh USING utf8) AS 'Biệt danh',\n" +
+                        "  gioi_tinh AS 'Giới tính',\n" +
+                        "  ngay_sinh AS 'Ngày sinh',\n" +
+                        "  so_CMND AS 'Số CMND',\n" +
+        //                "  ngay_cap_CMND AS 'Ngày cấp CMND',\n" +
+        //                "  CONVERT(noi_cap_CMND USING utf8) AS 'Nơi cấp CMND',\n" +
+                        "  CONVERT(noi_sinh USING utf8) AS 'Nơi sinh',\n" +
+                        "  CONVERT(nguyen_quan USING utf8) AS 'Nguyên quán',\n" +
+                        "  CONVERT(dan_toc USING utf8) AS 'Dân tộc',\n" +
+                        "  CONVERT(nghe_nghiep USING utf8) AS 'Nghề nghiệp',\n" +
+                        "  CONVERT(noi_lam_viec USING utf8) AS 'Nơi làm việc',\n" +
+                        "  quan_he_voi_chu_ho AS 'Quan hệ với chủ hộ',\n" +
+        //                "  ngay_dang_ky_thuong_tru AS 'Ngày đăng ký thường trú',\n" +
+        //                "  CONVERT(dia_chi_truoc_khi_chuyen USING utf8) AS 'Địa chỉ trước khi chuyển',\n" +
+                        "  chuyen_di AS 'Chuyển đi',\n" +
+        //                "  deleted AS 'Đã xóa',\n" +
+                        "  so_ho_khau AS 'Số hộ khẩu',\n" +
+                        "  qua_doi AS 'Qua đời'\n" +
+                        "FROM nhan_khau\n" +
+                        "WHERE deleted = 0\n" +
+                        "ORDER BY so_ho_khau;";
+            rs = st.executeQuery(sql);
+            tNhanKhau.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+
+        }
+    }
     
     public void openFile(String file){
         try{
@@ -744,12 +834,12 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton In;
     private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnTrinhBanGhi;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbHoKhau;
     private javax.swing.JLabel lbKhaiTu;
     private javax.swing.JLabel lbKhaiTu1;
@@ -759,5 +849,6 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lbThoat;
     private javax.swing.JPanel nhanKhauPanel;
     private javax.swing.JTable tNhanKhau;
+    private javax.swing.JTextField tfTim;
     // End of variables declaration//GEN-END:variables
 }

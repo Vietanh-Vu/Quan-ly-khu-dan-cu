@@ -74,7 +74,7 @@ public class HoKhauMainPage extends javax.swing.JFrame {
 
         lbHoKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbHoKhau.setForeground(new java.awt.Color(255, 255, 255));
-        lbHoKhau.setText("Hộ khẩu");
+        lbHoKhau.setText("Nhân khẩu");
         lbHoKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbHoKhauMouseClicked(evt);
@@ -83,7 +83,7 @@ public class HoKhauMainPage extends javax.swing.JFrame {
 
         lbNhanKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbNhanKhau.setForeground(new java.awt.Color(255, 255, 255));
-        lbNhanKhau.setText("Nhân khẩu");
+        lbNhanKhau.setText("Hộ khẩu");
         lbNhanKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbNhanKhauMouseClicked(evt);
@@ -469,7 +469,7 @@ public class HoKhauMainPage extends javax.swing.JFrame {
             rs = st.executeQuery(sql) ;
             tHoKhau.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu.");
         }
     }//GEN-LAST:event_btnTimMouseClicked
 
@@ -543,6 +543,7 @@ public class HoKhauMainPage extends javax.swing.JFrame {
         if (key.equals("") || hoKhau == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một hộ khẩu trong bảng\n"
                     + "để theo dõi thêm thông tin về hộ đó.");
+            return;
         }
         // ------ truyền vào form sửa hộ khẩu khẩu
         SuaXoaHoKhauForm newForm =  new SuaXoaHoKhauForm(hoKhau);

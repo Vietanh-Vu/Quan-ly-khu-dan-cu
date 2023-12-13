@@ -25,9 +25,20 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
         initComponents();
     }
     
-       public ThemNhanKhauForm(HoKhau hoKhau) {
+    public ThemNhanKhauForm(HoKhau hoKhau) {
         initComponents();
         this.hoKhau = hoKhau;
+        if(hoKhau == null){
+            tfSoHoKhau.setText("");
+            tfSoHoKhau.setEditable(true);
+        } else if (hoKhau != null && hoKhau.getSoHoKhau() != null) {
+            tfSoHoKhau.setText(hoKhau.getSoHoKhau());
+            tfSoHoKhau.setEditable(false);
+        } else {
+            tfSoHoKhau.setText("");
+            tfSoHoKhau.setEditable(true);
+            
+        }
     }
 
     /**
@@ -77,6 +88,8 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
         cbQuaDoi = new javax.swing.JComboBox<>();
         cbChuyenDi = new javax.swing.JComboBox<>();
         tfQuanHeVoiChuHo = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        tfSoHoKhau = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -317,6 +330,21 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel23.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel23.setText("Số hộ khẩu");
+
+        tfSoHoKhau.setForeground(new java.awt.Color(0, 102, 102));
+        tfSoHoKhau.setCaretColor(new java.awt.Color(0, 102, 102));
+        tfSoHoKhau.setDisabledTextColor(new java.awt.Color(0, 102, 102));
+        tfSoHoKhau.setMargin(new java.awt.Insets(4, 6, 4, 6));
+        tfSoHoKhau.setSelectedTextColor(new java.awt.Color(0, 102, 102));
+        tfSoHoKhau.setSelectionColor(new java.awt.Color(0, 102, 102));
+        tfSoHoKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSoHoKhauActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -356,22 +384,31 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
                                 .addComponent(jLabel11)
                                 .addGap(26, 26, 26)
                                 .addComponent(tfNgayCap, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel22)
-                            .addGap(18, 18, 18)
-                            .addComponent(cbChuyenDi, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(38, 38, 38)
-                            .addComponent(jLabel24)
-                            .addGap(31, 31, 31)
-                            .addComponent(cbQuaDoi, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                             .addComponent(btnLuu)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnHuy))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel21)
-                            .addGap(78, 78, 78)
-                            .addComponent(tfQuanHeVoiChuHo, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel21)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tfQuanHeVoiChuHo))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel22)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cbChuyenDi, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(37, 37, 37)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel24)
+                                    .addGap(31, 31, 31))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel23)
+                                    .addGap(5, 5, 5)))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(tfSoHoKhau)
+                                .addComponent(cbQuaDoi, 0, 144, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel19)
@@ -465,7 +502,10 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfQuanHeVoiChuHo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21))
+                    .addComponent(jLabel21)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel23)
+                        .addComponent(tfSoHoKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -557,7 +597,7 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
                 if(tfNgayCap.getText().isEmpty()){
                     ngayCap = "NULL";
                 } else{
-                    ngayCap = tfNgayCap.getText();
+                    ngayCap = "'" + tfNgayCap.getText() + "'";
                 }
                 String sql = "INSERT INTO nhan_khau (ho_ten, biet_danh, gioi_tinh, ngay_sinh, "
                         + "so_CMND, ngay_cap_CMND, noi_cap_CMND, noi_sinh, nguyen_quan, dan_toc, nghe_nghiep, "
@@ -577,7 +617,7 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
                         + "'" + tfQuanHeVoiChuHo.getText() + "',"
                         + "'" + tfNgayDangKyThuongTru.getText() + "',"
                         + "'" + tfDiaChiTruocKhiChuyen.getText() + "',"
-                        + "'" + hoKhau.getSoHoKhau() + "',"
+                        + "'" + tfSoHoKhau.getText() + "',"
                         + "'" + cbQuaDoi.getSelectedItem().toString() + "',"
                         + "'" + cbChuyenDi.getSelectedItem().toString() + "');";
                 
@@ -589,7 +629,8 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
             } catch(Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Lỗi\n"
-                        + "Vui lòng kiểm tra lại trường thông tin ngày tháng theo định dạng yyyy-mm-dd\n");
+                        + "Vui lòng kiểm tra lại trường thông tin ngày tháng theo định dạng yyyy-mm-dd\n"
+                        + "Hoặc điền đủ các trường thông tin cần thiết");
             }
        }
     }//GEN-LAST:event_btnLuuMouseClicked
@@ -598,6 +639,10 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnHuyMouseClicked
+
+    private void tfSoHoKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSoHoKhauActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSoHoKhauActionPerformed
 
     /**
      * @param args the command line arguments
@@ -668,6 +713,7 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -688,5 +734,6 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
     private javax.swing.JTextField tfNoiSinh;
     private javax.swing.JTextField tfQuanHeVoiChuHo;
     private javax.swing.JTextField tfSoCMND;
+    private javax.swing.JTextField tfSoHoKhau;
     // End of variables declaration//GEN-END:variables
 }

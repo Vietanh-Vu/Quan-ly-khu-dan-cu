@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.proteanit.sql.DbUtils;
 import demographic.components.ThemNhanKhauForm;
+import demographic.models.NhanKhau;
 
 
 /**
@@ -21,6 +22,10 @@ import demographic.components.ThemNhanKhauForm;
 public class SuaXoaHoKhauForm extends javax.swing.JFrame {
     
     HoKhau hoKhau;
+    
+    NhanKhau nhanKhau;
+    
+    String key = "";
 
     /**
      * Creates new form Form
@@ -69,6 +74,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
         btnHoanTac = new javax.swing.JButton();
         btnThemNhanKhau = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
+        btnSuaNhanKhau = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -276,6 +282,21 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
             }
         });
 
+        btnSuaNhanKhau.setBackground(new java.awt.Color(0, 51, 51));
+        btnSuaNhanKhau.setForeground(new java.awt.Color(255, 255, 255));
+        btnSuaNhanKhau.setText("Sửa nhân khẩu");
+        btnSuaNhanKhau.setMargin(new java.awt.Insets(4, 5, 4, 5));
+        btnSuaNhanKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSuaNhanKhauMouseClicked(evt);
+            }
+        });
+        btnSuaNhanKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaNhanKhauActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelSuaXoaHoKhauLayout = new javax.swing.GroupLayout(PanelSuaXoaHoKhau);
         PanelSuaXoaHoKhau.setLayout(PanelSuaXoaHoKhauLayout);
         PanelSuaXoaHoKhauLayout.setHorizontalGroup(
@@ -287,16 +308,6 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1119, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(PanelSuaXoaHoKhauLayout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnHoanTac, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnThemNhanKhau)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelSuaXoaHoKhauLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelSuaXoaHoKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,6 +339,18 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelSuaXoaHoKhauLayout.createSequentialGroup()
                         .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15))))
+            .addGroup(PanelSuaXoaHoKhauLayout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnHoanTac, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnThemNhanKhau)
+                .addGap(18, 18, 18)
+                .addComponent(btnSuaNhanKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(145, 145, 145))
         );
         PanelSuaXoaHoKhauLayout.setVerticalGroup(
             PanelSuaXoaHoKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,7 +389,8 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
                     .addComponent(btnXoa)
                     .addComponent(btnLuu)
                     .addComponent(btnThemNhanKhau)
-                    .addComponent(btnHoanTac))
+                    .addComponent(btnHoanTac)
+                    .addComponent(btnSuaNhanKhau))
                 .addGap(30, 30, 30)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -400,22 +424,39 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
     private void tNhanKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tNhanKhauMouseClicked
         DefaultTableModel model = (DefaultTableModel)tNhanKhau.getModel();
         int indexRow = tNhanKhau.getSelectedRow();
-        String key = String.valueOf(model.getValueAt(indexRow, 0).toString());
+        key = String.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-            String query = "SELECT * FROM ho_khau where so_ho_khau = \"" + key + "\"";
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+            String query = "SELECT * FROM nhan_khau where nhan_khau_id = " + key + ";";
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
+            NhanKhau nhanKhauMoi = new NhanKhau();
             while (resultSet.next()) {
-                //                tfSoHoKhau.setText(resultSet.getString("so_ho_khau"));
-                //                tfKhuVuc.setText(resultSet.getString("khu_vuc"));
-                //                tfDiaChi.setText(resultSet.getString("dia_chi"));
-                //                tfNgayLap.setText(resultSet.getString("ngay_lap"));
-                //                tfIdChuHo.setText(resultSet.getString("id_chu_ho"));
-
+                nhanKhauMoi.setNhanKhauId(resultSet.getInt("nhan_khau_id"));
+                nhanKhauMoi.setHoTen(resultSet.getString("ho_ten"));
+                nhanKhauMoi.setBietDanh(resultSet.getString("biet_danh"));
+                nhanKhauMoi.setGioiTinh(resultSet.getString("gioi_tinh"));
+                nhanKhauMoi.setNgaySinh(resultSet.getString("ngay_sinh"));
+                nhanKhauMoi.setSoCMND(resultSet.getString("so_CMND"));
+                nhanKhauMoi.setNgayCapCMND(resultSet.getString("ngay_cap_CMND"));
+                nhanKhauMoi.setNoiCapCMND(resultSet.getString("noi_cap_CMND"));
+                nhanKhauMoi.setNoiSinh(resultSet.getString("noi_sinh"));
+                nhanKhauMoi.setNguyenQuan(resultSet.getString("nguyen_quan"));
+                nhanKhauMoi.setDanToc(resultSet.getString("dan_toc"));
+                nhanKhauMoi.setNgheNghiep(resultSet.getString("nghe_nghiep"));
+                nhanKhauMoi.setNoiLamViec(resultSet.getString("noi_lam_viec"));
+                nhanKhauMoi.setQuanHeVoiChuHo(resultSet.getString("quan_he_voi_chu_ho"));
+                nhanKhauMoi.setNgayDangKyThuongTru(resultSet.getString("ngay_dang_ky_thuong_tru"));
+                nhanKhauMoi.setDiaChiTruocKhiChuyen(resultSet.getString("dia_chi_truoc_khi_chuyen"));
+                nhanKhauMoi.setChuyenDi(resultSet.getString("chuyen_di"));
+                nhanKhauMoi.setDeleted(resultSet.getInt("deleted"));
+                nhanKhauMoi.setSoHoKhau(resultSet.getString("so_ho_khau"));
+                nhanKhauMoi.setQuaDoi(resultSet.getString("qua_doi"));
             }
+            nhanKhau = nhanKhauMoi;
+            
         } catch (Exception e){
-            JOptionPane.showMessageDialog(this, e);
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
         }
     }//GEN-LAST:event_tNhanKhauMouseClicked
 
@@ -604,6 +645,23 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
         displayNhanKhau();
     }//GEN-LAST:event_PanelSuaXoaHoKhauMouseClicked
 
+    private void btnSuaNhanKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaNhanKhauMouseClicked
+        // TODO add your handling code here:
+        // ------ kiểm tra xem đã chọn hộ khẩu chưa
+        if (key.equals("") || nhanKhau == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một nhân khẩu trong bảng\n"
+                    + "để theo dõi thêm thông tin về nhân khẩu đó.");
+            return;
+        }
+        // ------ truyền vào form sửa hộ khẩu khẩu
+        SuaXoaNhanKhauForm newForm =  new SuaXoaNhanKhauForm(nhanKhau);
+        newForm.setVisible(true);
+    }//GEN-LAST:event_btnSuaNhanKhauMouseClicked
+
+    private void btnSuaNhanKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNhanKhauActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSuaNhanKhauActionPerformed
+
         // ------------- CONNECTION SQL PARAMETER---------------
         Connection conn = null;
         PreparedStatement pst = null;
@@ -612,26 +670,30 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
     
     // ----------------- display bản ghi ----------------------
     private void displayTextFields() {
-        tfSoHoKhau.setText(hoKhau.getSoHoKhau());
-        tfDiaChi.setText(hoKhau.getDiaChi());
-        tfNgayLap.setText(hoKhau.getNgayLap());
-        tfSoCMND.setText(hoKhau.getChuHoCMND());
-        cbLaChungCu.setSelectedItem(hoKhau.getLaChungCu());
-        String hoTenChuHo = "";
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
-            st = conn.createStatement();
-            String keyCMND = hoKhau.getChuHoCMND();
-            String sql = "SELECT ho_ten FROM nhan_khau WHERE so_CMND = \'" + keyCMND + "\';";
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()){
-                hoTenChuHo = resultSet.getString("ho_ten");
-                tfTenChuHo.setText(hoTenChuHo);
+            tfSoHoKhau.setText(hoKhau.getSoHoKhau());
+            tfDiaChi.setText(hoKhau.getDiaChi());
+            tfNgayLap.setText(hoKhau.getNgayLap());
+            tfSoCMND.setText(hoKhau.getChuHoCMND());
+            cbLaChungCu.setSelectedItem(hoKhau.getLaChungCu());
+            String hoTenChuHo = "";
+            try {
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+                st = conn.createStatement();
+                String keyCMND = hoKhau.getChuHoCMND();
+                String sql = "SELECT ho_ten FROM nhan_khau WHERE so_CMND = \'" + keyCMND + "\';";
+                Statement statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+                while (resultSet.next()){
+                    hoTenChuHo = resultSet.getString("ho_ten");
+                    tfTenChuHo.setText(hoTenChuHo);
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
             }
-            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+            e.printStackTrace();
         }
     }
     
@@ -640,8 +702,8 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
             st = conn.createStatement();
-            String sql ="SELECT so_CMND as 'Số CMND', ho_ten as 'Họ và tên', gioi_tinh as 'Giới tính', ngay_sinh as 'Ngày sinh', nghe_nghiep as 'Nghề nghiệp', "
-                    + "quan_he_voi_chu_ho as 'Quan hệ với chủ hộ' FROM nhan_khau"
+            String sql ="SELECT nhan_khau_id as 'ID', so_CMND as 'Số CMND', ho_ten as 'Họ và tên', gioi_tinh as 'Giới tính', ngay_sinh as 'Ngày sinh', nghe_nghiep as 'Nghề nghiệp', "
+                    + "quan_he_voi_chu_ho as 'Quan hệ với chủ hộ', qua_doi as 'Qua đời' FROM nhan_khau"
                     + " WHERE so_ho_khau = \'" + hoKhau.getSoHoKhau() + "\';";
             rs = st.executeQuery(sql);
             tNhanKhau.setModel(DbUtils.resultSetToTableModel(rs));
@@ -698,6 +760,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
     private javax.swing.JPanel PanelSuaXoaHoKhau;
     private javax.swing.JButton btnHoanTac;
     private javax.swing.JButton btnLuu;
+    private javax.swing.JButton btnSuaNhanKhau;
     private javax.swing.JButton btnThemNhanKhau;
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnXoa;
