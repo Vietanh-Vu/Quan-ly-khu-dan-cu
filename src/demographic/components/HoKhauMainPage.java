@@ -9,6 +9,7 @@ import demographic.quanlynhankhau.*;
 import demographic.User;
 import demographic.login.MainFormForAdmin;
 import demographic.login.MainFormForUser;
+import demographic.models.HoKhau;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -375,9 +376,10 @@ public class HoKhauMainPage extends javax.swing.JFrame {
                 openFile(saveFile.toString());
             }
             else {
-                JOptionPane.showMessageDialog(null, "Error");
+                JOptionPane.showMessageDialog(null, "Xảy ra lỗi");
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Xảy ra lỗi");
         }
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
@@ -395,9 +397,12 @@ public class HoKhauMainPage extends javax.swing.JFrame {
     private void btnTrinhBanGhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrinhBanGhiMouseClicked
         // TODO add your handling code here:
         displayHoKhau();
+        hoKhau = null;
     }//GEN-LAST:event_btnTrinhBanGhiMouseClicked
 
     private void tHoKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tHoKhauMouseClicked
+        // ------ lấy tham số từ cái click vào bảng -----
+        // ------ sau đó tạo một đối tượng nhan khau với tham số đó
         DefaultTableModel model = (DefaultTableModel)tHoKhau.getModel();
         int indexRow = tHoKhau.getSelectedRow();
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
@@ -406,15 +411,20 @@ public class HoKhauMainPage extends javax.swing.JFrame {
             String query = "SELECT * FROM ho_khau where so_ho_khau = \"" + key + "\"";
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
+            HoKhau hoKhauMoi = new HoKhau();
+            
             while (resultSet.next()) {
-//                tfSoHoKhau.setText(resultSet.getString("so_ho_khau"));
-//                tfKhuVuc.setText(resultSet.getString("khu_vuc"));
-//                tfDiaChi.setText(resultSet.getString("dia_chi"));
-//                tfNgayLap.setText(resultSet.getString("ngay_lap"));
-//                tfIdChuHo.setText(resultSet.getString("id_chu_ho"));
-//                System.out.println(resultSet.getString("so_ho_khau"));
-
+                hoKhauMoi.setHoKhauId(resultSet.getInt("ho_khau_id"));
+                hoKhauMoi.setSoHoKhau(resultSet.getString("so_ho_khau"));
+                hoKhauMoi.setChuHoId(resultSet.getInt("chu_ho_id"));
+                hoKhauMoi.setChuHoCMND(resultSet.getString("chu_ho_CMND"));
+                hoKhauMoi.setDiaChi(resultSet.getString("dia_chi"));
+                hoKhauMoi.setLaChungCu(resultSet.getString("la_chung_cu"));
+                hoKhauMoi.setNgayLap(resultSet.getString("ngay_lap"));
+                hoKhauMoi.setDeleted(resultSet.getInt("deleted"));
             }
+            hoKhau = hoKhauMoi;
+//            System.out.println(hoKhau.toString());
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, e);
         }
@@ -428,35 +438,8 @@ public class HoKhauMainPage extends javax.swing.JFrame {
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
         ThemHoKhauForm newForm = new ThemHoKhauForm();
-        
-//        if (key.equals("")) {
-//            JOptionPane.showMessageDialog(this, "Select a person to edit");
-//        }
-//        else {
-//            try {
-//                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
-//                String query = "Update ho_khau Set so_ho_khau = ?, "
-//                + "khu_vuc = ?, "
-//                + "dia_chi = ?, "
-//                + "ngay_lap = ?, "
-//                + "id_chu_ho = ? "
-//                + "where so_ho_khau = \"" + key + "\"";
-//                PreparedStatement update = conn.prepareStatement(query);
-////                update.setString(1, tfSoHoKhau.getText());
-////                update.setString(2, tfKhuVuc.getText());
-////                update.setString(3, tfDiaChi.getText());
-////                update.setString(4, tfNgayLap.getText());
-////                update.setString(5, tfIdChuHo.getText());
-//                int row = update.executeUpdate();
-//                JOptionPane.showMessageDialog(this, "Đã sửa thông tin của hộ khẩu");
-//                conn.close();
-//                displayHoKhau();
-//                clearAfterAdding();
-//            }
-//            catch (Exception e){
-//                JOptionPane.showMessageDialog(this, e);
-//            }
-//        }
+        newForm.setVisible(true);
+        displayHoKhau();
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
@@ -555,6 +538,15 @@ public class HoKhauMainPage extends javax.swing.JFrame {
 
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
+
+        // ------ kiểm tra xem đã chọn hộ khẩu chưa
+        if (key.equals("") || hoKhau == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hộ khẩu trong bảng\n"
+                    + "để theo dõi thêm thông tin về hộ đó.");
+        }
+        // ------ truyền vào form sửa hộ khẩu khẩu
+        SuaXoaHoKhauForm newForm =  new SuaXoaHoKhauForm(hoKhau);
+        newForm.setVisible(true);
     }//GEN-LAST:event_btnSuaMouseClicked
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -570,6 +562,8 @@ public class HoKhauMainPage extends javax.swing.JFrame {
     ResultSet rs = null;
     Statement st = null;
     
+    HoKhau hoKhau;
+    
     // ------------- DISPLAY PEOPLE ---------------------
     private void displayHoKhau(){
         try {
@@ -582,25 +576,16 @@ public class HoKhauMainPage extends javax.swing.JFrame {
                   "    nhan_khau.ho_ten AS 'Họ tên chủ hộ', " +
                   "    ho_khau.chu_ho_CMND AS 'CMND của Chủ hộ' " +
                   "FROM ho_khau " +
-                  "JOIN nhan_khau ON ho_khau.chu_ho_id = nhan_khau.nhan_khau_id;";
+                  "JOIN nhan_khau ON ho_khau.chu_ho_id = nhan_khau.nhan_khau_id\n"
+                    + "WHERE ho_khau.deleted = 0;";
 
-//            String sql = "select * from ho_khau";
             rs = st.executeQuery(sql);
             tHoKhau.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
         }
-    }
-    
-    // ------------ CLEAR TEXT FIELD AFTER ADDING PEOPLE -------------
-    private void clearAfterAdding() {
-//        tfKhuVuc.setText("");
-//        tfDiaChi.setText("");
-//        tfSoHoKhau.setText("");
-//        tfIdChuHo.setText("");
-//        tfNgayLap.setText("");
-    }
-    
+    }    
     
     // ----------------- EXTRACT DATA FROM CLICK ON TABLE -----------------
     String key = "";

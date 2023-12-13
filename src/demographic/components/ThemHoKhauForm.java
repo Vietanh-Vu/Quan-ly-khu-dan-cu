@@ -390,7 +390,7 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
             }
         });
 
-        btnThem.setBackground(new java.awt.Color(0, 102, 102));
+        btnThem.setBackground(new java.awt.Color(0, 51, 51));
         btnThem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm");
@@ -401,7 +401,7 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
             }
         });
 
-        btnHuy.setBackground(new java.awt.Color(153, 0, 51));
+        btnHuy.setBackground(new java.awt.Color(102, 0, 0));
         btnHuy.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnHuy.setForeground(new java.awt.Color(255, 255, 255));
         btnHuy.setText("Hủy");
@@ -634,7 +634,7 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
                 tfNgayDangKyThuongTru.getText().isEmpty() ||
                 tfDiaChiTruocKhiChuyen.getText().isEmpty() 
                 )  {
-            JOptionPane.showMessageDialog(this, "Missing information");
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đủ các trường thông tin");
         }
         else {
             try {
@@ -644,10 +644,7 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
                 String sql = "INSERT INTO nhan_khau (ho_ten, biet_danh, gioi_tinh, ngay_sinh, "
                         + "so_CMND, ngay_cap_CMND, noi_cap_CMND, noi_sinh, nguyen_quan, dan_toc, nghe_nghiep, "
                         + "noi_lam_viec, quan_he_voi_chu_ho, ngay_dang_ky_thuong_tru, dia_chi_truoc_khi_chuyen, so_ho_khau)\n" 
-                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);\n"
-//                        + "INSERT INTO ho_khau (so_ho_khau, chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap)"
-//                        + " VALUES (?,?,?,?,?) ;"
-                         ;
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);\n";
                 PreparedStatement add = conn.prepareStatement(sql);
                 add.setString(1, tfHoTen.getText());
                 add.setString(2, tfBietDanh.getText());
@@ -681,6 +678,22 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
                 add.setString(4, cbLaChungCu.getSelectedItem().toString());
                 add.setString(5, tfNgayLap.getText());
                 add.setString(6, tfSoCMND.getText());
+
+                row = add.executeUpdate();
+                
+                // ----- log việc thêm hộ khẩu ------
+                sql = "INSERT INTO ho_khau_log (ho_khau_id, so_ho_khau, chu_ho_id ,chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap)"
+                        + " SELECT ho_khau_id,?,chu_ho_id,?,?,?,?\n"
+                        + " FROM ho_khau"
+                        + " WHERE so_ho_khau = ?;"
+                         ;
+                add = conn.prepareStatement(sql);
+                add.setString(1, tfSoHoKhau.getText());
+                add.setString(2,tfSoCMND.getText());
+                add.setString(3, tfDiaChi.getText());
+                add.setString(4, cbLaChungCu.getSelectedItem().toString());
+                add.setString(5, tfNgayLap.getText());
+                add.setString(6, tfSoHoKhau.getText());
 
                 row = add.executeUpdate();
 
