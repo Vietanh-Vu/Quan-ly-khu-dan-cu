@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/SuaXoaHoKhauForm.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/models/NhanKhau.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/HoKhauMainPage.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/SuaXoaNhanKhauForm.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/models/TamVang.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/ThemTamVangForm.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/TamVangMainPage.java</file>
         </group>
     </open-files>
 </project-private>

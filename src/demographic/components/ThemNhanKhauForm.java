@@ -500,12 +500,13 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
                     .addComponent(tfDiaChiTruocKhiChuyen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfQuanHeVoiChuHo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel23)
-                        .addComponent(tfSoHoKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tfSoHoKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfQuanHeVoiChuHo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel21)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -577,7 +578,7 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
         // TODO add your handling code here:
 
-            if (
+        if (
                 tfHoTen.getText().isEmpty() ||
                 tfNgaySinh.getText().isEmpty() ||
                 tfNguyenQuan.getText().isEmpty() ||
@@ -606,7 +607,7 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
                         + "'"+ tfBietDanh.getText() + "',"
                         + "'"+ cbGioiTinh.getSelectedItem().toString() + "',"
                         + "'" + tfNgaySinh.getText() + "',"
-                        + "'" + tfSoCMND.getText() + "',"
+                        + (tfSoCMND.getText().isEmpty() ? " NULL, " : "'" + tfSoCMND.getText() + "',")
                         + "" + ngayCap + ","
                         + "'" + tfNoiCap.getText() + "',"
                         + "'" + tfNoiSinh.getText() + "',"
@@ -621,6 +622,7 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
                         + "'" + cbQuaDoi.getSelectedItem().toString() + "',"
                         + "'" + cbChuyenDi.getSelectedItem().toString() + "');";
                 
+                System.out.println(sql);
                 PreparedStatement add = conn.prepareStatement(sql);
                 
                 int row = add.executeUpdate(); 

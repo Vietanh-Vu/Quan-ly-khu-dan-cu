@@ -597,7 +597,14 @@ public class SuaXoaNhanKhauForm extends javax.swing.JFrame {
 
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
         // TODO add your handling code here:
-        if (tfSoHoKhau.getText().isEmpty() ) {
+        if (tfSoHoKhau.getText().isEmpty() ||
+                tfHoTen.getText().isEmpty() ||
+                tfNgaySinh.getText().isEmpty() ||
+                tfNguyenQuan.getText().isEmpty() ||
+                tfNoiSinh.getText().isEmpty() ||
+                tfDanToc.getText().isEmpty() ||
+                tfQuanHeVoiChuHo.getText().isEmpty() ||
+                tfNgayDangKyThuongTru.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng điền đủ thông tin");          
         }
         else {

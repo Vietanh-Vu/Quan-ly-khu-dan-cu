@@ -5,7 +5,7 @@
 package demographic.quanlynhankhau;
 
 //import com.sun.jdi.connect.spi.Connection;
-import demographic.User;
+import demographic.models.User;
 import demographic.login.MainFormForAdmin;
 import demographic.quanlynhankhau.KhaiTuMainPage;
 import demographic.quanlynhankhau.HoKhauMainPage;

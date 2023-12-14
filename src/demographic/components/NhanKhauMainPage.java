@@ -6,7 +6,7 @@ package demographic.components;
 
 //import com.sun.jdi.connect.spi.Connection;
 import demographic.quanlynhankhau.*;
-import demographic.User;
+import demographic.models.User;
 import demographic.login.MainFormForAdmin;
 import demographic.login.MainFormForUser;
 import demographic.models.NhanKhau;
@@ -164,9 +164,9 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
                 .addComponent(lbNhanKhau)
                 .addGap(18, 18, 18)
                 .addComponent(lbHoKhau)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(lbTamVang)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(lbTamTru)
                 .addGap(18, 18, 18)
                 .addComponent(lbKhaiTu)
@@ -324,8 +324,8 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
                     .addComponent(btnTim)
                     .addComponent(tfTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThem))
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
