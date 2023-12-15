@@ -219,7 +219,7 @@ public class Login extends javax.swing.JFrame {
     private User getAuthenticatedUser(String username, String password) {
         User user = null;
 
-        final String DB_URL = "jdbc:mysql://localhost/demographic";
+        final String DB_URL = "jdbc:mysql://localhost/quan_ly_nhan_khau";
         final String USER_NAME = "root";
         final String PASSWORD = "";
 
@@ -236,7 +236,7 @@ public class Login extends javax.swing.JFrame {
                 user = new User();
                 user.userName = resultSet.getString("username");
                 user.email = resultSet.getString("email");
-                user.isAdmin = resultSet.getString("isAdmin");
+                user.isAdmin = resultSet.getString("is_admin");
                 user.password = resultSet.getString("password");
             }
             
