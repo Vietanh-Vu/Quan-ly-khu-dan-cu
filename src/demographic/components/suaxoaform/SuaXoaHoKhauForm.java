@@ -427,7 +427,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
         int indexRow = tNhanKhau.getSelectedRow();
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
             String query = "SELECT * FROM nhan_khau where nhan_khau_id = " + key + ";";
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -483,7 +483,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
 
     private boolean checkSoCMNDHoTen(){
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
             String hoTen = tfTenChuHo.getText();
             String soCMND = tfSoCMND.getText();
             String soHoKhau = hoKhau.getSoHoKhau();
@@ -522,7 +522,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
         }
         else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
                 String sql = "UPDATE ho_khau "
                         + "SET so_ho_khau = '" + tfSoHoKhau.getText() + "' ,\n "
                         + "dia_chi = '" + tfDiaChi.getText() + "',\n "
@@ -574,7 +574,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
                 + "Nếu xóa, bạn sẽ xóa cả dữ liệu nhân khẩu của hộ!", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION){
             try{
-                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
                 String sql = "UPDATE ho_khau "
                         + "SET deleted = 1\n "
                         + "WHERE ho_khau_id = " + hoKhau.getHoKhauId() + ";"; 
@@ -679,7 +679,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
             cbLaChungCu.setSelectedItem(hoKhau.getLaChungCu());
             String hoTenChuHo = "";
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
                 st = conn.createStatement();
                 String keyCMND = hoKhau.getChuHoCMND();
                 String sql = "SELECT ho_ten FROM nhan_khau WHERE so_CMND = \'" + keyCMND + "\';";
@@ -701,7 +701,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
     // ---------------- display thông tin nhân khẩu của hộ --------
     private void displayNhanKhau(){
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
             st = conn.createStatement();
             String sql ="SELECT nhan_khau_id as 'ID', so_CMND as 'Số CMND', ho_ten as 'Họ và tên', gioi_tinh as 'Giới tính', ngay_sinh as 'Ngày sinh', nghe_nghiep as 'Nghề nghiệp', "
                     + "quan_he_voi_chu_ho as 'Quan hệ với chủ hộ', qua_doi as 'Qua đời' FROM nhan_khau"

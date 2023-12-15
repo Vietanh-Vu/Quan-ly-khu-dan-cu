@@ -609,7 +609,7 @@ public class SuaXoaNhanKhauForm extends javax.swing.JFrame {
         }
         else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
                 String sql = "UPDATE nhan_khau "
                     + "SET ho_ten = '" + tfHoTen.getText() + "',\n "
                     + "biet_danh = '" + tfBietDanh.getText() + "',\n "

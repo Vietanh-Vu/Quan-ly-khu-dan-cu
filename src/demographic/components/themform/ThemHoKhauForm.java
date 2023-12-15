@@ -638,7 +638,7 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
         }
         else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
                 
                 // ----- thêm chủ hộ vào nhân khẩu -----
                 String sql = "INSERT INTO nhan_khau (ho_ten, biet_danh, gioi_tinh, ngay_sinh, "
@@ -711,7 +711,7 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
             catch (Exception e){
                 try {
                     // ------------ xóa những gì mới cập nhật -----------------
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
                     
                     String sql = "DELETE FROM nhan_khau WHERE so_CMND = ?";
                     PreparedStatement add = conn.prepareStatement(sql);

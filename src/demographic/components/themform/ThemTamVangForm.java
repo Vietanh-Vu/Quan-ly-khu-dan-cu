@@ -381,7 +381,7 @@ public class ThemTamVangForm extends javax.swing.JFrame {
         }
         else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
                                 
                 String sql = "INSERT INTO tam_vang (nhan_khau_id, ngay_bat_dau, ngay_ket_thuc, ly_do, so_CMND, dia_chi_noi_den)\n" +
                         "VALUES ((SELECT nhan_khau_id FROM nhan_khau WHERE so_CMND = '" + tfSoCMND.getText() + "') ,"
@@ -426,7 +426,7 @@ public class ThemTamVangForm extends javax.swing.JFrame {
     private void btnTuDongDienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTuDongDienMouseClicked
         // TODO add your handling code here:
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_nhan_khau","root","");            
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");            
             Statement st = conn.createStatement();
             
             String soCMND = tfSoCMND.getText();

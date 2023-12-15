@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `quan_ly_nhan_khau`
+-- Database: `quan-ly-khu-dan-cu`
 --
 
 -- --------------------------------------------------------
