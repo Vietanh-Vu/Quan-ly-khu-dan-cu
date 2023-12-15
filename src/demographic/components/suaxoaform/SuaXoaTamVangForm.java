@@ -412,7 +412,7 @@ public class SuaXoaTamVangForm extends javax.swing.JFrame {
         }
         else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
                                 
                 String sql = "UPDATE tam_vang\n" +
                     "SET ngay_bat_dau = '" + tfNgayBatDau.getText() + "',\n" +
@@ -475,7 +475,7 @@ public class SuaXoaTamVangForm extends javax.swing.JFrame {
         String soHoKhau = "";
         try {
             
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");            
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");            
             Statement st = conn.createStatement();
             
             String soCMND = tamVang.getSoCMND();

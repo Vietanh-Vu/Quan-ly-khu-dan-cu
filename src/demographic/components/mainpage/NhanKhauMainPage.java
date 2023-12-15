@@ -349,7 +349,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
         try {
             // ----- set table ----
              try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
                 st = conn.createStatement();
                 String sql ="SELECT \n" +
                     "  nhan_khau_id AS 'Nhân khẩu ID',\n" +
@@ -444,7 +444,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
         int indexRow = tNhanKhau.getSelectedRow();
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
             String query = "SELECT * FROM nhan_khau where nhan_khau_id = " + key + ";";
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -503,7 +503,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
     private void btnTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimMouseClicked
         // TODO add your handling code here:
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
             st = conn.createStatement();
             String thongTin = tfTim.getText();
             String sql = "SELECT \n" +
@@ -629,7 +629,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
     // -------------- display Nhân khẩu -----------------
     private void displayNhanKhau(){
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
             st = conn.createStatement();
             String sql ="SELECT \n" +
                         "  nhan_khau_id AS 'Nhân khẩu ID',\n" +

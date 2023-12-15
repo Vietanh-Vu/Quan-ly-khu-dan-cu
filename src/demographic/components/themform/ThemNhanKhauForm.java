@@ -591,7 +591,7 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
         }
         else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
                 
                 // ----- thêm chủ hộ vào nhân khẩu -----
                 String ngayCap = "";

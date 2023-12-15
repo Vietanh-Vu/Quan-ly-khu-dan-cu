@@ -409,7 +409,7 @@ public class HoKhauMainPage extends javax.swing.JFrame {
         int indexRow = tHoKhau.getSelectedRow();
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
             String query = "SELECT * FROM ho_khau where so_ho_khau = \"" + key + "\"";
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -451,7 +451,7 @@ public class HoKhauMainPage extends javax.swing.JFrame {
     private void btnTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimMouseClicked
         // TODO add your handling code here:
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
             st = conn.createStatement();
             String thongTin = tfTim.getText();
             String sql = "SELECT " +
@@ -570,7 +570,7 @@ public class HoKhauMainPage extends javax.swing.JFrame {
     // ------------- DISPLAY PEOPLE ---------------------
     private void displayHoKhau(){
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan-ly-khu-dan-cu","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
             st = conn.createStatement();
             String sql = "SELECT " +
                   "    ho_khau.so_ho_khau AS 'Số hộ khẩu', " +
