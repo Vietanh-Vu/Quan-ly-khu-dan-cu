@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Demographic">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/dist/Demographic.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
