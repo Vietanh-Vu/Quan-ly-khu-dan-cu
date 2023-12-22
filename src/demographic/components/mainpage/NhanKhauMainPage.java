@@ -201,7 +201,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
 
         btnSua.setBackground(new java.awt.Color(0, 51, 51));
         btnSua.setForeground(new java.awt.Color(255, 255, 255));
-        btnSua.setText("Sửa");
+        btnSua.setText("Sửa/Xóa");
         btnSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSuaMouseClicked(evt);
@@ -528,7 +528,8 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
                     "  so_ho_khau AS 'Số hộ khẩu',\n" +
                     "  qua_doi AS 'Qua đời'\n" +
                     "FROM nhan_khau\n" +
-                    "WHERE nhan_khau.so_CMND = '" + thongTin + "'\n" +
+                    "WHERE nhan_khau.so_CMND = '" + thongTin + "' " +
+                    "AND deleted = 0\n" +
                     "ORDER BY so_ho_khau;";
             
             rs = st.executeQuery(sql) ;
