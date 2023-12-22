@@ -413,24 +413,25 @@ public class SuaXoaTamTruForm extends javax.swing.JFrame {
             try {
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
                                 
-                String sql = "INSERT INTO tam_tru (ho_ten, ngay_sinh, so_CMND, ngay_cap, noi_cap, gioi_tinh, dia_chi_thuong_tru, cho_o_hien_tai, ly_do, ngay_tam_tru)\n" +
-                        "VALUES \n" +
-                        "('" + tfHoTen.getText() + "', "
-                        + "'" + tfNgaySinh.getText() + "',"
-                        + " '" + tfSoCMND.getText() + "', "
-                        + "'" + tfNgayCap.getText() + "', "
-                        + "'" + tfNoiCap.getText() +"', "
-                        + "'" + cbGioiTinh.getSelectedItem() + "', "
-                        + "'" + tfDiaChiThuongTru.getText() + "', "
-                        + "'" + tfChoOHienTai.getText() + "', "
-                        + "'" + tfLyDo.getText() +"',"
-                        + "'" + tfNgayTamTru.getText() +"');";
+                String sql = "UPDATE tam_tru " +
+                "SET ho_ten = '" + tfHoTen.getText() + "', " +
+                "    ngay_sinh = '" + tfNgaySinh.getText() + "', " +
+                "    so_CMND = '" + tfSoCMND.getText() + "', " +
+                "    ngay_cap = '" + tfNgayCap.getText() + "', " +
+                "    noi_cap = '" + tfNoiCap.getText() + "', " +
+                "    gioi_tinh = '" + cbGioiTinh.getSelectedItem() + "', " +
+                "    dia_chi_thuong_tru = '" + tfDiaChiThuongTru.getText() + "', " +
+                "    cho_o_hien_tai = '" + tfChoOHienTai.getText() + "', " +
+                "    ly_do = '" + tfLyDo.getText() + "', " +
+                "    ngay_tam_tru = '" + tfNgayTamTru.getText() + "' " +
+                "WHERE tam_tru_id = " + this.tamTru.getTamTruId() + ";";
+
                 
                 System.out.println(sql);
                 PreparedStatement add = conn.prepareStatement(sql);
                 
                 int row = add.executeUpdate(); 
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                JOptionPane.showMessageDialog(this, "Lưu thành công");
                 this.dispose();
             } catch(Exception e) {
                 e.printStackTrace();
