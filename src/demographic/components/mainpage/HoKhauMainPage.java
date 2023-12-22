@@ -5,6 +5,7 @@
 package demographic.components.mainpage;
 
 //import com.sun.jdi.connect.spi.Connection;
+import demographic.components.suaxoaform.DinhChinhForm;
 import demographic.components.suaxoaform.SuaXoaHoKhauForm;
 import demographic.components.themform.ThemHoKhauForm;
 import demographic.quanlynhankhau.*;
@@ -67,6 +68,7 @@ public class HoKhauMainPage extends javax.swing.JFrame {
         btnXuatFile = new javax.swing.JButton();
         tfTim = new javax.swing.JTextField();
         btnSua = new javax.swing.JButton();
+        btnXuatFile1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -282,41 +284,63 @@ public class HoKhauMainPage extends javax.swing.JFrame {
             }
         });
 
+        btnXuatFile1.setBackground(new java.awt.Color(51, 0, 0));
+        btnXuatFile1.setForeground(new java.awt.Color(255, 255, 255));
+        btnXuatFile1.setText("Lịch sử chỉnh sửa");
+        btnXuatFile1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXuatFile1MouseClicked(evt);
+            }
+        });
+        btnXuatFile1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatFile1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout nhanKhauPanelLayout = new javax.swing.GroupLayout(nhanKhauPanel);
         nhanKhauPanel.setLayout(nhanKhauPanelLayout);
         nhanKhauPanelLayout.setHorizontalGroup(
             nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nhanKhauPanelLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(nhanKhauPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
-                        .addContainerGap())
-                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(btnTrinhBanGhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                        .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfTim, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))))
+                            .addGroup(nhanKhauPanelLayout.createSequentialGroup()
+                                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1))
+                                .addContainerGap())
+                            .addGroup(nhanKhauPanelLayout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(btnTrinhBanGhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfTim, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nhanKhauPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnXuatFile1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))))
         );
         nhanKhauPanelLayout.setVerticalGroup(
             nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(12, 12, 12)
+                .addComponent(btnXuatFile1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTrinhBanGhi)
                     .addComponent(btnThem)
@@ -558,6 +582,16 @@ public class HoKhauMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSuaActionPerformed
 
+    private void btnXuatFile1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFile1MouseClicked
+        // TODO add your handling code here:
+        DinhChinhForm newForm = new DinhChinhForm();
+        newForm.setVisible(true);
+    }//GEN-LAST:event_btnXuatFile1MouseClicked
+
+    private void btnXuatFile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFile1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXuatFile1ActionPerformed
+
     // ------------ START TO CODE HERE -----------------
     // ------------- User parameter --------------------
     public User user;
@@ -770,6 +804,7 @@ public class HoKhauMainPage extends javax.swing.JFrame {
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnTrinhBanGhi;
     private javax.swing.JButton btnXuatFile;
+    private javax.swing.JButton btnXuatFile1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
