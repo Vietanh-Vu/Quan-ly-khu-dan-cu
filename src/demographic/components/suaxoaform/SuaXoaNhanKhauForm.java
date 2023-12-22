@@ -649,6 +649,27 @@ public class SuaXoaNhanKhauForm extends javax.swing.JFrame {
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
         // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa nhân khẩu này?\n"
+                , "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION){
+            try{
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                String sql = "UPDATE nhan_khau "
+                        + "SET deleted = 1\n "
+                        + "WHERE nhan_khau_id = " + nhanKhau.getNhanKhauId() + ";"; 
+                PreparedStatement add = conn.prepareStatement(sql);
+                System.out.println(sql);
+                int row = add.executeUpdate();
+                
+                
+                JOptionPane.showMessageDialog(this, "Đã xóa thành công");
+                conn.close();
+                this.dispose();
+            } catch (Exception e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu.");
+            }
+        }
     }//GEN-LAST:event_btnXoaMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/themform/ThemTamVangForm.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/models/TamVang.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/login/Login.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/MainPageTest.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/models/User.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/login/Register.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/suaxoaform/SuaXoaHoKhauForm.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/suaxoaform/SuaXoaNhanKhauForm.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/mainpage/NhanKhauMainPage.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/mainpage/HoKhauMainPage.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/mainpage/TamTruMainPage.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/models/TamTru.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/suaxoaform/SuaXoaTamTruForm.java</file>
+            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/suaxoaform/SuaXoaTamVangForm.java</file>
             <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/components/mainpage/TamVangMainPage.java</file>
-            <file>file:/D:/HUST/2023.1/NMCNPM/Quan-ly-khu-dan-cu/src/demographic/login/MainFormForUser.java</file>
         </group>
     </open-files>
 </project-private>

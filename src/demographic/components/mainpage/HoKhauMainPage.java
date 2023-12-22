@@ -270,7 +270,7 @@ public class HoKhauMainPage extends javax.swing.JFrame {
 
         btnSua.setBackground(new java.awt.Color(0, 51, 51));
         btnSua.setForeground(new java.awt.Color(255, 255, 255));
-        btnSua.setText("Sửa");
+        btnSua.setText("Sửa/Xóa");
         btnSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSuaMouseClicked(evt);
@@ -462,15 +462,17 @@ public class HoKhauMainPage extends javax.swing.JFrame {
                   "    ho_khau.chu_ho_CMND AS 'CMND của Chủ hộ' " +
                   "FROM ho_khau " +
                   "JOIN nhan_khau ON ho_khau.chu_ho_id = nhan_khau.nhan_khau_id " +
-                  "WHERE ho_khau.so_ho_khau = '" + thongTin + "' OR " +
+                  "WHERE (ho_khau.so_ho_khau = '" + thongTin + "' OR " +
                   "      ho_khau.dia_chi = '" + thongTin + "' OR " +
                   "      ho_khau.ngay_lap = '" + thongTin + "' OR " +
                   "      nhan_khau.ho_ten = '" + thongTin + "' OR " +
-                  "      ho_khau.chu_ho_CMND = '" + thongTin + "';";
+                  "      ho_khau.chu_ho_CMND = '" + thongTin + "') " +
+                  "      AND ho_khau.deleted = 0;";
             
             rs = st.executeQuery(sql) ;
             tHoKhau.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu.");
         }
     }//GEN-LAST:event_btnTimMouseClicked

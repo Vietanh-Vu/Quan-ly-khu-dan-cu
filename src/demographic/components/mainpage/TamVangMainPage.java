@@ -271,7 +271,7 @@ public class TamVangMainPage extends javax.swing.JFrame {
 
         btnSua.setBackground(new java.awt.Color(0, 51, 51));
         btnSua.setForeground(new java.awt.Color(255, 255, 255));
-        btnSua.setText("Sửa");
+        btnSua.setText("Sửa/Xóa");
         btnSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSuaMouseClicked(evt);
@@ -465,7 +465,7 @@ public class TamVangMainPage extends javax.swing.JFrame {
                 "    tam_vang.dia_chi_noi_den AS 'Địa Chỉ Nơi Đến'\n" +
                 "FROM tam_vang\n" +
                 "JOIN nhan_khau ON tam_vang.nhan_khau_id = nhan_khau.nhan_khau_id\n" +
-                "WHERE nhan_khau.ho_ten = '" + thongTin + "';";
+                "WHERE nhan_khau.ho_ten = '" + thongTin + "' AND tam_vang.deleted = 0;";
             
             rs = st.executeQuery(sql) ;
             tTamVang.setModel(DbUtils.resultSetToTableModel(rs));
@@ -572,16 +572,17 @@ public class TamVangMainPage extends javax.swing.JFrame {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
             st = conn.createStatement();
             String sql = "SELECT \n" +
-                "    tam_vang_id AS 'Tạm vắng ID',\n" +     
-                "    nhan_khau.ho_ten AS 'Tên Nhân khẩu',\n" +
-                "    nhan_khau.gioi_tinh AS 'Giới Tính',\n" +
-                "    tam_vang.ngay_bat_dau AS 'Ngày Bắt Đầu',\n" +
-                "    tam_vang.ngay_ket_thuc AS 'Ngày Kết Thúc',\n" +
-                "    tam_vang.ly_do AS 'Lý Do',\n" +
-                "    tam_vang.so_CMND AS 'Số CMND',\n" +
-                "    tam_vang.dia_chi_noi_den AS 'Địa Chỉ Nơi Đến'\n" +
-                "FROM tam_vang\n" +
-                "JOIN nhan_khau ON tam_vang.nhan_khau_id = nhan_khau.nhan_khau_id;";
+                    "    tam_vang_id AS 'Tạm vắng ID',\n" +     
+                    "    nhan_khau.ho_ten AS 'Tên Nhân khẩu',\n" +
+                    "    nhan_khau.gioi_tinh AS 'Giới Tính',\n" +
+                    "    tam_vang.ngay_bat_dau AS 'Ngày Bắt Đầu',\n" +
+                    "    tam_vang.ngay_ket_thuc AS 'Ngày Kết Thúc',\n" +
+                    "    tam_vang.ly_do AS 'Lý Do',\n" +
+                    "    tam_vang.so_CMND AS 'Số CMND',\n" +
+                    "    tam_vang.dia_chi_noi_den AS 'Địa Chỉ Nơi Đến'\n" +
+                    "FROM tam_vang\n" +
+                    "JOIN nhan_khau ON tam_vang.nhan_khau_id = nhan_khau.nhan_khau_id\n" +
+                    "AND tam_vang.deleted = 0;";
 
             rs = st.executeQuery(sql);
             tTamVang.setModel(DbUtils.resultSetToTableModel(rs));
