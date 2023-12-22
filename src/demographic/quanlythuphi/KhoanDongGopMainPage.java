@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Nam
+ * @author vietanh
  */
 public class KhoanDongGopMainPage extends javax.swing.JFrame {
 

@@ -14,7 +14,7 @@ import java.sql.*;
 
 /**
  *
- * @author Nam
+ * @author vietanh
  */
 public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
 

@@ -29,7 +29,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
- * @author Nam
+ * @author vietanh
  */
 public class KhoanPhiMainPage extends javax.swing.JFrame {
     /**
