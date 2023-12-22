@@ -543,13 +543,13 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
     // -------------------- BACK TO MAIN FORM ----------------------------
     private void lbThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbThoatMouseClicked
         // TODO add your handling code here:
-        if(user.isAdmin.equals("Yes")){
+        if(user.isAdmin == 1){
             MainFormForAdmin mainForm = new MainFormForAdmin();
             mainForm.setVisible(true);
             mainForm.user = user;
             this.dispose();
         }
-        else if (user.isAdmin.equals("No")) {
+        else if (user.isAdmin == 0) {
             MainFormForUser mainForm = new MainFormForUser();
             mainForm.setVisible(true);
             mainForm.user = user;

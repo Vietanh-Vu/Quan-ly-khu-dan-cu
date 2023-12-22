@@ -29,9 +29,9 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
      */
     public KhoanDongGopMainPage() {
         initComponents();
-        displayPeople();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,32 +41,31 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        nhanKhauPanel = new javax.swing.JPanel();
+        dongGopPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lbHoKhau = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lbThoat = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        tfCMND = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        tfHoTen = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        tfThuongTru = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        tfTonGiao = new javax.swing.JTextField();
         btnTim = new javax.swing.JButton();
         btnLuu = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tNhanKhau = new javax.swing.JTable();
+        tKhoanDongGop = new javax.swing.JTable();
+        btnTringBanGhi = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tKhoanDongGop1 = new javax.swing.JTable();
+        btnTringBanGhi1 = new javax.swing.JButton();
         btnTim1 = new javax.swing.JButton();
+        btnLuu1 = new javax.swing.JButton();
+        btnSua1 = new javax.swing.JButton();
+        btnXoa1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        nhanKhauPanel.setBackground(new java.awt.Color(255, 255, 255));
+        dongGopPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -127,87 +126,43 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 102, 102));
         jLabel7.setText("THÊM KHOẢN ĐÓNG GÓP");
 
-        jLabel8.setText("ID khoản đóng góp");
-
-        tfCMND.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCMNDActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setText("Ngày bắt đầu");
-
-        tfHoTen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfHoTenActionPerformed(evt);
-            }
-        });
-
-        jLabel13.setText("Tên khoản đóng góp");
-
-        tfThuongTru.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfThuongTruActionPerformed(evt);
-            }
-        });
-
-        jLabel14.setText("Ngày kết thúc");
-
-        tfTonGiao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTonGiaoActionPerformed(evt);
-            }
-        });
-
+        btnTim.setBackground(new java.awt.Color(0, 51, 51));
+        btnTim.setForeground(new java.awt.Color(255, 255, 255));
         btnTim.setText("Tìm");
         btnTim.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTimMouseClicked(evt);
             }
         });
-        btnTim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimActionPerformed(evt);
-            }
-        });
 
+        btnLuu.setBackground(new java.awt.Color(0, 51, 51));
+        btnLuu.setForeground(new java.awt.Color(255, 255, 255));
         btnLuu.setText("Lưu");
         btnLuu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLuuMouseClicked(evt);
             }
         });
-        btnLuu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLuuActionPerformed(evt);
-            }
-        });
 
+        btnXoa.setBackground(new java.awt.Color(0, 51, 51));
+        btnXoa.setForeground(new java.awt.Color(255, 255, 255));
         btnXoa.setText("Xóa");
         btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnXoaMouseClicked(evt);
             }
         });
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
 
+        btnSua.setBackground(new java.awt.Color(0, 51, 51));
+        btnSua.setForeground(new java.awt.Color(255, 255, 255));
         btnSua.setText("Sửa");
         btnSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSuaMouseClicked(evt);
             }
         });
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
 
-        tNhanKhau.setModel(new javax.swing.table.DefaultTableModel(
+        tKhoanDongGop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -218,393 +173,250 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tNhanKhau.setRowHeight(26);
-        tNhanKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+        tKhoanDongGop.setRowHeight(26);
+        tKhoanDongGop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tNhanKhauMouseClicked(evt);
+                tKhoanDongGopMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tNhanKhau);
+        jScrollPane1.setViewportView(tKhoanDongGop);
 
-        btnTim1.setText("Trình bản ghi");
+        btnTringBanGhi.setBackground(new java.awt.Color(0, 51, 51));
+        btnTringBanGhi.setForeground(new java.awt.Color(255, 255, 255));
+        btnTringBanGhi.setText("Trình bản ghi");
+        btnTringBanGhi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTringBanGhiMouseClicked(evt);
+            }
+        });
+
+        tKhoanDongGop1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tKhoanDongGop1.setRowHeight(26);
+        tKhoanDongGop1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tKhoanDongGop1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tKhoanDongGop1);
+
+        btnTringBanGhi1.setBackground(new java.awt.Color(0, 51, 51));
+        btnTringBanGhi1.setForeground(new java.awt.Color(255, 255, 255));
+        btnTringBanGhi1.setText("Trình bản ghi");
+        btnTringBanGhi1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTringBanGhi1MouseClicked(evt);
+            }
+        });
+
+        btnTim1.setBackground(new java.awt.Color(0, 51, 51));
+        btnTim1.setForeground(new java.awt.Color(255, 255, 255));
+        btnTim1.setText("Tìm");
         btnTim1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTim1MouseClicked(evt);
             }
         });
-        btnTim1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTim1ActionPerformed(evt);
+
+        btnLuu1.setBackground(new java.awt.Color(0, 51, 51));
+        btnLuu1.setForeground(new java.awt.Color(255, 255, 255));
+        btnLuu1.setText("Lưu");
+        btnLuu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLuu1MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout nhanKhauPanelLayout = new javax.swing.GroupLayout(nhanKhauPanel);
-        nhanKhauPanel.setLayout(nhanKhauPanelLayout);
-        nhanKhauPanelLayout.setHorizontalGroup(
-            nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(nhanKhauPanelLayout.createSequentialGroup()
+        btnSua1.setBackground(new java.awt.Color(0, 51, 51));
+        btnSua1.setForeground(new java.awt.Color(255, 255, 255));
+        btnSua1.setText("Sửa");
+        btnSua1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSua1MouseClicked(evt);
+            }
+        });
+
+        btnXoa1.setBackground(new java.awt.Color(0, 51, 51));
+        btnXoa1.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoa1.setText("Xóa");
+        btnXoa1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXoa1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dongGopPanelLayout = new javax.swing.GroupLayout(dongGopPanel);
+        dongGopPanel.setLayout(dongGopPanelLayout);
+        dongGopPanelLayout.setHorizontalGroup(
+            dongGopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dongGopPanelLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                        .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                                        .addGap(194, 194, 194)
-                                        .addComponent(jLabel6))
-                                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                                        .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                                                    .addComponent(btnTim1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(jLabel13))
-                                            .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                                                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                                                        .addComponent(jLabel8)
-                                                        .addGap(0, 0, Short.MAX_VALUE))
-                                                    .addComponent(tfCMND))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel9)
-                                                    .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel14)
-                                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tfTonGiao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(tfThuongTru))
-                                .addGap(0, 74, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nhanKhauPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1)))
+                .addGroup(dongGopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dongGopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dongGopPanelLayout.createSequentialGroup()
+                            .addGap(220, 220, 220)
+                            .addComponent(btnTringBanGhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(26, 26, 26)
+                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(195, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dongGopPanelLayout.createSequentialGroup()
+                            .addGap(203, 203, 203)
+                            .addGroup(dongGopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7))
+                            .addGap(378, 378, 378)))
+                    .addGroup(dongGopPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(dongGopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1))
                         .addContainerGap())
-                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                        .addGap(264, 264, 264)
-                        .addComponent(jLabel7)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dongGopPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
+                        .addComponent(btnTringBanGhi1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTim1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLuu1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSua1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnXoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(203, 203, 203))))
         );
-        nhanKhauPanelLayout.setVerticalGroup(
-            nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        dongGopPanelLayout.setVerticalGroup(
+            dongGopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(nhanKhauPanelLayout.createSequentialGroup()
+            .addGroup(dongGopPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfTonGiao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfThuongTru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(175, 175, 175)
+                .addGroup(dongGopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTringBanGhi)
                     .addComponent(btnTim)
                     .addComponent(btnLuu)
                     .addComponent(btnSua)
-                    .addComponent(btnXoa)
-                    .addComponent(btnTim1))
-                .addGap(30, 30, 30)
+                    .addComponent(btnXoa))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(82, 82, 82)
+                .addGroup(dongGopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTringBanGhi1)
+                    .addComponent(btnTim1)
+                    .addComponent(btnLuu1)
+                    .addComponent(btnSua1)
+                    .addComponent(btnXoa1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(nhanKhauPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(dongGopPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(nhanKhauPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(dongGopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTim1ActionPerformed
+    private void btnTringBanGhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTringBanGhiMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTim1ActionPerformed
+    }//GEN-LAST:event_btnTringBanGhiMouseClicked
 
-    private void btnTim1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTim1MouseClicked
-        // TODO add your handling code here:
-        key = "";
-        displayPeople();
-    }//GEN-LAST:event_btnTim1MouseClicked
+    private void tKhoanDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tKhoanDongGopMouseClicked
 
-    private void tNhanKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tNhanKhauMouseClicked
-        DefaultTableModel model = (DefaultTableModel)tNhanKhau.getModel();
-        int indexRow = tNhanKhau.getSelectedRow();
-        key = String.valueOf(model.getValueAt(indexRow, 0).toString());
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-            String query = "SELECT * FROM nhan_khau where so_CMND = \"" + key + "\"";
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                tfCMND.setText(resultSet.getString("so_CMND"));
-                tfHoTen.setText(resultSet.getString("ho_ten"));
-                tfBietDanh.setText(resultSet.getString("biet_danh"));
-                cbGioiTinh.setSelectedItem(resultSet.getString("gioi_tinh"));
-                tfNgaySinh.setText(resultSet.getString("ngay_sinh"));
-                tfThuongTru.setText(resultSet.getString("thuong_tru"));
-                tfTonGiao.setText(resultSet.getString("ton_giao"));
-                tfSoHoKhau.setText(resultSet.getString("so_ho_khau"));
-                cbLaChuHo.setSelectedItem(resultSet.getString("la_chu_ho"));
-                cbQuaDoi.setSelectedItem(resultSet.getString("qua_doi"));
-
-            }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this, e);
-        }
-    }//GEN-LAST:event_tNhanKhauMouseClicked
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSuaActionPerformed
+    }//GEN-LAST:event_tKhoanDongGopMouseClicked
 
     // -------------------------- EDIT DATA --------------------------------
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
-        if (key.equals("")) {
-            JOptionPane.showMessageDialog(this, "Select a person to edit");
-        }
-        else {
-            try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-                String query = "Update nhan_khau Set so_CMND = ?, "
-                + "ho_ten = ?, "
-                + "biet_danh = ?, "
-                + "gioi_tinh = ?, "
-                + "ngay_sinh = ?, "
-                + "thuong_tru = ?, "
-                + "ton_giao = ?, "
-                + "so_ho_khau = ?, "
-                + "la_chu_ho = ?, "
-                + "qua_doi = ? "
-                + "where so_CMND = \"" + key + "\"";
-                PreparedStatement update = conn.prepareStatement(query);
-                update.setString(1, tfCMND.getText());
-                update.setString(2, tfHoTen.getText());
-                update.setString(3, tfBietDanh.getText());
-                update.setString(4, cbGioiTinh.getSelectedItem().toString());
-                update.setString(5, tfNgaySinh.getText());
-                update.setString(6, tfThuongTru.getText());
-                update.setString(7, tfTonGiao.getText());
-                update.setString(8, tfSoHoKhau.getText());
-                update.setString(9, cbLaChuHo.getSelectedItem().toString());
-                update.setString(10, cbQuaDoi.getSelectedItem().toString());
-                int row = update.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Đã sửa thông tin của công dân " + tfHoTen.getText());
-                conn.close();
-                displayPeople();
-                clearAfterAdding();
-            }
-            catch (Exception e){
-                JOptionPane.showMessageDialog(this, e);
-            }
-        }
     }//GEN-LAST:event_btnSuaMouseClicked
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaActionPerformed
 
     // ----------------- DELETE DATA ---------------
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
         // TODO add your handling code here:
-        if (key.equals("")) {
-            JOptionPane.showMessageDialog(this, "Select a person");
-        }
-        else {
-            try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-                String query = "Delete From nhan_khau where so_CMND = \"" + key + "\"";
-                Statement deletePerson = conn.createStatement();
-                deletePerson.executeUpdate(query);
-                JOptionPane.showMessageDialog(this, "Deleted!");
-                displayPeople();
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(this, e);
-            }
-        }
+        
     }//GEN-LAST:event_btnXoaMouseClicked
-
-    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLuuActionPerformed
 
     // ------------- Save the data --------------------
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
         // TODO add your handling code here:
-        if (tfHoTen.getText().isEmpty() ||
-            tfCMND.getText().isEmpty() ||
-            tfBietDanh.getText().isEmpty() ||
-            tfNgaySinh.getText().isEmpty() ||
-            tfThuongTru.getText().isEmpty() ||
-            tfTonGiao.getText().isEmpty() ||
-            tfSoHoKhau.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Missing information");
-        }
-        else {
-            try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-                PreparedStatement add = conn.prepareStatement("INSERT INTO nhan_khau VALUES (?,?,?,?,?,?,?,?,?,?) ");
-                add.setString(1, tfCMND.getText());
-                add.setString(2, tfHoTen.getText());
-                add.setString(3, tfBietDanh.getText());
-                add.setString(4, cbGioiTinh.getSelectedItem().toString());
-                add.setString(5, tfNgaySinh.getText());
-                add.setString(6, tfThuongTru.getText());
-                add.setString(7, tfTonGiao.getText());
-                add.setString(8, tfSoHoKhau.getText());
-                add.setString(9, cbLaChuHo.getSelectedItem().toString());
-                add.setString(10, cbQuaDoi.getSelectedItem().toString());
-                int row = add.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Đã thêm " + tfHoTen.getText());
-                conn.close();
-                displayPeople();
-                clearAfterAdding();
-            }
-            catch (Exception e){
-                JOptionPane.showMessageDialog(this, e);
-            }
-        }
     }//GEN-LAST:event_btnLuuMouseClicked
-
-    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimMouseClicked
         // TODO add your handling code here:
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-            st = conn.createStatement();
-            String soCMND = tfCMND.getText();
-            String hoTen = tfHoTen.getText();
-            String bietDanh = tfBietDanh.getText();
-            String gioiTinh = cbGioiTinh.getSelectedItem().toString();
-            String ngaySinh = tfNgaySinh.getText();
-            String thuongTru = tfThuongTru.getText();
-            String tonGiao = tfTonGiao.getText();
-            String soHoKhau = tfSoHoKhau.getText();
-            String laChuHo = cbLaChuHo.getSelectedItem().toString();
-            String quaDoi = cbQuaDoi.getSelectedItem().toString();
-            String sql = "SELECT so_CMND as 'Số CMND', ho_ten as 'Họ và tên', gioi_tinh as 'Giới tính', ngay_sinh as 'Ngày sinh', thuong_tru as 'Thường trú', so_ho_khau as 'Số hộ khẩu' FROM nhan_khau "+
-            "WHERE (so_CMND = \"" + soCMND + "\" or \"\" = \"" + soCMND + "\") " +
-            "AND (ho_ten = \"" + hoTen + "\" or \"\" = \"" + hoTen + "\") " +
-            "AND (biet_danh = \"" + bietDanh + "\" or \"\" = \"" + bietDanh + "\") " +
-            "AND (ngay_sinh = \"" + ngaySinh + "\" or \"\" = \"" + ngaySinh + "\") " +
-            "AND (gioi_tinh = \"" + gioiTinh + "\" or \"\" = \"" + gioiTinh + "\") " +
-            "AND (thuong_tru = \"" + thuongTru + "\" or \"\" = \"" + thuongTru + "\") " +
-            "AND (ton_giao = \"" + tonGiao + "\" or \"\" = \"" + tonGiao + "\") " +
-            "AND (so_ho_khau = \"" + soHoKhau + "\" or \"\" = \"" + soHoKhau + "\") ";
-            System.out.println(sql);
-            rs = st.executeQuery(sql) ;
-            tNhanKhau.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e) {
-
-        }
+        
     }//GEN-LAST:event_btnTimMouseClicked
-
-    private void tfHoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfHoTenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfHoTenActionPerformed
-
-    private void tfCMNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCMNDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCMNDActionPerformed
 
     // -------------------- BACK TO MAIN FORM ----------------------------
     private void lbThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbThoatMouseClicked
         // TODO add your handling code here:
-        if(user.isAdmin.equals("Yes")){
-            MainFormForAdmin mainForm = new MainFormForAdmin();
-            mainForm.setVisible(true);
-            mainForm.user = user;
-            this.dispose();
-        }
-        else if (user.isAdmin.equals("No")) {
-            MainFormForUser mainForm = new MainFormForUser();
-            mainForm.setVisible(true);
-            mainForm.user = user;
-            this.dispose();
-        }
-        else {
-            MainFormForUser mainForm = new MainFormForUser();
-            mainForm.setVisible(true);
-            this.dispose();
-        }
-        this.dispose();
+       
     }//GEN-LAST:event_lbThoatMouseClicked
 
     private void lbHoKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHoKhauMouseClicked
         // TODO add your handling code here:
-        HoKhauMainPage hoKhau = new HoKhauMainPage();
-        hoKhau.setVisible(true);
-        hoKhau.user = user;
-        this.dispose();
+        
     }//GEN-LAST:event_lbHoKhauMouseClicked
 
-    private void tfTonGiaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTonGiaoActionPerformed
+    private void tKhoanDongGop1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tKhoanDongGop1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfTonGiaoActionPerformed
+    }//GEN-LAST:event_tKhoanDongGop1MouseClicked
 
-    private void tfThuongTruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfThuongTruActionPerformed
+    private void btnTringBanGhi1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTringBanGhi1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfThuongTruActionPerformed
+    }//GEN-LAST:event_btnTringBanGhi1MouseClicked
+
+    private void btnTim1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTim1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTim1MouseClicked
+
+    private void btnLuu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuu1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLuu1MouseClicked
+
+    private void btnSua1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSua1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSua1MouseClicked
+
+    private void btnXoa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoa1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXoa1MouseClicked
 
     // ------------ START TO CODE HERE -----------------
     // ------------- CONNECTION SQL PARAMETER---------------
-    Connection conn = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
-    Statement st = null;
+   
     
     // ------------- DISPLAY PEOPLE ---------------------
-    private void displayPeople(){
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-            st = conn.createStatement();
-            rs = st.executeQuery("SELECT so_CMND as 'Số CMND', ho_ten as 'Họ và tên', gioi_tinh as 'Giới tính', ngay_sinh as 'Ngày sinh', thuong_tru as 'Thường trú', so_ho_khau as 'Số hộ khẩu' FROM nhan_khau");
-            tNhanKhau.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e) {
-            
-        }
-    }
-    
+ 
     // ------------ CLEAR TEXT FIELD AFTER ADDING PEOPLE -------------
-    private void clearAfterAdding() {
-        tfHoTen.setText("");
-        tfBietDanh.setText("");
-        tfCMND.setText("");
-        tfSoHoKhau.setText("");
-        tfNgaySinh.setText("");
-        tfThuongTru.setText("");
-        tfTonGiao.setText("");
-    }
-    
+  
     
     // ----------------- EXTRACT DATA FROM CLICK ON TABLE -----------------
-    String key = "";
+  
     
     /**
      * @param args the command line arguments
@@ -888,6 +700,23 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(KhoanDongGopMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(KhoanDongGopMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(KhoanDongGopMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(KhoanDongGopMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -898,26 +727,25 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
+    private javax.swing.JButton btnLuu1;
     private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnSua1;
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnTim1;
+    private javax.swing.JButton btnTringBanGhi;
+    private javax.swing.JButton btnTringBanGhi1;
     private javax.swing.JButton btnXoa;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JButton btnXoa1;
+    private javax.swing.JPanel dongGopPanel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbHoKhau;
     private javax.swing.JLabel lbThoat;
-    private javax.swing.JPanel nhanKhauPanel;
-    private javax.swing.JTable tNhanKhau;
-    private javax.swing.JTextField tfCMND;
-    private javax.swing.JTextField tfHoTen;
-    private javax.swing.JTextField tfThuongTru;
-    private javax.swing.JTextField tfTonGiao;
+    private javax.swing.JTable tKhoanDongGop;
+    private javax.swing.JTable tKhoanDongGop1;
     // End of variables declaration//GEN-END:variables
 }

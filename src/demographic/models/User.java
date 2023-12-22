@@ -9,10 +9,10 @@ package demographic.models;
  * @author Nam
  */
 public class User {
-    public String userId;
+    public int userId;
     public String userName;
     public String email;
-    public String isAdmin;
+    public int isAdmin;
     public String password;
     
 }

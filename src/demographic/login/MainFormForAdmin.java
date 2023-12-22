@@ -7,6 +7,8 @@ package demographic.login;
 import demographic.models.User;
 import demographic.login.Login;
 import demographic.quanlynhankhau.NhanKhauMainPage;
+import demographic.quanlythuphi.KhoanDongGopMainPage;
+import demographic.quanlythuphi.KhoanPhiMainPage;
 
 /**
  *
@@ -99,9 +101,9 @@ public class MainFormForAdmin extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Quản lý thu chi");
         jButton2.setMargin(new java.awt.Insets(5, 14, 5, 14));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnThuChiMouseClick(evt);
             }
         });
 
@@ -202,10 +204,6 @@ public class MainFormForAdmin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -240,6 +238,14 @@ public class MainFormForAdmin extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void btnThuChiMouseClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThuChiMouseClick
+        // TODO add your handling code here:
+        KhoanPhiMainPage khoanPhiMainPage = new KhoanPhiMainPage();
+        khoanPhiMainPage.setVisible(true);
+        khoanPhiMainPage.user = user;
+        this.dispose();
+    }//GEN-LAST:event_btnThuChiMouseClick
 
     /**
      * @param args the command line arguments
