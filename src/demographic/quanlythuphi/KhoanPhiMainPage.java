@@ -502,7 +502,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
     // ----------------- EXTRACT DATA FROM CLICK ON TABLE -----------------
     String key = "";
     
-    // -------------- display Nhân khẩu -----------------
   
     
     public void openFile(String file){
