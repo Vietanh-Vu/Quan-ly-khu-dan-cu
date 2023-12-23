@@ -681,21 +681,21 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
 
                 row = add.executeUpdate();
                 
-                // ----- log việc thêm hộ khẩu ------
-                sql = "INSERT INTO ho_khau_log (ho_khau_id, so_ho_khau, chu_ho_id ,chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap)"
-                        + " SELECT ho_khau_id,?,chu_ho_id,?,?,?,?\n"
-                        + " FROM ho_khau"
-                        + " WHERE so_ho_khau = ?;"
-                         ;
-                add = conn.prepareStatement(sql);
-                add.setString(1, tfSoHoKhau.getText());
-                add.setString(2,tfSoCMND.getText());
-                add.setString(3, tfDiaChi.getText());
-                add.setString(4, cbLaChungCu.getSelectedItem().toString());
-                add.setString(5, tfNgayLap.getText());
-                add.setString(6, tfSoHoKhau.getText());
-
-                row = add.executeUpdate();
+//                // ----- log việc thêm hộ khẩu ------
+//                sql = "INSERT INTO ho_khau_log (ho_khau_id, so_ho_khau, chu_ho_id ,chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap)"
+//                        + " SELECT ho_khau_id,?,chu_ho_id,?,?,?,?\n"
+//                        + " FROM ho_khau"
+//                        + " WHERE so_ho_khau = ?;"
+//                         ;
+//                add = conn.prepareStatement(sql);
+//                add.setString(1, tfSoHoKhau.getText());
+//                add.setString(2,tfSoCMND.getText());
+//                add.setString(3, tfDiaChi.getText());
+//                add.setString(4, cbLaChungCu.getSelectedItem().toString());
+//                add.setString(5, tfNgayLap.getText());
+//                add.setString(6, tfSoHoKhau.getText());
+//
+//                row = add.executeUpdate();
 
 //                sql = "UPDATE ho_khau\n" +
 //                "SET chu_ho_id = (SELECT nhan_khau_id FROM nhan_khau WHERE chu_ho_CMND = ?)\n" +
