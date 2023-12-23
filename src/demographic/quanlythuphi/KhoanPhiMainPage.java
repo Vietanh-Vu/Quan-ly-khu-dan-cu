@@ -6,7 +6,11 @@ package demographic.quanlythuphi;
 
 //import com.sun.jdi.connect.spi.Connection;
 import demographic.components.mainpage.*;
-import demographic.components.suaxoaform.SuaXoaNhanKhauForm;
+import demographic.components.suaxoaform.SuaXoaDongPhiForm;
+import demographic.components.suaxoaform.SuaXoaKhoanPhiForm;
+import demographic.components.themform.*;
+import demographic.components.themform.ThemKhoanPhiForm;
+import demographic.components.themform.ThemDongPhiForm;
 import demographic.components.themform.ThemNhanKhauForm;
 import demographic.quanlynhankhau.*;
 import demographic.models.User;
@@ -32,11 +36,24 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author vietanh
  */
 public class KhoanPhiMainPage extends javax.swing.JFrame {
+
+    public User user;
+    // ------------- CONNECTION SQL PARAMETER---------------
+    Connection conn = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    Statement st = null;
+
+    // ----------------- EXTRACT DATA FROM CLICK ON TABLE -----------------
+    String key = "";
+
     /**
      * Creates new form NhanKhauMainPage
      */
     public KhoanPhiMainPage() {
         initComponents();
+        displayDongPhi();
+        displayKhoanPhi();
     }
 
     /**
@@ -291,7 +308,7 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
 
         btnTimDongPhi.setBackground(new java.awt.Color(0, 51, 51));
         btnTimDongPhi.setForeground(new java.awt.Color(255, 255, 255));
-        btnTimDongPhi.setText("Tìm theo tên");
+        btnTimDongPhi.setText("Tìm theo số hộ khẩu");
         btnTimDongPhi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTimDongPhiMouseClicked(evt);
@@ -299,7 +316,7 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         });
 
         tfTimDongPhi.setForeground(new java.awt.Color(0, 102, 102));
-        tfTimDongPhi.setText("Nhâp tên");
+        tfTimDongPhi.setText("Nhập số hộ khẩu");
         tfTimDongPhi.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         tfTimDongPhi.setSelectedTextColor(new java.awt.Color(102, 102, 102));
         tfTimDongPhi.addActionListener(new java.awt.event.ActionListener() {
@@ -316,23 +333,26 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(khoanPhiPanelLayout.createSequentialGroup()
-                        .addComponent(btnTrinhBanGhiKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnThemKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSuaKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnXuatFileKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
-                        .addComponent(btnTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
+                        .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(khoanPhiPanelLayout.createSequentialGroup()
+                                .addComponent(btnTrinhBanGhiKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnThemKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSuaKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnXuatFileKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                                .addComponent(btnTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addContainerGap())
                     .addGroup(khoanPhiPanelLayout.createSequentialGroup()
                         .addComponent(btnTrinhBanGhiDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -341,11 +361,11 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                         .addComponent(btnSuaDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnXuatFileDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
-                        .addComponent(btnTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(tfTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(tfTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))))
         );
         khoanPhiPanelLayout.setVerticalGroup(
             khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,9 +375,7 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(21, 21, 21)
                 .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTrinhBanGhiKhoanPhi)
                     .addComponent(btnSuaKhoanPhi)
@@ -365,11 +383,11 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                     .addComponent(btnTimKhoanPhi)
                     .addComponent(tfTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemKhoanPhi))
-                .addGap(67, 67, 67)
-                .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTrinhBanGhiDongPhi)
                     .addComponent(btnSuaDongPhi)
@@ -377,7 +395,9 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                     .addComponent(btnTimDongPhi)
                     .addComponent(tfTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemDongPhi))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -401,44 +421,63 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
 
     private void btnTrinhBanGhiKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrinhBanGhiKhoanPhiMouseClicked
         // TODO add your handling code here:
+        displayKhoanPhi();
     }//GEN-LAST:event_btnTrinhBanGhiKhoanPhiMouseClicked
 
     private void tKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tKhoanPhiMouseClicked
-        
+
     }//GEN-LAST:event_tKhoanPhiMouseClicked
 
     // -------------------------- EDIT DATA --------------------------------
     private void btnSuaKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaKhoanPhiMouseClicked
         // TODO add your handling code here:
+        SuaXoaKhoanPhiForm newForm = new SuaXoaKhoanPhiForm();
+        newForm.setVisible(true);
     }//GEN-LAST:event_btnSuaKhoanPhiMouseClicked
 
     private void btnTimKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKhoanPhiMouseClicked
         // TODO add your handling code here:
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            st = conn.createStatement();
+            String tenKhoanPhi = tfTimKhoanPhi.getText();
+            String sqlQuery = "SELECT id_khoan_thu_phi AS 'ID Khoản Phí',"
+                    + "ten_khoan_thu_phi AS 'Tên Khoản Phí',"
+                    + "tien_phi AS 'Tiền Phí',"
+                    + "ngay_bat_dau AS 'Ngày Bắt Đầu',"
+                    + "ngay_ket_thuc AS 'Ngày kết thúc',"
+                    + "chi_tiet AS 'Chi tiết'"
+                    + "FROM `khoan_thu_phi` "
+                    + "WHERE `ten_khoan_thu_phi` LIKE " + "'%" + tenKhoanPhi + "%' ";
+            rs = st.executeQuery(sqlQuery);
+            tKhoanPhi.setModel(DbUtils.resultSetToTableModel(rs));
+            tfTimKhoanPhi.setText("Nhập tên");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+        }
     }//GEN-LAST:event_btnTimKhoanPhiMouseClicked
 
     // -------------------- BACK TO MAIN FORM ----------------------------
     private void lbThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbThoatMouseClicked
         // TODO add your handling code here:
-        if(user.isAdmin == 1){
+        if (user.isAdmin == 1) {
             MainFormForAdmin mainForm = new MainFormForAdmin();
             mainForm.setVisible(true);
             mainForm.user = user;
             this.dispose();
-        }
-        else if (user.isAdmin == 0) {
+        } else if (user.isAdmin == 0) {
             MainFormForUser mainForm = new MainFormForUser();
             mainForm.setVisible(true);
             mainForm.user = user;
             this.dispose();
-        }
-        else {
+        } else {
             MainFormForUser mainForm = new MainFormForUser();
             mainForm.setVisible(true);
             this.dispose();
         }
         this.dispose();
     }//GEN-LAST:event_lbThoatMouseClicked
-
 
     private void IbDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IbDongPhiMouseClicked
         // TODO add your handling code here:
@@ -450,11 +489,15 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
 
     private void lbDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDongGopMouseClicked
         // TODO add your handling code here:
+        KhoanDongGopMainPage newFrame = new KhoanDongGopMainPage();
+        newFrame.setVisible(true);
+        newFrame.user = user;
+        this.dispose();
     }//GEN-LAST:event_lbDongGopMouseClicked
 
     private void btnThemKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemKhoanPhiMouseClicked
         // TODO add your handling code here:
-        ThemNhanKhauForm newForm = new ThemNhanKhauForm();
+        ThemKhoanPhiForm newForm = new ThemKhoanPhiForm();
         newForm.setVisible(true);
     }//GEN-LAST:event_btnThemKhoanPhiMouseClicked
 
@@ -468,14 +511,19 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
 
     private void btnTrinhBanGhiDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrinhBanGhiDongPhiMouseClicked
         // TODO add your handling code here:
+        displayDongPhi();
     }//GEN-LAST:event_btnTrinhBanGhiDongPhiMouseClicked
 
     private void btnThemDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemDongPhiMouseClicked
         // TODO add your handling code here:
+        ThemDongPhiForm newForm = new ThemDongPhiForm();
+        newForm.setVisible(true);
     }//GEN-LAST:event_btnThemDongPhiMouseClicked
 
     private void btnSuaDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaDongPhiMouseClicked
         // TODO add your handling code here:
+        SuaXoaDongPhiForm newForm = new SuaXoaDongPhiForm();
+        newForm.setVisible(true);
     }//GEN-LAST:event_btnSuaDongPhiMouseClicked
 
     private void btnXuatFileDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFileDongPhiMouseClicked
@@ -483,34 +531,81 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXuatFileDongPhiMouseClicked
 
     private void btnTimDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimDongPhiMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:'
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            st = conn.createStatement();
+            String soHoKhau = tfTimDongPhi.getText();
+            String sqlQuery = "SELECT "
+                    + "id_dong_phi AS 'ID Đóng Phí',"
+                    + "id_khoan_thu_phi AS 'ID Khoản Thu Phí',"
+                    + "so_ho_khau AS 'Số hộ khẩu',"
+                    + "so_tien AS 'Số tiền',"
+                    + "da_dong AS 'Đã đóng',"
+                    + "ngay_dong AS 'Ngày đóng'"
+                    + "FROM `dong_phi` "
+                    + "WHERE `so_ho_khau` LIKE " + "'%" + soHoKhau + "%' ";
+            rs = st.executeQuery(sqlQuery);
+            tDongPhi.setModel(DbUtils.resultSetToTableModel(rs));
+            tfTimDongPhi.setText("Nhập tên");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+        }
     }//GEN-LAST:event_btnTimDongPhiMouseClicked
 
     private void tfTimDongPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTimDongPhiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfTimDongPhiActionPerformed
 
-    // ------------ START TO CODE HERE -----------------
-    // ------------- User parameter --------------------
-    public User user;
-    // ------------- CONNECTION SQL PARAMETER---------------
-    Connection conn = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
-    Statement st = null;
-    
-    // ----------------- EXTRACT DATA FROM CLICK ON TABLE -----------------
-    String key = "";
-    
-  
-    
-    public void openFile(String file){
-        try{
-            File path = new File(file);
-            Desktop.getDesktop().open(path);
-        } catch (Exception e) {            
+    private void displayKhoanPhi() {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            st = conn.createStatement();
+            String sql = "SELECT id_khoan_thu_phi AS 'ID Khoản Phí',"
+                    + "ten_khoan_thu_phi AS 'Tên Khoản Phí',"
+                    + "tien_phi AS 'Tiền Phí',"
+                    + "ngay_bat_dau AS 'Ngày Bắt Đầu',"
+                    + "ngay_ket_thuc AS 'Ngày kết thúc',"
+                    + "chi_tiet AS 'Chi tiết'"
+                    + "FROM khoan_thu_phi";
+            rs = st.executeQuery(sql);
+            tKhoanPhi.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu: Không đọc được khoan_thu_phi");
+
         }
     }
+
+    private void displayDongPhi() {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            st = conn.createStatement();
+            String sql = "SELECT "
+                    + "id_dong_phi AS 'ID Đóng Phí',"
+                    + "id_khoan_thu_phi AS 'ID Khoản Thu Phí',"
+                    + "so_ho_khau AS 'Số hộ khẩu',"
+                    + "so_tien AS 'Số tiền',"
+                    + "da_dong AS 'Đã đóng',"
+                    + "ngay_dong AS 'Ngày đóng'"
+                    + " FROM dong_phi";
+            rs = st.executeQuery(sql);
+            tDongPhi.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu: Không đọc được dong_phi");
+        }
+    }
+
+    public void openFile(String file) {
+        try {
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (Exception e) {
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -518,7 +613,7 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
-
 /**
  *
  * @author vietanh
@@ -19,18 +18,18 @@ import java.sql.*;
 public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
 
     KhoanPhi khoanPhi;
-    
+
     /**
      * Creates new form Form
      */
     public SuaXoaKhoanPhiForm() {
         initComponents();
     }
-    
+
     public SuaXoaKhoanPhiForm(KhoanPhi khoanPhi) {
         initComponents();
         this.khoanPhi = khoanPhi;
-        System.out.println(this.khoanPhi.toString());   
+        System.out.println(this.khoanPhi.toString());
     }
 
     /**
@@ -47,18 +46,16 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         btnLuu = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        tfHoTen = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        tfNgaySinh = new javax.swing.JTextField();
+        tfTenKhoanPhi = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        tfSoCMND = new javax.swing.JTextField();
+        tfTienPhi = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        tfNoiCap = new javax.swing.JTextField();
+        tfNgayBatDau = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        tfNoiSinh = new javax.swing.JTextField();
+        tfNgayKetThuc = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        tfDanToc = new javax.swing.JTextField();
+        tfChiTiet = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,33 +109,17 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("THÔNG TIN KHOẢN PHÍ");
 
-        jLabel7.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel7.setText("ID Khoản Phí");
-
-        tfHoTen.setForeground(new java.awt.Color(0, 102, 102));
-        tfHoTen.setCaretColor(new java.awt.Color(0, 102, 102));
-        tfHoTen.setDisabledTextColor(new java.awt.Color(0, 102, 102));
-        tfHoTen.setMargin(new java.awt.Insets(4, 6, 4, 6));
-        tfHoTen.setSelectedTextColor(new java.awt.Color(0, 102, 102));
-        tfHoTen.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfHoTen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfIDKhoanPhiActionPerformed(evt);
-            }
-        });
-
         jLabel9.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 102, 102));
         jLabel9.setText("Tên Khoản Phí");
 
-        tfNgaySinh.setForeground(new java.awt.Color(0, 102, 102));
-        tfNgaySinh.setCaretColor(new java.awt.Color(0, 102, 102));
-        tfNgaySinh.setDisabledTextColor(new java.awt.Color(0, 102, 102));
-        tfNgaySinh.setMargin(new java.awt.Insets(4, 6, 4, 6));
-        tfNgaySinh.setSelectedTextColor(new java.awt.Color(0, 102, 102));
-        tfNgaySinh.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfNgaySinh.addActionListener(new java.awt.event.ActionListener() {
+        tfTenKhoanPhi.setForeground(new java.awt.Color(0, 102, 102));
+        tfTenKhoanPhi.setCaretColor(new java.awt.Color(0, 102, 102));
+        tfTenKhoanPhi.setDisabledTextColor(new java.awt.Color(0, 102, 102));
+        tfTenKhoanPhi.setMargin(new java.awt.Insets(4, 6, 4, 6));
+        tfTenKhoanPhi.setSelectedTextColor(new java.awt.Color(0, 102, 102));
+        tfTenKhoanPhi.setSelectionColor(new java.awt.Color(0, 102, 102));
+        tfTenKhoanPhi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfTenKhoanPhiActionPerformed(evt);
             }
@@ -148,13 +129,13 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(0, 102, 102));
         jLabel12.setText("Tiền Phí");
 
-        tfSoCMND.setForeground(new java.awt.Color(0, 102, 102));
-        tfSoCMND.setCaretColor(new java.awt.Color(0, 102, 102));
-        tfSoCMND.setDisabledTextColor(new java.awt.Color(0, 102, 102));
-        tfSoCMND.setMargin(new java.awt.Insets(4, 6, 4, 6));
-        tfSoCMND.setSelectedTextColor(new java.awt.Color(0, 102, 102));
-        tfSoCMND.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfSoCMND.addActionListener(new java.awt.event.ActionListener() {
+        tfTienPhi.setForeground(new java.awt.Color(0, 102, 102));
+        tfTienPhi.setCaretColor(new java.awt.Color(0, 102, 102));
+        tfTienPhi.setDisabledTextColor(new java.awt.Color(0, 102, 102));
+        tfTienPhi.setMargin(new java.awt.Insets(4, 6, 4, 6));
+        tfTienPhi.setSelectedTextColor(new java.awt.Color(0, 102, 102));
+        tfTienPhi.setSelectionColor(new java.awt.Color(0, 102, 102));
+        tfTienPhi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfTienPhiActionPerformed(evt);
             }
@@ -164,15 +145,15 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(0, 102, 102));
         jLabel13.setText("Ngày Bắt Đầu");
 
-        tfNoiCap.setForeground(new java.awt.Color(0, 102, 102));
-        tfNoiCap.setCaretColor(new java.awt.Color(0, 102, 102));
-        tfNoiCap.setDisabledTextColor(new java.awt.Color(0, 102, 102));
-        tfNoiCap.setMargin(new java.awt.Insets(4, 6, 4, 6));
-        tfNoiCap.setSelectedTextColor(new java.awt.Color(0, 102, 102));
-        tfNoiCap.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfNoiCap.addActionListener(new java.awt.event.ActionListener() {
+        tfNgayBatDau.setForeground(new java.awt.Color(0, 102, 102));
+        tfNgayBatDau.setCaretColor(new java.awt.Color(0, 102, 102));
+        tfNgayBatDau.setDisabledTextColor(new java.awt.Color(0, 102, 102));
+        tfNgayBatDau.setMargin(new java.awt.Insets(4, 6, 4, 6));
+        tfNgayBatDau.setSelectedTextColor(new java.awt.Color(0, 102, 102));
+        tfNgayBatDau.setSelectionColor(new java.awt.Color(0, 102, 102));
+        tfNgayBatDau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNoiCaptfNgayBatDauActionPerformed(evt);
+                tfNgayBatDautfNgayBatDauActionPerformed(evt);
             }
         });
 
@@ -180,13 +161,13 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(0, 102, 102));
         jLabel16.setText("Ngày Kết Thúc");
 
-        tfNoiSinh.setForeground(new java.awt.Color(0, 102, 102));
-        tfNoiSinh.setCaretColor(new java.awt.Color(0, 102, 102));
-        tfNoiSinh.setDisabledTextColor(new java.awt.Color(0, 102, 102));
-        tfNoiSinh.setMargin(new java.awt.Insets(4, 6, 4, 6));
-        tfNoiSinh.setSelectedTextColor(new java.awt.Color(0, 102, 102));
-        tfNoiSinh.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfNoiSinh.addActionListener(new java.awt.event.ActionListener() {
+        tfNgayKetThuc.setForeground(new java.awt.Color(0, 102, 102));
+        tfNgayKetThuc.setCaretColor(new java.awt.Color(0, 102, 102));
+        tfNgayKetThuc.setDisabledTextColor(new java.awt.Color(0, 102, 102));
+        tfNgayKetThuc.setMargin(new java.awt.Insets(4, 6, 4, 6));
+        tfNgayKetThuc.setSelectedTextColor(new java.awt.Color(0, 102, 102));
+        tfNgayKetThuc.setSelectionColor(new java.awt.Color(0, 102, 102));
+        tfNgayKetThuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfNgayKetThucActionPerformed(evt);
             }
@@ -196,13 +177,13 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(0, 102, 102));
         jLabel18.setText("Chi Tiết ");
 
-        tfDanToc.setForeground(new java.awt.Color(0, 102, 102));
-        tfDanToc.setCaretColor(new java.awt.Color(0, 102, 102));
-        tfDanToc.setDisabledTextColor(new java.awt.Color(0, 102, 102));
-        tfDanToc.setMargin(new java.awt.Insets(4, 6, 4, 6));
-        tfDanToc.setSelectedTextColor(new java.awt.Color(0, 102, 102));
-        tfDanToc.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfDanToc.addActionListener(new java.awt.event.ActionListener() {
+        tfChiTiet.setForeground(new java.awt.Color(0, 102, 102));
+        tfChiTiet.setCaretColor(new java.awt.Color(0, 102, 102));
+        tfChiTiet.setDisabledTextColor(new java.awt.Color(0, 102, 102));
+        tfChiTiet.setMargin(new java.awt.Insets(4, 6, 4, 6));
+        tfChiTiet.setSelectedTextColor(new java.awt.Color(0, 102, 102));
+        tfChiTiet.setSelectionColor(new java.awt.Color(0, 102, 102));
+        tfChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfChiTietActionPerformed(evt);
             }
@@ -213,33 +194,25 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
+                .addGap(151, 151, 151)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(80, 80, 80)
+                        .addComponent(tfChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addGap(80, 80, 80)
-                                .addComponent(tfDanToc))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel7))
-                                .addGap(37, 37, 37)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNgaySinh)
-                                    .addComponent(tfSoCMND)
-                                    .addComponent(tfNoiCap)
-                                    .addComponent(tfNoiSinh)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(151, 151, 151)))
-                .addContainerGap())
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel16))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfTenKhoanPhi)
+                            .addComponent(tfTienPhi)
+                            .addComponent(tfNgayBatDau)
+                            .addComponent(tfNgayKetThuc))))
+                .addGap(157, 157, 157))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addComponent(btnLuu)
@@ -248,35 +221,36 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnHuy)
                 .addGap(91, 91, 91))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(tfNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfTenKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(tfSoCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfTienPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(tfNoiCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNoiSinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(tfDanToc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel18)))
@@ -325,10 +299,6 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXoaActionPerformed
 
-    private void tfIDKhoanPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDKhoanPhiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfIDKhoanPhiActionPerformed
-
     private void tfTenKhoanPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTenKhoanPhiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfTenKhoanPhiActionPerformed
@@ -337,9 +307,9 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfTienPhiActionPerformed
 
-    private void tfNoiCaptfNgayBatDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNoiCaptfNgayBatDauActionPerformed
+    private void tfNgayBatDautfNgayBatDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNgayBatDautfNgayBatDauActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfNoiCaptfNgayBatDauActionPerformed
+    }//GEN-LAST:event_tfNgayBatDautfNgayBatDauActionPerformed
 
     private void tfNgayKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNgayKetThucActionPerformed
         // TODO add your handling code here:
@@ -357,7 +327,7 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -457,14 +427,12 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField tfDanToc;
-    private javax.swing.JTextField tfHoTen;
-    private javax.swing.JTextField tfNgaySinh;
-    private javax.swing.JTextField tfNoiCap;
-    private javax.swing.JTextField tfNoiSinh;
-    private javax.swing.JTextField tfSoCMND;
+    private javax.swing.JTextField tfChiTiet;
+    private javax.swing.JTextField tfNgayBatDau;
+    private javax.swing.JTextField tfNgayKetThuc;
+    private javax.swing.JTextField tfTenKhoanPhi;
+    private javax.swing.JTextField tfTienPhi;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,9 +9,10 @@ package demographic.models;
  * @author vietanhvu
  */
 public class KhoanPhi {
+
     private String idKhoanPhi;
     private String tenKhoanPhi;
-    private int tienPhi;
+    private String tienPhi;
     private String ngayBatDau;
     private String ngayKetThuc;
     private String chiTiet;
@@ -19,7 +20,7 @@ public class KhoanPhi {
     public KhoanPhi() {
     }
 
-    public KhoanPhi(String idKhoanPhi, String tenKhoanPhi, int tienPhi, String ngayBatDau, String ngayKetThuc, String chiTiet) {
+    public KhoanPhi(String idKhoanPhi, String tenKhoanPhi, String tienPhi, String ngayBatDau, String ngayKetThuc, String chiTiet) {
         this.idKhoanPhi = idKhoanPhi;
         this.tenKhoanPhi = tenKhoanPhi;
         this.tienPhi = tienPhi;
@@ -44,11 +45,11 @@ public class KhoanPhi {
         this.tenKhoanPhi = tenKhoanPhi;
     }
 
-    public int getTienPhi() {
+    public String getTienPhi() {
         return tienPhi;
     }
 
-    public void setTienPhi(int tienPhi) {
+    public void setTienPhi(String tienPhi) {
         this.tienPhi = tienPhi;
     }
 
@@ -75,4 +76,5 @@ public class KhoanPhi {
     public void setChiTiet(String chiTiet) {
         this.chiTiet = chiTiet;
     }
+
 }
