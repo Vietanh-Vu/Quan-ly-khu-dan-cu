@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2023 at 01:43 AM
+-- Generation Time: Dec 22, 2023 at 07:27 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,95 @@ SET time_zone = "+00:00";
 --
 -- Database: `quan_ly_khu_dan_cu`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chung_cu`
+--
+
+CREATE TABLE `chung_cu` (
+  `so_ho_khau` varchar(20) NOT NULL,
+  `loai_chung_cu` enum('cao_cap','thuong','gia_re') DEFAULT NULL,
+  `dien_tich` decimal(10,1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chung_cu`
+--
+
+INSERT INTO `chung_cu` (`so_ho_khau`, `loai_chung_cu`, `dien_tich`) VALUES
+('SHK003', 'cao_cap', 150.0),
+('SHK001', 'thuong', 100.0),
+('SHK004', 'gia_re', 60.0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dong_gop`
+--
+
+CREATE TABLE `dong_gop` (
+  `so_ho_khau` varchar(20) NOT NULL,
+  `id_khoan_dong_gop` varchar(5) NOT NULL,
+  `so_tien` int(11) DEFAULT 0,
+  `ngay_dong` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dong_phi`
+--
+
+CREATE TABLE `dong_phi` (
+  `id_dong_phi` varchar(5) NOT NULL,
+  `id_khoan_thu_phi` varchar(10) DEFAULT NULL,
+  `so_ho_khau` varchar(20) DEFAULT NULL,
+  `so_tien` int(11) DEFAULT 0,
+  `da_dong` tinyint(1) DEFAULT 0,
+  `ngay_dong` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dong_phi`
+--
+
+INSERT INTO `dong_phi` (`id_dong_phi`, `id_khoan_thu_phi`, `so_ho_khau`, `so_tien`, `da_dong`, `ngay_dong`) VALUES
+('00001', 'QLTT2306', 'SHK001', 500000, 0, '0000-00-00'),
+('00002', 'QLCC2306', 'SHK003', 1500000, 0, '0000-00-00'),
+('00003', 'QLRR2306', 'SHK004', 120000, 0, '0000-00-00'),
+('00004', 'DVCC2306', 'SHK001', 2500000, 0, '0000-00-00'),
+('00005', 'DVCC2306', 'SHK003', 3750000, 0, '0000-00-00'),
+('00006', 'DVCC2306', 'SHK004', 1500000, 0, '0000-00-00'),
+('00007', 'DVCC2307', 'SHK001', 2500000, 0, '0000-00-00'),
+('00008', 'QLTT2308', 'SHK001', 500000, 0, '0000-00-00'),
+('00010', 'CVS00023', 'SHK001', 7000000, 0, '0000-00-00'),
+('00011', 'CVS00023', 'SHK005', 70000, 0, '0000-00-00');
+
+--
+-- Triggers `dong_phi`
+--
+DELIMITER $$
+CREATE TRIGGER `calculate_so_tien` BEFORE INSERT ON `dong_phi` FOR EACH ROW BEGIN
+    DECLARE tien INT;
+    SELECT 
+        k.tien_phi * c.dien_tich 
+    INTO 
+        tien
+    FROM 
+        khoan_thu_phi k
+    JOIN 
+        chung_cu c ON k.id_khoan_thu_phi = NEW.id_khoan_thu_phi 
+                   AND c.so_ho_khau = NEW.so_ho_khau;
+    IF tien IS NULL THEN
+        SET tien = (SELECT tien_phi FROM khoan_thu_phi WHERE id_khoan_thu_phi = NEW.id_khoan_thu_phi);
+    END IF;
+    
+    SET NEW.so_tien = tien;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -77,6 +166,54 @@ INSERT INTO `ho_khau_log` (`log_ho_khau_id`, `ho_khau_id`, `so_ho_khau`, `chu_ho
 (7, 2, 'SHK002', 5, '654321987', '456 Đường DEF, Quận UVW', 'Không', '2023-02-01', 0, '2023-12-12 14:54:51'),
 (8, 3, 'SHK003', 9, '789012345', '789 Đường GHI, Quận LMN', 'Có', '2023-03-01', 0, '2023-12-12 15:58:28'),
 (9, 3, 'SHK003', 9, '789012345', '789 Đường GHI, Quận LMN', 'Có', '2023-03-01', 0, '2023-12-12 16:03:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `khoan_dong_gop`
+--
+
+CREATE TABLE `khoan_dong_gop` (
+  `id_khoan_dong_gop` varchar(5) NOT NULL,
+  `ten_khoan_dong_gop` varchar(50) DEFAULT NULL,
+  `ngay_bat_dau` date NOT NULL,
+  `ngay_ket_thuc` date NOT NULL,
+  `chi_tiet` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `khoan_thu_phi`
+--
+
+CREATE TABLE `khoan_thu_phi` (
+  `id_khoan_thu_phi` varchar(20) NOT NULL,
+  `ten_khoan_thu_phi` varchar(50) NOT NULL,
+  `tien_phi` int(11) DEFAULT 0,
+  `ngay_bat_dau` date NOT NULL,
+  `ngay_ket_thuc` date NOT NULL,
+  `chi_tiet` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `khoan_thu_phi`
+--
+
+INSERT INTO `khoan_thu_phi` (`id_khoan_thu_phi`, `ten_khoan_thu_phi`, `tien_phi`, `ngay_bat_dau`, `ngay_ket_thuc`, `chi_tiet`) VALUES
+('CVS00023', 'Phí lắp đặt chung năm 2023', 70000, '2023-06-01', '2023-09-01', NULL),
+('DVCC2306', 'Phí dịch vụ chung cư tháng 6', 25000, '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư'),
+('DVCC2307', 'Phí dịch vụ chung cư tháng 7', 25000, '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư'),
+('DVCC2308', 'Phí dịch vụ chung cư tháng 8', 25000, '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư'),
+('QLCC2306', 'Phí dịch vụ chung cư cao cấp tháng 6', 10000, '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư cao cấp'),
+('QLCC2307', 'Phí dịch vụ chung cư cao cấp tháng 7', 10000, '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư cao cấp'),
+('QLCC2308', 'Phí dịch vụ chung cư cao cấp tháng 8', 10000, '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư cao cấp'),
+('QLRR2306', 'Phí dịch vụ chung cư giá rẻ tháng 6', 2000, '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư giá rẻ'),
+('QLRR2307', 'Phí dịch vụ chung cư giá rẻ tháng 7', 2000, '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư giá rẻ'),
+('QLRR2308', 'Phí dịch vụ chung cư giá rẻ tháng 8', 2000, '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư giá rẻ'),
+('QLTT2306', 'Phí dịch vụ chung cư thường tháng 6', 5000, '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư thường'),
+('QLTT2307', 'Phí dịch vụ chung cư thường tháng 7', 5000, '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư thường'),
+('QLTT2308', 'Phí dịch vụ chung cư thường tháng 8', 5000, '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư thường');
 
 -- --------------------------------------------------------
 
@@ -182,66 +319,30 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `is_admin`, `password`) VAL
 (1, 'admin', 'admin@example.com', 1, '12345'),
 (2, 'user1', 'user1@example.com', 0, 'password123');
 
-
--- --------------------------------------------------------
-
---
--- Table structure for table `khoan_phi`
---
-
-CREATE TABLE `khoan_thu_phi` (  --thu phí là bắt buộc
-  `id_khoan_thu_phi` varchar(5) NOT NULL,
-  `ten_khoan_thu_phi` varchar(50) NOT NULL, 
-  `tien_phi` int(11) DEFAULT 0,
-  `ngay_bat_dau` date NOT NULL,
-  `ngay_ket_thuc` date NOT NULL,
-  `chi_tiet` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `thu_phi`
---
-
-CREATE TABLE `dong_phi` (
-  `id_dong_phi` varchar(5) NOT NULL,
-  `id_khoan_thu_phi` varchar(5) DEFAULT NULL,
-  `so_ho_khau` varchar(20) NOT NULL,
-  `so_tien` int(11) DEFAULT 0,
-  `da_dong` boolean DEFAULT 0,
-  `ngay_dong` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
--- --------------------------------------------------------
-
---
--- Table structure for table `khoan_phi`
---
-
-CREATE TABLE `khoan_dong_gop` (  -- dong gop la khong bat buoc
-  `id_khoan_dong_gop` varchar(5) NOT NULL,
-  `ten_khoan_dong_gop` varchar(50) NOT NULL NULL, 
-  `ngay_bat_dau` date NOT NULL,
-  `ngay_ket_thuc` date NOT NULL,
-  `chi_tiet` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `thu_phi`
---
-
-CREATE TABLE `dong_gop` (
-  `so_ho_khau` varchar(20) NOT NULL,
-  `id_khoan_dong_gop` varchar(5) NOT NULL,
-  `so_tien` int(11) DEFAULT 0,
-  `ngay_dong` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `chung_cu`
+--
+ALTER TABLE `chung_cu`
+  ADD KEY `chung_cu_ibfk_1` (`so_ho_khau`);
+
+--
+-- Indexes for table `dong_gop`
+--
+ALTER TABLE `dong_gop`
+  ADD KEY `dong_gop_ibfk_1` (`so_ho_khau`),
+  ADD KEY `dong_gop_ibfk_2` (`id_khoan_dong_gop`);
+
+--
+-- Indexes for table `dong_phi`
+--
+ALTER TABLE `dong_phi`
+  ADD PRIMARY KEY (`id_dong_phi`),
+  ADD KEY `dong_phi_ibfk_1` (`so_ho_khau`),
+  ADD KEY `dong_phi_ibfk_2` (`id_khoan_thu_phi`);
 
 --
 -- Indexes for table `ho_khau`
@@ -257,6 +358,18 @@ ALTER TABLE `ho_khau`
 ALTER TABLE `ho_khau_log`
   ADD PRIMARY KEY (`log_ho_khau_id`),
   ADD KEY `fk_log_ho_khau_ho_khau` (`ho_khau_id`);
+
+--
+-- Indexes for table `khoan_dong_gop`
+--
+ALTER TABLE `khoan_dong_gop`
+  ADD PRIMARY KEY (`id_khoan_dong_gop`);
+
+--
+-- Indexes for table `khoan_thu_phi`
+--
+ALTER TABLE `khoan_thu_phi`
+  ADD PRIMARY KEY (`id_khoan_thu_phi`);
 
 --
 -- Indexes for table `nhan_khau`
@@ -314,28 +427,28 @@ ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Indexes for table `dip_thu_phi`
---
-ALTER TABLE `khoan_thu_phi`
-  ADD PRIMARY KEY (`id_khoan_thu_phi`);
-
---
--- Indexes for table `khoan_dong_gop`
---
-ALTER TABLE `khoan_dong_gop`
-  ADD PRIMARY KEY (`id_khoan_dong_gop`);
-
---
--- Indexes for table `thu_phi`
---
-ALTER TABLE `dong_phi`
-  ADD PRIMARY KEY (`id_dong_phi`),
-  ADD KEY `so_ho_khau` (`so_ho_khau`),
-  ADD KEY `id_khoan_thu_phi` (`id_khoan_thu_phi`);
-
---
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `chung_cu`
+--
+ALTER TABLE `chung_cu`
+  ADD CONSTRAINT `chung_cu_ibfk_1` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau` (`so_ho_khau`);
+
+--
+-- Constraints for table `dong_gop`
+--
+ALTER TABLE `dong_gop`
+  ADD CONSTRAINT `dong_gop_ibfk_1` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau` (`so_ho_khau`),
+  ADD CONSTRAINT `dong_gop_ibfk_2` FOREIGN KEY (`id_khoan_dong_gop`) REFERENCES `khoan_dong_gop` (`id_khoan_dong_gop`);
+
+--
+-- Constraints for table `dong_phi`
+--
+ALTER TABLE `dong_phi`
+  ADD CONSTRAINT `dong_phi_ibfk_1` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau` (`so_ho_khau`),
+  ADD CONSTRAINT `dong_phi_ibfk_2` FOREIGN KEY (`id_khoan_thu_phi`) REFERENCES `khoan_thu_phi` (`id_khoan_thu_phi`);
 
 --
 -- Constraints for table `ho_khau`
@@ -356,30 +469,6 @@ ALTER TABLE `ho_khau_log`
 ALTER TABLE `tam_vang`
   ADD CONSTRAINT `tam_vang_ibfk_1` FOREIGN KEY (`nhan_khau_id`) REFERENCES `nhan_khau` (`nhan_khau_id`),
   ADD CONSTRAINT `tam_vang_ibfk_2` FOREIGN KEY (`so_CMND`) REFERENCES `nhan_khau` (`so_CMND`);
-
---
--- Constraints for table `dong_phi`
---
-ALTER TABLE `dong_phi` 
-  ADD CONSTRAINT `dong_phi_ibfk_1` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau`(`so_ho_khau`) 
-  ON DELETE RESTRICT ON UPDATE RESTRICT; 
-  
-ALTER TABLE `dong_phi` 
-  ADD CONSTRAINT `dong_phi_ibfk_2` FOREIGN KEY (`id_khoan_thu_phi`) REFERENCES `khoan_thu_phi`(`id_khoan_thu_phi`) 
-  ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
---
--- Constraints for table `dong_gop`
---
-ALTER TABLE `dong_gop` 
-ADD CONSTRAINT `dong_gop_ibfk_1` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau`(`so_ho_khau`) 
-ON DELETE RESTRICT ON UPDATE RESTRICT; 
-
-ALTER TABLE `dong_gop` 
-ADD CONSTRAINT `dong_gop_ibfk_2` FOREIGN KEY (`id_khoan_dong_gop`) REFERENCES `khoan_dong_gop`(`id_khoan_dong_gop`) 
-ON DELETE RESTRICT ON UPDATE RESTRICT;
-  
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
