@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 22 déc. 2023 à 17:44
+-- Généré le : sam. 23 déc. 2023 à 10:52
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -47,19 +47,32 @@ INSERT INTO `ho_khau` (`ho_khau_id`, `so_ho_khau`, `chu_ho_id`, `chu_ho_CMND`, `
 (2, 'SHK002', 5, '654321987', '456 Đường DEF, Quận UVW', 'Không', '2023-02-01', 0),
 (3, 'SHK003', 9, '789012345', '789 Đường GHI, Quận LMN', 'Có', '2023-03-01', 0),
 (4, 'SHK004', 13, '123012345', '987 Đường KLM, Quận OPQ', 'Có', '2023-04-01', 0),
-(5, 'SHK005', 19, '123456729', '1234 Đường ABC, Quận XYZ', 'Không', '2022-01-01', 0);
+(5, 'SHK005', 19, '123456729', '1234 Đường ABC, Quận XYZ', 'Không', '2022-01-01', 0),
+(22, 'fbfbfb', 59, '21434243124', '54543 ggrg', 'Không', '2020-02-02', 1),
+(23, 'đvfddđ', 60, 'đvddd', 'd', 'Không', '2020-02-02', 1),
+(24, 'd', 61, 'd', 'd', 'Không', '2020-02-02', 1),
+(25, 's', 62, 's', 's', 'Không', '2020-02-02', 1),
+(26, 'SHK009', 3, '456789123', '234 AAAA', 'Không', '2023-02-02', 1),
+(27, 'SHK008', 2, '987654321', '323 Lotty', 'Không', '2023-04-03', 1),
+(28, '23434234r234', 2, '987654321', '43243 aaaaaa', 'Không', '2023-02-02', 1),
+(29, 'SHK006', 2, '987654321', '10 AA', 'Không', '2020-02-03', 0),
+(30, 'SHK007', 14, '567890123', '345 OIII', 'Không', '2023-02-09', 0);
 
 --
 -- Déclencheurs `ho_khau`
 --
 DELIMITER $$
-CREATE TRIGGER `after_insert_ho_khau` AFTER INSERT ON `ho_khau` FOR EACH ROW INSERT INTO ho_khau_log (ho_khau_id, so_ho_khau, chu_ho_id, chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap)
-VALUES (NEW.ho_khau_id, NEW.so_ho_khau, NEW.chu_ho_id, NEW.chu_ho_CMND, NEW.dia_chi, NEW.la_chung_cu, NEW.ngay_lap)
+CREATE TRIGGER `after_insert_ho_khau` AFTER INSERT ON `ho_khau` FOR EACH ROW BEGIN
+    INSERT INTO ho_khau_log (ho_khau_id, so_ho_khau, chu_ho_id, chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap, deleted)
+    VALUES (NEW.ho_khau_id, NEW.so_ho_khau, NEW.chu_ho_id, NEW.chu_ho_CMND, NEW.dia_chi, NEW.la_chung_cu, NEW.ngay_lap, NEW.deleted);
+END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `after_update_ho_khau` AFTER UPDATE ON `ho_khau` FOR EACH ROW INSERT INTO ho_khau_log (ho_khau_id, so_ho_khau, chu_ho_id, chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap)
-VALUES (NEW.ho_khau_id, NEW.so_ho_khau, NEW.chu_ho_id, NEW.chu_ho_CMND, NEW.dia_chi, NEW.la_chung_cu, NEW.ngay_lap)
+CREATE TRIGGER `after_update_ho_khau` AFTER UPDATE ON `ho_khau` FOR EACH ROW BEGIN
+    INSERT INTO ho_khau_log (ho_khau_id, so_ho_khau, chu_ho_id, chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap, deleted)
+    VALUES (NEW.ho_khau_id, NEW.so_ho_khau, NEW.chu_ho_id, NEW.chu_ho_CMND, NEW.dia_chi, NEW.la_chung_cu, NEW.ngay_lap, NEW.deleted);
+END
 $$
 DELIMITER ;
 
@@ -92,7 +105,30 @@ INSERT INTO `ho_khau_log` (`log_ho_khau_id`, `ho_khau_id`, `so_ho_khau`, `chu_ho
 (8, 3, 'SHK003', 9, '789012345', '789 Đường GHI, Quận LMN', 'Có', '2023-03-01', 0, '2023-12-12 15:58:28'),
 (9, 3, 'SHK003', 9, '789012345', '789 Đường GHI, Quận LMN', 'Có', '2023-03-01', 0, '2023-12-12 16:03:19'),
 (10, 2, 'SHK002', 5, '654321987', '456 Đường DEF, Quận UVW', 'Không', '2023-02-01', 0, '2023-12-22 14:26:14'),
-(11, 2, 'SHK002', 5, '654321987', '456 Đường DEF, Quận UVW', 'Không', '2023-02-01', 0, '2023-12-22 14:49:37');
+(11, 2, 'SHK002', 5, '654321987', '456 Đường DEF, Quận UVW', 'Không', '2023-02-01', 0, '2023-12-22 14:49:37'),
+(12, 22, 'fbfbfb', 59, '21434243124', 'dvvv', 'Không', '2020-02-02', 0, '2023-12-23 08:46:41'),
+(13, 22, 'fbfbfb', 59, '21434243124', 'dvvv', 'Không', '2020-02-02', 0, '2023-12-23 08:46:41'),
+(14, 22, 'fbfbfb', 59, '21434243124', 'dvvvdqswws', 'Không', '2020-02-02', 0, '2023-12-23 08:47:31'),
+(15, 22, 'fbfbfb', 59, '21434243124', 'dvvvdqswws', 'Không', '2020-02-02', 0, '2023-12-23 08:47:31'),
+(16, 22, 'fbfbfb', 59, '21434243124', '54543 ggrg', 'Không', '2020-02-02', 0, '2023-12-23 08:48:58'),
+(17, 23, 'đvfddđ', 60, 'đvddd', 'd', 'Không', '2020-02-02', 0, '2023-12-23 08:49:47'),
+(18, 22, 'fbfbfb', 59, '21434243124', '54543 ggrg', 'Không', '2020-02-02', 0, '2023-12-23 08:50:02'),
+(19, 22, 'fbfbfb', 59, '21434243124', '54543 ggrg', 'Không', '2020-02-02', 0, '2023-12-23 08:50:02'),
+(20, 23, 'đvfddđ', 60, 'đvddd', 'd', 'Không', '2020-02-02', 0, '2023-12-23 08:50:08'),
+(21, 23, 'đvfddđ', 60, 'đvddd', 'd', 'Không', '2020-02-02', 0, '2023-12-23 08:50:08'),
+(22, 24, 'd', 61, 'd', 'd', 'Không', '2020-02-02', 0, '2023-12-23 08:55:25'),
+(23, 24, 'd', 61, 'd', 'd', 'Không', '2020-02-02', 1, '2023-12-23 08:55:31'),
+(24, 24, 'd', 61, 'd', 'd', 'Không', '2020-02-02', 0, '2023-12-23 08:55:31'),
+(25, 25, 's', 62, 's', 's', 'Không', '2020-02-02', 0, '2023-12-23 08:57:16'),
+(26, 25, 's', 62, 's', 's', 'Không', '2020-02-02', 1, '2023-12-23 08:57:24'),
+(27, 26, 'SHK009', 3, '456789123', '234 AAAA', 'Không', '2023-02-02', 0, '2023-12-23 09:05:51'),
+(28, 26, 'SHK009', 3, '456789123', '234 AAAA', 'Không', '2023-02-02', 1, '2023-12-23 09:08:08'),
+(29, 27, 'SHK008', 2, '987654321', '323 Lotty', 'Không', '2023-04-03', 0, '2023-12-23 09:08:46'),
+(30, 27, 'SHK008', 2, '987654321', '323 Lotty', 'Không', '2023-04-03', 1, '2023-12-23 09:11:04'),
+(31, 28, '23434234r234', 2, '987654321', '43243 aaaaaa', 'Không', '2023-02-02', 0, '2023-12-23 09:11:28'),
+(32, 28, '23434234r234', 2, '987654321', '43243 aaaaaa', 'Không', '2023-02-02', 1, '2023-12-23 09:14:43'),
+(33, 29, 'SHK006', 2, '987654321', '10 AA', 'Không', '2020-02-03', 0, '2023-12-23 09:15:22'),
+(34, 30, 'SHK007', 14, '567890123', '345 OIII', 'Không', '2023-02-09', 0, '2023-12-23 09:17:27');
 
 -- --------------------------------------------------------
 
@@ -114,7 +150,7 @@ CREATE TABLE `khai_tu` (
 --
 
 INSERT INTO `khai_tu` (`khai_tu_id`, `nhan_khau_id`, `thoi_gian`, `ly_do`, `deleted`, `so_giay_khai_tu`) VALUES
-(1, 18, '2023-12-22', 'tuổi cao', 0, '4535345');
+(1, 18, '2023-12-22', 'tuổi cao', 0, '409535345');
 
 -- --------------------------------------------------------
 
@@ -151,9 +187,9 @@ CREATE TABLE `nhan_khau` (
 
 INSERT INTO `nhan_khau` (`nhan_khau_id`, `ho_ten`, `biet_danh`, `gioi_tinh`, `ngay_sinh`, `so_CMND`, `ngay_cap_CMND`, `noi_cap_CMND`, `noi_sinh`, `nguyen_quan`, `dan_toc`, `nghe_nghiep`, `noi_lam_viec`, `quan_he_voi_chu_ho`, `ngay_dang_ky_thuong_tru`, `dia_chi_truoc_khi_chuyen`, `chuyen_di`, `deleted`, `so_ho_khau`, `qua_doi`) VALUES
 (1, 'Nguyen Van A', NULL, 'Nam', '1990-01-01', '123456789', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Sinh vien', '', 'Chủ hộ', '2023-01-01', NULL, 'Không', 0, 'SHK001', 'Không'),
-(2, 'Tran Thi B', NULL, 'Nữ', '1995-02-15', '987654321', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Giáo viên', '', 'Vợ', '2023-01-02', NULL, 'Không', 0, 'SHK001', 'Không'),
+(2, 'Tran Thi B', NULL, 'Nữ', '1995-02-15', '987654321', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Giáo viên', '', 'Chủ hộ', '2023-01-02', NULL, 'Không', 0, 'SHK006', 'Không'),
 (3, 'Le Van C', NULL, 'Nam', '1988-03-20', '456789123', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Kỹ sư', '', 'Con', '2023-01-03', NULL, 'Không', 0, 'SHK001', 'Không'),
-(4, 'Pham Thi D', 'bà D', 'Nữ', '1992-04-10', '789456123', NULL, '', 'Hanoi', 'Hanoi', 'Kinh', 'Y sĩ', '', 'Con', '2023-01-04', '', 'Không', 0, 'SHK001', 'Không'),
+(4, 'Pham Thi D', 'bà D', 'Nữ', '1992-04-10', '789456123', NULL, '', 'Hanoi', 'Hanoi', 'Kinh', 'Y sĩ', '', NULL, '2023-01-04', '', 'Không', 0, 'SHK006', 'Không'),
 (5, 'Vo Van E', NULL, 'Nam', '1985-05-05', '654321987', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Kinh doanh', '', 'Chủ hộ', '2023-02-01', NULL, 'Không', 0, 'SHK002', 'Không'),
 (6, 'Do Thi F', NULL, 'Nữ', '1990-06-12', '321654789', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Nghệ sĩ', '', 'Vợ', '2023-02-02', NULL, 'Không', 0, 'SHK002', 'Không'),
 (7, 'Nguyen Van G', NULL, 'Nam', '1987-07-25', '987123654', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Lập trình viên', '', 'Con', '2023-02-03', NULL, 'Không', 0, 'SHK002', 'Không'),
@@ -163,7 +199,7 @@ INSERT INTO `nhan_khau` (`nhan_khau_id`, `ho_ten`, `biet_danh`, `gioi_tinh`, `ng
 (11, 'Hoang Van L', NULL, 'Nam', '1989-11-22', '345678901', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Kỹ thuật viên', '', 'Con', '2023-03-03', NULL, 'Không', 0, 'SHK003', 'Không'),
 (12, 'Nguyen Thi M', NULL, 'Nữ', '1994-12-25', '678901234', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Nhân viên văn phòng', '', 'Con', '2023-03-04', NULL, 'Không', 0, 'SHK003', 'Không'),
 (13, 'Do Van N', NULL, 'Nam', '1984-01-30', '123012345', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Nhân viên', '', 'Chủ hộ', '2023-04-01', NULL, 'Không', 0, 'SHK004', 'Không'),
-(14, 'Le Thi O', NULL, 'Nữ', '1986-02-14', '567890123', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Nghệ sĩ', '', 'Vợ', '2023-04-02', NULL, 'Không', 0, 'SHK004', 'Không'),
+(14, 'Le Thi O', NULL, 'Nữ', '1986-02-14', '567890123', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Nghệ sĩ', '', 'Chủ hộ', '2023-04-02', NULL, 'Không', 0, 'SHK007', 'Không'),
 (15, 'Phan Van P', NULL, 'Nam', '1983-03-18', '901234567', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Giáo viên', '', 'Con', '2023-04-03', NULL, 'Không', 0, 'SHK004', 'Không'),
 (16, 'Tran Thi Q', NULL, 'Nữ', '1988-04-23', '234567890', NULL, NULL, 'Hanoi', 'Hanoi', 'Kinh', 'Nhân viên kế toán', '', 'Con', '2023-04-04', NULL, 'Không', 0, 'SHK004', 'Không'),
 (17, 'Nguyen Van X', 'X', 'Nam', '1990-01-01', '123456781', '2022-01-01', 'TP Hanoi', 'TP Hanoi', 'TP Hanoi', 'Kinh', 'Sinh viên', 'Trường ABC', 'Con', '2022-01-01', '123 Đường ABC, Quận XYZ', 'Không', 0, 'SHK001', 'Không'),
@@ -171,7 +207,11 @@ INSERT INTO `nhan_khau` (`nhan_khau_id`, `ho_ten`, `biet_danh`, `gioi_tinh`, `ng
 (19, 'Nguyen Van rA', 'A', 'Nam', '1990-01-01', '123456729', '2022-01-01', 'TP Hanoi', 'TP Hanoi', 'TP Hanoi', 'Kinh', 'Sinh viên', 'Trường ABC', 'Chủ hộ', '2022-01-01', '1233 Đường ABC, Quận XYZ', 'Không', 0, 'SHK005', 'Không'),
 (46, 'Trần A A', 'A A', 'Nam', '2020-02-02', '', NULL, '', 'Hanoi', 'Hanoi', 'Hanoi', '', '', 'Con', '2020-02-02', '', 'Không', 0, 'SHK003', 'Không'),
 (47, 'Trần POPO', 'POPO', 'Nữ', '2020-02-02', '342422434', '2020-02-02', 'Hải Phòng', 'Hải Phòng', 'Hải Phòng', 'Kinh', 'Sinh viên', 'Trường T', 'Vợ', '2020-02-02', '', 'Không', 0, 'SHK005', 'Không'),
-(58, 'f', '', 'Nam', '2020-02-02', NULL, NULL, '', 'r', 'r', 'r', '', '', 'rrr', '2020-02-02', '', 'Không', 1, 'rrrr', 'Không');
+(58, 'f', '', 'Nam', '2020-02-02', NULL, NULL, '', 'r', 'r', 'r', '', '', 'rrr', '2020-02-02', '', 'Không', 1, 'rrrr', 'Không'),
+(59, 'dddd', 'd', 'Nam', '2020-02-02', '21434243124', '2020-02-02', 'fdvgf', 'fvffvf', 'fbvf', 'ffff', 'fv', 'f', 'Chủ hộ', '2020-02-02', 'ddd', 'Không', 1, 'fbfbfb', 'Không'),
+(60, 'f', 'f', 'Nam', '2020-02-02', 'đvddd', '2020-02-02', 'd', 'd', 'd', 'd', 'd', 'd', 'Chủ hộ', '2020-02-02', 'd', 'Không', 1, 'đvfddđ', 'Không'),
+(61, 'd', 'd', 'Nam', '2020-02-02', 'd', '2020-02-02', 'q', 'd', 'f', 'd', 'd', 'd', 'Chủ hộ', '2020-02-02', 's', 'Không', 1, 'd', 'Không'),
+(62, 's', 's', 'Nam', '2020-02-02', 's', '2020-02-02', 's', 's', 's', 's', 's', 's', 'Chủ hộ', '2020-02-02', 'd', 'Không', 1, 's', 'Không');
 
 --
 -- Déclencheurs `nhan_khau`
@@ -336,13 +376,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `ho_khau`
 --
 ALTER TABLE `ho_khau`
-  MODIFY `ho_khau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ho_khau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT pour la table `ho_khau_log`
 --
 ALTER TABLE `ho_khau_log`
-  MODIFY `log_ho_khau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `log_ho_khau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT pour la table `khai_tu`
@@ -354,7 +394,7 @@ ALTER TABLE `khai_tu`
 -- AUTO_INCREMENT pour la table `nhan_khau`
 --
 ALTER TABLE `nhan_khau`
-  MODIFY `nhan_khau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `nhan_khau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT pour la table `tam_tru`

@@ -76,6 +76,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
         btnThemNhanKhau = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
         btnSuaNhanKhau = new javax.swing.JButton();
+        btnTachHoKhau = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -298,6 +299,21 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
             }
         });
 
+        btnTachHoKhau.setBackground(new java.awt.Color(102, 102, 0));
+        btnTachHoKhau.setForeground(new java.awt.Color(255, 255, 255));
+        btnTachHoKhau.setText("Tách hộ khẩu");
+        btnTachHoKhau.setMargin(new java.awt.Insets(4, 6, 4, 6));
+        btnTachHoKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTachHoKhauMouseClicked(evt);
+            }
+        });
+        btnTachHoKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTachHoKhauActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelSuaXoaHoKhauLayout = new javax.swing.GroupLayout(PanelSuaXoaHoKhau);
         PanelSuaXoaHoKhau.setLayout(PanelSuaXoaHoKhauLayout);
         PanelSuaXoaHoKhauLayout.setHorizontalGroup(
@@ -341,7 +357,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
                         .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15))))
             .addGroup(PanelSuaXoaHoKhauLayout.createSequentialGroup()
-                .addGap(118, 118, 118)
+                .addGap(54, 54, 54)
                 .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHoanTac, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,8 +366,10 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnSuaNhanKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTachHoKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145))
+                .addGap(100, 100, 100))
         );
         PanelSuaXoaHoKhauLayout.setVerticalGroup(
             PanelSuaXoaHoKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,7 +409,8 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
                     .addComponent(btnLuu)
                     .addComponent(btnThemNhanKhau)
                     .addComponent(btnHoanTac)
-                    .addComponent(btnSuaNhanKhau))
+                    .addComponent(btnSuaNhanKhau)
+                    .addComponent(btnTachHoKhau))
                 .addGap(30, 30, 30)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -423,6 +442,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
     }//GEN-LAST:event_tfDiaChiActionPerformed
 
     private void tNhanKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tNhanKhauMouseClicked
+        displayNhanKhau();
         DefaultTableModel model = (DefaultTableModel)tNhanKhau.getModel();
         int indexRow = tNhanKhau.getSelectedRow();
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
@@ -538,21 +558,21 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
 //                System.out.println(sql);
                 int row = add.executeUpdate();
                 
-                sql = "INSERT INTO ho_khau_log(ho_khau_id, so_ho_khau, chu_ho_id, chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap) "
-                        + "VALUES ("
-                        + hoKhau.getHoKhauId()+  ",\n "
-                        + "'" + tfSoHoKhau.getText() + "',\n "
-                        + "(\n" +
-                        "    SELECT nhan_khau_id\n" +
-                        "    FROM nhan_khau\n" +
-                        "    WHERE so_CMND = '" + tfSoCMND.getText() + "'),\n "
-                        + "'" + tfSoCMND.getText() + "',\n "
-                        + "'" + tfDiaChi.getText() + "',\n "
-                        + "'" + cbLaChungCu.getSelectedItem() + "',\n "
-                        + "'" + tfNgayLap.getText() + "'); ";
-                add = conn.prepareStatement(sql);
-//                System.out.println(sql);
-                row = add.executeUpdate();
+//                sql = "INSERT INTO ho_khau_log(ho_khau_id, so_ho_khau, chu_ho_id, chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap) "
+//                        + "VALUES ("
+//                        + hoKhau.getHoKhauId()+  ",\n "
+//                        + "'" + tfSoHoKhau.getText() + "',\n "
+//                        + "(\n" +
+//                        "    SELECT nhan_khau_id\n" +
+//                        "    FROM nhan_khau\n" +
+//                        "    WHERE so_CMND = '" + tfSoCMND.getText() + "'),\n "
+//                        + "'" + tfSoCMND.getText() + "',\n "
+//                        + "'" + tfDiaChi.getText() + "',\n "
+//                        + "'" + cbLaChungCu.getSelectedItem() + "',\n "
+//                        + "'" + tfNgayLap.getText() + "'); ";
+//                add = conn.prepareStatement(sql);
+////                System.out.println(sql);
+//                row = add.executeUpdate();
                 
                 JOptionPane.showMessageDialog(this, "Đã lưu thành công");
                 conn.close();
@@ -589,21 +609,21 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
                 System.out.println(sql);
                 row = add.executeUpdate();
                 
-                sql = "INSERT INTO ho_khau_log(ho_khau_id, so_ho_khau, chu_ho_id, chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap) "
-                        + "VALUES ("
-                        + hoKhau.getHoKhauId()+  ",\n "
-                        + "'" + hoKhau.getSoHoKhau() + "',\n "
-                        + "(\n" +
-                        "    SELECT nhan_khau_id\n" +
-                        "    FROM nhan_khau\n" +
-                        "    WHERE so_CMND = '" + hoKhau.getChuHoCMND() + "'),\n "
-                        + "'" + hoKhau.getChuHoCMND() + "',\n "
-                        + "'" + hoKhau.getDiaChi() + "',\n "
-                        + "'" + hoKhau.getLaChungCu() + "',\n "
-                        + "'" + hoKhau.getNgayLap() + "'); ";
-                add = conn.prepareStatement(sql);
-                System.out.println(sql);
-                row = add.executeUpdate();
+//                sql = "INSERT INTO ho_khau_log(ho_khau_id, so_ho_khau, chu_ho_id, chu_ho_CMND, dia_chi, la_chung_cu, ngay_lap) "
+//                        + "VALUES ("
+//                        + hoKhau.getHoKhauId()+  ",\n "
+//                        + "'" + hoKhau.getSoHoKhau() + "',\n "
+//                        + "(\n" +
+//                        "    SELECT nhan_khau_id\n" +
+//                        "    FROM nhan_khau\n" +
+//                        "    WHERE so_CMND = '" + hoKhau.getChuHoCMND() + "'),\n "
+//                        + "'" + hoKhau.getChuHoCMND() + "',\n "
+//                        + "'" + hoKhau.getDiaChi() + "',\n "
+//                        + "'" + hoKhau.getLaChungCu() + "',\n "
+//                        + "'" + hoKhau.getNgayLap() + "'); ";
+//                add = conn.prepareStatement(sql);
+//                System.out.println(sql);
+//                row = add.executeUpdate();
                 
                 JOptionPane.showMessageDialog(this, "Đã xóa thành công");
                 conn.close();
@@ -613,8 +633,6 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu.");
             }
         }
-
-        
     }//GEN-LAST:event_btnXoaMouseClicked
 
     private void btnThemNhanKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNhanKhauActionPerformed
@@ -662,6 +680,16 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
     private void btnSuaNhanKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNhanKhauActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSuaNhanKhauActionPerformed
+
+    private void btnTachHoKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTachHoKhauMouseClicked
+        // TODO add your handling code here:
+        TachHoKhauForm newForm = new TachHoKhauForm(this.hoKhau);
+        newForm.setVisible(true);
+    }//GEN-LAST:event_btnTachHoKhauMouseClicked
+
+    private void btnTachHoKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTachHoKhauActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTachHoKhauActionPerformed
 
         // ------------- CONNECTION SQL PARAMETER---------------
         Connection conn = null;
@@ -762,6 +790,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
     private javax.swing.JButton btnHoanTac;
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSuaNhanKhau;
+    private javax.swing.JButton btnTachHoKhau;
     private javax.swing.JButton btnThemNhanKhau;
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnXoa;
