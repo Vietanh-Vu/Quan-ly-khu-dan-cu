@@ -188,7 +188,7 @@ public class Login extends javax.swing.JFrame {
         user = getAuthenticatedUser(username,password);
         if(user != null){
             this.dispose();
-            if(user.isAdmin.equals("Yes")){
+            if(user.isAdmin == 1){
                 MainFormForAdmin mainForm = new MainFormForAdmin();
                 mainForm.setVisible(true);
                 mainForm.user = user;
@@ -236,7 +236,7 @@ public class Login extends javax.swing.JFrame {
                 user = new User();
                 user.userName = resultSet.getString("username");
                 user.email = resultSet.getString("email");
-                user.isAdmin = resultSet.getString("is_admin");
+                user.isAdmin = resultSet.getInt("is_admin");
                 user.password = resultSet.getString("password");
             }
             

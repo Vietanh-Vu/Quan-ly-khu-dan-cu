@@ -6,7 +6,7 @@ package demographic.login;
 
 import demographic.models.User;
 import demographic.login.Login;
-import demographic.quanlynhankhau.NhanKhauMainPage;
+import demographic.quanlynhankhauhokhau.mainpage.HoKhauMainPage;
 
 /**
  *
@@ -219,9 +219,9 @@ public class MainFormForAdmin extends javax.swing.JFrame {
     
     private void btnNhanKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanKhauMouseClicked
         // TODO add your handling code here:
-        NhanKhauMainPage nhanKhau = new NhanKhauMainPage();
-        nhanKhau.setVisible(true);
-        nhanKhau.user = user;
+        HoKhauMainPage hoKhau = new HoKhauMainPage();
+        hoKhau.setVisible(true);
+        hoKhau.user = user;
         this.dispose();
     }//GEN-LAST:event_btnNhanKhauMouseClicked
 
