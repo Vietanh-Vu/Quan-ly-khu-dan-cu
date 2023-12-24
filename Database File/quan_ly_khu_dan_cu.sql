@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2023 at 07:27 PM
+-- Generation Time: Dec 24, 2023 at 08:24 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -62,50 +62,57 @@ CREATE TABLE `dong_gop` (
 --
 
 CREATE TABLE `dong_phi` (
-  `id_dong_phi` varchar(5) NOT NULL,
-  `id_khoan_thu_phi` varchar(10) DEFAULT NULL,
-  `so_ho_khau` varchar(20) DEFAULT NULL,
-  `so_tien` int(11) DEFAULT 0,
+  `id_dong_phi` int(11) NOT NULL,
+  `id_khoan_thu_phi` int(11) DEFAULT NULL,
+  `so_ho_khau` varchar(255) DEFAULT NULL,
+  `so_tien` varchar(11) DEFAULT '0',
   `da_dong` tinyint(1) DEFAULT 0,
-  `ngay_dong` date NOT NULL
+  `ngay_dong` date DEFAULT NULL,
+  `phi_chung_cu` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dong_phi`
 --
 
-INSERT INTO `dong_phi` (`id_dong_phi`, `id_khoan_thu_phi`, `so_ho_khau`, `so_tien`, `da_dong`, `ngay_dong`) VALUES
-('00001', 'QLTT2306', 'SHK001', 500000, 0, '0000-00-00'),
-('00002', 'QLCC2306', 'SHK003', 1500000, 0, '0000-00-00'),
-('00003', 'QLRR2306', 'SHK004', 120000, 0, '0000-00-00'),
-('00004', 'DVCC2306', 'SHK001', 2500000, 0, '0000-00-00'),
-('00005', 'DVCC2306', 'SHK003', 3750000, 0, '0000-00-00'),
-('00006', 'DVCC2306', 'SHK004', 1500000, 0, '0000-00-00'),
-('00007', 'DVCC2307', 'SHK001', 2500000, 0, '0000-00-00'),
-('00008', 'QLTT2308', 'SHK001', 500000, 0, '0000-00-00'),
-('00010', 'CVS00023', 'SHK001', 7000000, 0, '0000-00-00'),
-('00011', 'CVS00023', 'SHK005', 70000, 0, '0000-00-00');
+INSERT INTO `dong_phi` (`id_dong_phi`, `id_khoan_thu_phi`, `so_ho_khau`, `so_tien`, `da_dong`, `ngay_dong`, `phi_chung_cu`) VALUES
+(1, 1, 'SHK003', '12500', 0, NULL, 0),
+(2, 4, 'SHK003', '50000', 0, NULL, 0),
+(3, 13, 'SHK003', '30000', 0, NULL, 0);
 
 --
 -- Triggers `dong_phi`
 --
 DELIMITER $$
-CREATE TRIGGER `calculate_so_tien` BEFORE INSERT ON `dong_phi` FOR EACH ROW BEGIN
+CREATE TRIGGER `calculate_so_tien_dong_phi` BEFORE INSERT ON `dong_phi` FOR EACH ROW BEGIN
     DECLARE tien INT;
-    SELECT 
-        k.tien_phi * c.dien_tich 
-    INTO 
-        tien
-    FROM 
-        khoan_thu_phi k
-    JOIN 
-        chung_cu c ON k.id_khoan_thu_phi = NEW.id_khoan_thu_phi 
-                   AND c.so_ho_khau = NEW.so_ho_khau;
-    IF tien IS NULL THEN
-        SET tien = (SELECT tien_phi FROM khoan_thu_phi WHERE id_khoan_thu_phi = NEW.id_khoan_thu_phi);
+    DECLARE total_people INT;
+
+    -- Retrieve so_ho_khau and id_khoan_thu_phi for the new row
+    DECLARE ho_khau_id VARCHAR(255);
+    DECLARE khoan_thu_id INT;
+
+    SELECT NEW.so_ho_khau, NEW.id_khoan_thu_phi INTO ho_khau_id, khoan_thu_id;
+
+    -- Count the number of people with the same so_ho_khau in nhan_khau
+    SELECT COUNT(*) INTO total_people
+    FROM nhan_khau
+    WHERE so_ho_khau = ho_khau_id;
+
+    -- Get the tien_phi corresponding to the id_khoan_thu_phi and convert to INT
+    SELECT CAST(tien_phi AS UNSIGNED) INTO tien
+    FROM khoan_thu_phi
+    WHERE id_khoan_thu_phi = khoan_thu_id;
+
+    -- Check the phi_chung_cu flag and calculate so_tien accordingly
+    IF NEW.phi_chung_cu = 0 THEN
+        SET NEW.so_tien = CAST(tien * total_people AS CHAR);
+    ELSE
+        SET NEW.so_tien = '0';
+        IF EXISTS (SELECT 1 FROM chung_cu WHERE so_ho_khau = ho_khau_id) THEN
+            SET NEW.so_tien = CAST(tien * (SELECT dien_tich FROM chung_cu WHERE so_ho_khau = ho_khau_id) AS CHAR);
+        END IF;
     END IF;
-    
-    SET NEW.so_tien = tien;
 END
 $$
 DELIMITER ;
@@ -188,11 +195,11 @@ CREATE TABLE `khoan_dong_gop` (
 --
 
 CREATE TABLE `khoan_thu_phi` (
-  `id_khoan_thu_phi` varchar(20) NOT NULL,
+  `id_khoan_thu_phi` int(11) NOT NULL,
   `ten_khoan_thu_phi` varchar(50) NOT NULL,
-  `tien_phi` int(11) DEFAULT 0,
-  `ngay_bat_dau` date NOT NULL,
-  `ngay_ket_thuc` date NOT NULL,
+  `tien_phi` varchar(11) DEFAULT '0',
+  `ngay_bat_dau` date DEFAULT NULL,
+  `ngay_ket_thuc` date DEFAULT NULL,
   `chi_tiet` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -201,19 +208,19 @@ CREATE TABLE `khoan_thu_phi` (
 --
 
 INSERT INTO `khoan_thu_phi` (`id_khoan_thu_phi`, `ten_khoan_thu_phi`, `tien_phi`, `ngay_bat_dau`, `ngay_ket_thuc`, `chi_tiet`) VALUES
-('CVS00023', 'Phí lắp đặt chung năm 2023', 70000, '2023-06-01', '2023-09-01', NULL),
-('DVCC2306', 'Phí dịch vụ chung cư tháng 6', 25000, '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư'),
-('DVCC2307', 'Phí dịch vụ chung cư tháng 7', 25000, '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư'),
-('DVCC2308', 'Phí dịch vụ chung cư tháng 8', 25000, '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư'),
-('QLCC2306', 'Phí dịch vụ chung cư cao cấp tháng 6', 10000, '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư cao cấp'),
-('QLCC2307', 'Phí dịch vụ chung cư cao cấp tháng 7', 10000, '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư cao cấp'),
-('QLCC2308', 'Phí dịch vụ chung cư cao cấp tháng 8', 10000, '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư cao cấp'),
-('QLRR2306', 'Phí dịch vụ chung cư giá rẻ tháng 6', 2000, '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư giá rẻ'),
-('QLRR2307', 'Phí dịch vụ chung cư giá rẻ tháng 7', 2000, '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư giá rẻ'),
-('QLRR2308', 'Phí dịch vụ chung cư giá rẻ tháng 8', 2000, '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư giá rẻ'),
-('QLTT2306', 'Phí dịch vụ chung cư thường tháng 6', 5000, '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư thường'),
-('QLTT2307', 'Phí dịch vụ chung cư thường tháng 7', 5000, '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư thường'),
-('QLTT2308', 'Phí dịch vụ chung cư thường tháng 8', 5000, '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư thường');
+(1, 'Phí dịch vụ chung cư tháng 6', '2500', '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư'),
+(2, 'Phí dịch vụ chung cư tháng 7', '2500', '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư'),
+(3, 'Phí dịch vụ chung cư tháng 8', '2500', '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư'),
+(4, 'Phí quản lý chung cư cao cấp tháng 6', '10000', '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư cao cấp'),
+(5, 'Phí quản lý chung cư cao cấp tháng 7', '10000', '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư cao cấp'),
+(6, 'Phí quản lý chung cư cao cấp tháng 8', '10000', '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư cao cấp'),
+(7, 'Phí quản lý chung cư giá rẻ tháng 6', '2000', '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư giá rẻ'),
+(8, 'Phí quản lý chung cư giá rẻ tháng 7', '2000', '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư giá rẻ'),
+(9, 'Phí quản lý chung cư giá rẻ tháng 8', '2000', '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư giá rẻ'),
+(10, 'Phí quản lý chung cư thường tháng 6', '5000', '2023-06-01', '2023-06-30', 'Tính theo diện tích chung cư thường'),
+(11, 'Phí quản lý chung cư thường tháng 7', '5000', '2023-07-01', '2023-07-31', 'Tính theo diện tích chung cư thường'),
+(12, 'Phí quản lý chung cư thường tháng 8', '5000', '2023-08-01', '2023-08-31', 'Tính theo diện tích chung cư thường'),
+(13, 'Phí vệ sinh năm 2023', '6000', '2023-12-01', '2023-12-31', 'Tính theo số tháng và số nhân khẩu');
 
 -- --------------------------------------------------------
 
@@ -341,8 +348,8 @@ ALTER TABLE `dong_gop`
 --
 ALTER TABLE `dong_phi`
   ADD PRIMARY KEY (`id_dong_phi`),
-  ADD KEY `dong_phi_ibfk_1` (`so_ho_khau`),
-  ADD KEY `dong_phi_ibfk_2` (`id_khoan_thu_phi`);
+  ADD KEY `dong_phi_ibfk_1` (`id_khoan_thu_phi`),
+  ADD KEY `dong_phi_ibfk_2` (`so_ho_khau`);
 
 --
 -- Indexes for table `ho_khau`
@@ -397,6 +404,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `dong_phi`
+--
+ALTER TABLE `dong_phi`
+  MODIFY `id_dong_phi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `ho_khau`
 --
 ALTER TABLE `ho_khau`
@@ -407,6 +420,12 @@ ALTER TABLE `ho_khau`
 --
 ALTER TABLE `ho_khau_log`
   MODIFY `log_ho_khau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `khoan_thu_phi`
+--
+ALTER TABLE `khoan_thu_phi`
+  MODIFY `id_khoan_thu_phi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `nhan_khau`
@@ -447,8 +466,8 @@ ALTER TABLE `dong_gop`
 -- Constraints for table `dong_phi`
 --
 ALTER TABLE `dong_phi`
-  ADD CONSTRAINT `dong_phi_ibfk_1` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau` (`so_ho_khau`),
-  ADD CONSTRAINT `dong_phi_ibfk_2` FOREIGN KEY (`id_khoan_thu_phi`) REFERENCES `khoan_thu_phi` (`id_khoan_thu_phi`);
+  ADD CONSTRAINT `dong_phi_ibfk_1` FOREIGN KEY (`id_khoan_thu_phi`) REFERENCES `khoan_thu_phi` (`id_khoan_thu_phi`),
+  ADD CONSTRAINT `dong_phi_ibfk_2` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau` (`so_ho_khau`);
 
 --
 -- Constraints for table `ho_khau`
