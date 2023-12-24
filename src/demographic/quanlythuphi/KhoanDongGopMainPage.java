@@ -6,6 +6,7 @@ package demographic.quanlythuphi;
 
 //import com.sun.jdi.connect.spi.Connection;
 import demographic.components.mainpage.*;
+import demographic.models.*;
 import demographic.components.suaxoaform.*;
 import demographic.components.themform.*;
 import demographic.components.themform.ThemNhanKhauForm;
@@ -34,11 +35,56 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class KhoanDongGopMainPage extends javax.swing.JFrame {
 
+    private KhoanDongGop khoanDongGop = null;
+    private DongGop dongGop = null;
+
     /**
      * Creates new form NhanKhauMainPage
      */
     public KhoanDongGopMainPage() {
         initComponents();
+        displayKhoanDongGop();
+        displayDongGop();
+    }
+
+    private void displayKhoanDongGop() {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            st = conn.createStatement();
+            String sql = "SELECT "
+                    + "id_khoan_dong_gop AS 'ID Khoản Đóng Góp',"
+                    + "ten_khoan_dong_gop AS 'Tên Khoản Đóng Góp',"
+                    + "ngay_bat_dau AS 'Ngày Bắt Đầu',"
+                    + "ngay_ket_thuc AS 'Ngày kết thúc',"
+                    + "chi_tiet AS 'Chi tiết'"
+                    + "FROM khoan_dong_gop";
+            rs = st.executeQuery(sql);
+            tKhoanDongGop.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu: Không đọc được khoan_dong_gop");
+
+        }
+    }
+
+    private void displayDongGop() {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            st = conn.createStatement();
+            String sql = "SELECT "
+                    + "id_dong_gop AS 'ID Đóng Góp',"
+                    + "so_ho_khau AS 'Số Hộ Khẩu',"
+                    + "id_khoan_dong_gop AS 'ID Khoản Đóng Góp',"
+                    + "so_tien AS 'Số Tiền',"
+                    + "ngay_dong AS 'Ngày Đóng'"
+                    + "FROM dong_gop";
+            rs = st.executeQuery(sql);
+            tDongGop.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu: Không đọc được dong_gop");
+
+        }
     }
 
     /**
@@ -59,19 +105,19 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
         btnTimKhoanPhi = new javax.swing.JButton();
         btnSuaKhoanPhi = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tKhoanPhi = new javax.swing.JTable();
+        tKhoanDongGop = new javax.swing.JTable();
         btnTrinhBanGhiKhoanPhi = new javax.swing.JButton();
-        tfTimKhoanPhi = new javax.swing.JTextField();
+        tfTimKhoanDongGop = new javax.swing.JTextField();
         btnThemKhoanPhi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tDongPhi = new javax.swing.JTable();
+        tDongGop = new javax.swing.JTable();
         btnTrinhBanGhiDongPhi = new javax.swing.JButton();
         btnThemDongPhi = new javax.swing.JButton();
         btnSuaDongPhi = new javax.swing.JButton();
         btnTimDongPhi = new javax.swing.JButton();
-        tfTimDongPhi = new javax.swing.JTextField();
+        tfTimDongGop = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -158,8 +204,8 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
             }
         });
 
-        tKhoanPhi.setForeground(new java.awt.Color(0, 102, 102));
-        tKhoanPhi.setModel(new javax.swing.table.DefaultTableModel(
+        tKhoanDongGop.setForeground(new java.awt.Color(0, 102, 102));
+        tKhoanDongGop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -170,17 +216,17 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tKhoanPhi.setGridColor(new java.awt.Color(188, 206, 206));
-        tKhoanPhi.setRowHeight(26);
-        tKhoanPhi.setSelectionBackground(new java.awt.Color(0, 102, 102));
-        tKhoanPhi.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tKhoanPhi.setShowGrid(true);
-        tKhoanPhi.addMouseListener(new java.awt.event.MouseAdapter() {
+        tKhoanDongGop.setGridColor(new java.awt.Color(188, 206, 206));
+        tKhoanDongGop.setRowHeight(26);
+        tKhoanDongGop.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        tKhoanDongGop.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tKhoanDongGop.setShowGrid(true);
+        tKhoanDongGop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tKhoanPhiMouseClicked(evt);
+                tKhoanDongGopMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tKhoanPhi);
+        jScrollPane1.setViewportView(tKhoanDongGop);
 
         btnTrinhBanGhiKhoanPhi.setBackground(new java.awt.Color(0, 51, 51));
         btnTrinhBanGhiKhoanPhi.setForeground(new java.awt.Color(255, 255, 255));
@@ -191,11 +237,11 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
             }
         });
 
-        tfTimKhoanPhi.setForeground(new java.awt.Color(0, 102, 102));
-        tfTimKhoanPhi.setText("Nhâp tên");
-        tfTimKhoanPhi.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        tfTimKhoanPhi.setSelectedTextColor(new java.awt.Color(102, 102, 102));
-        tfTimKhoanPhi.addActionListener(new java.awt.event.ActionListener() {
+        tfTimKhoanDongGop.setForeground(new java.awt.Color(0, 102, 102));
+        tfTimKhoanDongGop.setText("Nhâp tên");
+        tfTimKhoanDongGop.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        tfTimKhoanDongGop.setSelectedTextColor(new java.awt.Color(102, 102, 102));
+        tfTimKhoanDongGop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfTimKhoanDongGopActionPerformed(evt);
             }
@@ -220,8 +266,8 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("ĐÓNG GÓP");
 
-        tDongPhi.setForeground(new java.awt.Color(0, 102, 102));
-        tDongPhi.setModel(new javax.swing.table.DefaultTableModel(
+        tDongGop.setForeground(new java.awt.Color(0, 102, 102));
+        tDongGop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -232,17 +278,17 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tDongPhi.setGridColor(new java.awt.Color(188, 206, 206));
-        tDongPhi.setRowHeight(26);
-        tDongPhi.setSelectionBackground(new java.awt.Color(0, 102, 102));
-        tDongPhi.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tDongPhi.setShowGrid(true);
-        tDongPhi.addMouseListener(new java.awt.event.MouseAdapter() {
+        tDongGop.setGridColor(new java.awt.Color(188, 206, 206));
+        tDongGop.setRowHeight(26);
+        tDongGop.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        tDongGop.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tDongGop.setShowGrid(true);
+        tDongGop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tDongPhiMouseClicked(evt);
+                tDongGopMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tDongPhi);
+        jScrollPane2.setViewportView(tDongGop);
 
         btnTrinhBanGhiDongPhi.setBackground(new java.awt.Color(0, 51, 51));
         btnTrinhBanGhiDongPhi.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,22 +319,17 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
 
         btnTimDongPhi.setBackground(new java.awt.Color(0, 51, 51));
         btnTimDongPhi.setForeground(new java.awt.Color(255, 255, 255));
-        btnTimDongPhi.setText("Tìm theo tên");
+        btnTimDongPhi.setText("Tìm theo số hộ khẩu");
         btnTimDongPhi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTimDongGopMouseClicked(evt);
             }
         });
 
-        tfTimDongPhi.setForeground(new java.awt.Color(0, 102, 102));
-        tfTimDongPhi.setText("Nhâp tên");
-        tfTimDongPhi.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        tfTimDongPhi.setSelectedTextColor(new java.awt.Color(102, 102, 102));
-        tfTimDongPhi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTimDongGopActionPerformed(evt);
-            }
-        });
+        tfTimDongGop.setForeground(new java.awt.Color(0, 102, 102));
+        tfTimDongGop.setText("Nhập số hộ khẩu");
+        tfTimDongGop.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        tfTimDongGop.setSelectedTextColor(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout khoanPhiPanelLayout = new javax.swing.GroupLayout(khoanPhiPanel);
         khoanPhiPanel.setLayout(khoanPhiPanelLayout);
@@ -302,28 +343,28 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
                         .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(khoanPhiPanelLayout.createSequentialGroup()
-                                .addComponent(btnTrinhBanGhiKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTrinhBanGhiKhoanPhi)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnThemKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSuaKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
                                 .addComponent(btnTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(tfTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfTimKhoanDongGop, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane2)
                             .addGroup(khoanPhiPanelLayout.createSequentialGroup()
-                                .addComponent(btnTrinhBanGhiDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTrinhBanGhiDongPhi)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnThemDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSuaDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(tfTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tfTimDongGop, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
@@ -340,7 +381,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
                     .addComponent(btnTrinhBanGhiKhoanPhi)
                     .addComponent(btnSuaKhoanPhi)
                     .addComponent(btnTimKhoanPhi)
-                    .addComponent(tfTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfTimKhoanDongGop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemKhoanPhi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -351,7 +392,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
                     .addComponent(btnTrinhBanGhiDongPhi)
                     .addComponent(btnSuaDongPhi)
                     .addComponent(btnTimDongPhi)
-                    .addComponent(tfTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfTimDongGop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemDongPhi))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,21 +415,77 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
 
     private void btnTrinhBanGhiKhoanDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrinhBanGhiKhoanDongGopMouseClicked
         // TODO add your handling code here:
+        displayKhoanDongGop();
     }//GEN-LAST:event_btnTrinhBanGhiKhoanDongGopMouseClicked
 
-    private void tKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tKhoanPhiMouseClicked
+    private void tKhoanDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tKhoanDongGopMouseClicked
+        DefaultTableModel model = (DefaultTableModel) tKhoanDongGop.getModel();
+        int indexRow = tKhoanDongGop.getSelectedRow();
+        key = String.valueOf(model.getValueAt(indexRow, 0).toString());
 
-    }//GEN-LAST:event_tKhoanPhiMouseClicked
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            String sqlQuery = "SELECT * FROM khoan_dong_gop WHERE id_khoan_dong_gop = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
+            preparedStatement.setInt(1, Integer.parseInt(key));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            KhoanDongGop khoanDongGopMoi = new KhoanDongGop();
+
+            while (resultSet.next()) {
+                khoanDongGopMoi.setIDKhoanDongGop(resultSet.getInt("id_khoan_dong_gop"));
+                khoanDongGopMoi.setTenKhoanDongGop(resultSet.getString("ten_khoan_dong_gop"));
+                khoanDongGopMoi.setNgayBatDau(resultSet.getString("ngay_bat_dau"));
+                khoanDongGopMoi.setNgayKetThuc(resultSet.getString("ngay_ket_thuc"));
+                khoanDongGopMoi.setChiTiet(resultSet.getString("chi_tiet"));
+                System.out.println(khoanDongGopMoi);
+
+            }
+
+            khoanDongGop = khoanDongGopMoi;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+        }
+    }//GEN-LAST:event_tKhoanDongGopMouseClicked
 
     // -------------------------- EDIT DATA --------------------------------
     private void btnSuaKhoanDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaKhoanDongGopMouseClicked
         // TODO add your handling code here:
-        SuaXoaKhoanDongGopForm newForm = new SuaXoaKhoanDongGopForm();
-        newForm.setVisible(true);
+        if (khoanDongGop == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng trong bảng\n"
+                    + "để theo dõi thêm thông tin về khoản đóng góp đó.");
+        } else {
+            SuaXoaKhoanDongGopForm newForm = new SuaXoaKhoanDongGopForm(khoanDongGop);
+            newForm.setVisible(true);
+        }
     }//GEN-LAST:event_btnSuaKhoanDongGopMouseClicked
 
     private void btnTimKhoanDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKhoanDongGopMouseClicked
         // TODO add your handling code here:
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            String sqlQuery = "SELECT "
+                    + "id_khoan_dong_gop AS 'ID Khoản Đóng Góp',"
+                    + "ten_khoan_dong_gop AS 'Tên Khoản Đóng Góp',"
+                    + "ngay_bat_dau AS 'Ngày Bắt Đầu',"
+                    + "ngay_ket_thuc AS 'Ngày kết thúc',"
+                    + "chi_tiet AS 'Chi tiết'"
+                    + "FROM `khoan_dong_gop`"
+                    + "WHERE LOWER(ten_khoan_dong_gop) LIKE LOWER(?)";
+
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setString(1, "%" + tfTimKhoanDongGop.getText() + "%");
+
+            rs = ps.executeQuery();
+            tKhoanDongGop.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+        }
     }//GEN-LAST:event_btnTimKhoanDongGopMouseClicked
 
     // -------------------- BACK TO MAIN FORM ----------------------------
@@ -435,12 +532,43 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfTimKhoanDongGopActionPerformed
 
-    private void tDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tDongPhiMouseClicked
+    private void tDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tDongGopMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tDongPhiMouseClicked
+        DefaultTableModel model = (DefaultTableModel) tDongGop.getModel();
+        int indexRow = tDongGop.getSelectedRow();
+        key = String.valueOf(model.getValueAt(indexRow, 0).toString());
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            String sqlQuery = "SELECT * FROM dong_gop WHERE id_dong_gop = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
+            preparedStatement.setInt(1, Integer.parseInt(key));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            DongGop dongGopMoi = new DongGop();
+
+            while (resultSet.next()) {
+                dongGopMoi.setSoHoKhau(resultSet.getString("so_ho_khau"));
+                dongGopMoi.setIdKhoanDongGop(resultSet.getInt("id_khoan_dong_gop"));
+                dongGopMoi.setSoTien(resultSet.getString("so_tien"));
+                dongGopMoi.setNgayDong(resultSet.getString("ngay_dong"));
+                dongGopMoi.setIdDongGop(resultSet.getInt("id_dong_gop"));
+                System.out.println(dongGopMoi);
+
+            }
+
+            dongGop = dongGopMoi;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+        }
+    }//GEN-LAST:event_tDongGopMouseClicked
 
     private void btnTrinhBanGhiDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrinhBanGhiDongGopMouseClicked
         // TODO add your handling code here:
+        displayDongGop();
     }//GEN-LAST:event_btnTrinhBanGhiDongGopMouseClicked
 
     private void btnThemDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemDongGopMouseClicked
@@ -451,17 +579,39 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
 
     private void btnSuaDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaDongGopMouseClicked
         // TODO add your handling code here:
-        SuaXoaDongGopForm newForm = new SuaXoaDongGopForm();
-        newForm.setVisible(true);
+        if (dongGop == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng trong bảng\n"
+                    + "để theo dõi thêm thông tin về đóng góp đó.");
+        } else {
+            SuaXoaDongGopForm newForm = new SuaXoaDongGopForm(dongGop);
+            newForm.setVisible(true);
+        }
     }//GEN-LAST:event_btnSuaDongGopMouseClicked
 
     private void btnTimDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimDongGopMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTimDongGopMouseClicked
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            st = conn.createStatement();
+            String sqlQuery = "SELECT "
+                    + "id_dong_gop AS 'ID Đóng Góp',"
+                    + "so_ho_khau AS 'Số Hộ Khẩu',"
+                    + "id_khoan_dong_gop AS 'ID Khoản Đóng Góp',"
+                    + "so_tien AS 'Số Tiền',"
+                    + "ngay_dong AS 'Ngày Đóng'"
+                    + "FROM dong_gop "
+                    + "WHERE so_ho_khau LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setString(1, tfTimDongGop.getText());
 
-    private void tfTimDongGopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTimDongGopActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTimDongGopActionPerformed
+            rs = ps.executeQuery();
+            tDongGop.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+        }
+    }//GEN-LAST:event_btnTimDongGopMouseClicked
 
     // ------------ START TO CODE HERE -----------------
     // ------------- User parameter --------------------
@@ -1560,9 +1710,9 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lbHoKhau;
     private javax.swing.JLabel lbNhanKhau;
     private javax.swing.JLabel lbThoat;
-    private javax.swing.JTable tDongPhi;
-    private javax.swing.JTable tKhoanPhi;
-    private javax.swing.JTextField tfTimDongPhi;
-    private javax.swing.JTextField tfTimKhoanPhi;
+    private javax.swing.JTable tDongGop;
+    private javax.swing.JTable tKhoanDongGop;
+    private javax.swing.JTextField tfTimDongGop;
+    private javax.swing.JTextField tfTimKhoanDongGop;
     // End of variables declaration//GEN-END:variables
 }

@@ -468,7 +468,7 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                     + "ngay_ket_thuc AS 'Ngày kết thúc', "
                     + "chi_tiet AS 'Chi tiết' "
                     + "FROM `khoan_thu_phi` "
-                    + "WHERE `ten_khoan_thu_phi` LIKE ?";
+                    + "WHERE LOWER(ten_khoan_thu_phi) LIKE LOWER(?)";
 
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, "%" + tfTimKhoanPhi.getText() + "%");

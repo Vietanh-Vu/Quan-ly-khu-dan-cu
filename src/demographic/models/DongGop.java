@@ -11,18 +11,20 @@ package demographic.models;
 public class DongGop {
 
     private String soHoKhau;
-    private String idKhoanDongGop;
+    private int idKhoanDongGop;
     private String soTien;
     private String ngayDong;
+    private int idDongGop;
 
     public DongGop() {
     }
 
-    public DongGop(String soHoKhau, String idKhoanDongGop, String soTien, String ngayDong) {
+    public DongGop(String soHoKhau, int idKhoanDongGop, String soTien, String ngayDong, int idDongGop) {
         this.soHoKhau = soHoKhau;
         this.idKhoanDongGop = idKhoanDongGop;
         this.soTien = soTien;
         this.ngayDong = ngayDong;
+        this.idDongGop = idDongGop;
     }
 
     public String getSoHoKhau() {
@@ -33,11 +35,11 @@ public class DongGop {
         this.soHoKhau = soHoKhau;
     }
 
-    public String getIdKhoanDongGop() {
+    public int getIdKhoanDongGop() {
         return idKhoanDongGop;
     }
 
-    public void setIdKhoanDongGop(String idKhoanDongGop) {
+    public void setIdKhoanDongGop(int idKhoanDongGop) {
         this.idKhoanDongGop = idKhoanDongGop;
     }
 
@@ -55,6 +57,14 @@ public class DongGop {
 
     public void setNgayDong(String ngayDong) {
         this.ngayDong = ngayDong;
+    }
+
+    public int getIdDongGop() {
+        return idDongGop;
+    }
+
+    public void setIdDongGop(int idDongGop) {
+        this.idDongGop = idDongGop;
     }
 
 }

@@ -16,29 +16,11 @@ import java.sql.*;
  */
 public class ThemDongGopForm extends javax.swing.JFrame {
 
-    KhoanPhi khoanPhi;
-
     /**
      * Creates new form Form
      */
     public ThemDongGopForm() {
         initComponents();
-    }
-
-    public ThemDongGopForm(KhoanPhi khoanPhi) {
-        initComponents();
-        this.khoanPhi = khoanPhi;
-//        if(hoKhau == null){
-//            tfSoHoKhau.setText("");
-//            tfSoHoKhau.setEditable(true);
-//        } else if (khoanPhi != null && hoKhau.getSoHoKhau() != null) {
-//            tfSoHoKhau.setText(hoKhau.getSoHoKhau());
-//            tfSoHoKhau.setEditable(false);
-//        } else {
-//            tfSoHoKhau.setText("");
-//            tfSoHoKhau.setEditable(true);
-//
-//        }
     }
 
     /**
@@ -78,11 +60,6 @@ public class ThemDongGopForm extends javax.swing.JFrame {
         tfSoHoKhau.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfSoHoKhau.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfSoHoKhau.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfSoHoKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTenKhoanDongGopActionPerformed(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 102, 102));
@@ -98,11 +75,6 @@ public class ThemDongGopForm extends javax.swing.JFrame {
         tfIDKhoanDongGop.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfIDKhoanDongGop.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfIDKhoanDongGop.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfIDKhoanDongGop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNgayBatDauActionPerformed(evt);
-            }
-        });
 
         tfSoTien.setForeground(new java.awt.Color(0, 102, 102));
         tfSoTien.setCaretColor(new java.awt.Color(0, 102, 102));
@@ -110,11 +82,6 @@ public class ThemDongGopForm extends javax.swing.JFrame {
         tfSoTien.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfSoTien.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfSoTien.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfSoTien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNgayKetThucActionPerformed(evt);
-            }
-        });
 
         jLabel16.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 102, 102));
@@ -126,11 +93,6 @@ public class ThemDongGopForm extends javax.swing.JFrame {
         tfNgayDong.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfNgayDong.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfNgayDong.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfNgayDong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfChiTietActionPerformed(evt);
-            }
-        });
 
         jLabel18.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 102, 102));
@@ -245,30 +207,43 @@ public class ThemDongGopForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHuyActionPerformed
 
-    private void tfChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfChiTietActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfChiTietActionPerformed
-
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
         // TODO add your handling code here:
+        if (tfSoHoKhau.getText().isEmpty()
+                || tfIDKhoanDongGop.getText().isEmpty()
+                || tfSoTien.getText().isEmpty()
+                || tfNgayDong.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đủ các trường thông tin");
+        } else {
+            try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+                String sqlQuery = "INSERT INTO `dong_gop` (`so_ho_khau`, `id_khoan_dong_gop`, `so_tien`, `ngay_dong`) "
+                        + "VALUES (?, ?, ?, ?)";
+
+                PreparedStatement ps = conn.prepareStatement(sqlQuery);
+
+                // Thiết lập các giá trị tham số
+                ps.setString(1, tfSoHoKhau.getText());
+                ps.setString(2, tfIDKhoanDongGop.getText());
+                ps.setString(3, tfSoTien.getText());
+                ps.setString(4, tfNgayDong.getText());
+                System.out.println(sqlQuery);
+                int row = ps.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                this.dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi\n"
+                        + "Vui lòng kiểm tra lại trường thông tin ngày tháng theo định dạng yyyy-mm-dd\n"
+                        + "Hoặc điền đủ các trường thông tin cần thiết");
+            }
+        }
     }//GEN-LAST:event_btnLuuMouseClicked
 
     private void btnHuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHuyMouseClicked
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnHuyMouseClicked
-
-    private void tfTenKhoanDongGopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTenKhoanDongGopActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTenKhoanDongGopActionPerformed
-
-    private void tfNgayKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNgayKetThucActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfNgayKetThucActionPerformed
-
-    private void tfNgayBatDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNgayBatDauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfNgayBatDauActionPerformed
 
     /**
      * @param args the command line arguments

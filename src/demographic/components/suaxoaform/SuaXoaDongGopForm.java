@@ -7,6 +7,7 @@ package demographic.components.suaxoaform;
 import demographic.models.HoKhau;
 import demographic.models.KhoanPhi;
 import demographic.models.NhanKhau;
+import demographic.models.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
@@ -17,7 +18,7 @@ import java.sql.*;
  */
 public class SuaXoaDongGopForm extends javax.swing.JFrame {
 
-    KhoanPhi khoanPhi;
+    DongGop dongGop;
 
     /**
      * Creates new form Form
@@ -26,10 +27,18 @@ public class SuaXoaDongGopForm extends javax.swing.JFrame {
         initComponents();
     }
 
-    public SuaXoaDongGopForm(KhoanPhi khoanPhi) {
+    public SuaXoaDongGopForm(DongGop dongGop) {
         initComponents();
-        this.khoanPhi = khoanPhi;
-        System.out.println(this.khoanPhi.toString());
+        this.dongGop = dongGop;
+        System.out.println(this.dongGop.toString());
+        displayTextField();
+    }
+
+    public void displayTextField() {
+        tfSoHoKhau.setText(dongGop.getSoHoKhau());
+        tfIDKhoanDongGop.setText(String.valueOf(dongGop.getIdKhoanDongGop()));
+        tfSoTien.setText(dongGop.getSoTien());
+        tfNgayDong.setText(dongGop.getNgayDong());
     }
 
     /**
@@ -96,11 +105,6 @@ public class SuaXoaDongGopForm extends javax.swing.JFrame {
                 btnXoaMouseClicked(evt);
             }
         });
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 102));
@@ -117,11 +121,6 @@ public class SuaXoaDongGopForm extends javax.swing.JFrame {
         tfSoHoKhau.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfSoHoKhau.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfSoHoKhau.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfSoHoKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSoHoKhauActionPerformed(evt);
-            }
-        });
 
         jLabel13.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 102, 102));
@@ -133,11 +132,6 @@ public class SuaXoaDongGopForm extends javax.swing.JFrame {
         tfIDKhoanDongGop.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfIDKhoanDongGop.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfIDKhoanDongGop.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfIDKhoanDongGop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfIDKhoanDongGopActionPerformed(evt);
-            }
-        });
 
         jLabel16.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 102, 102));
@@ -149,11 +143,6 @@ public class SuaXoaDongGopForm extends javax.swing.JFrame {
         tfSoTien.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfSoTien.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfSoTien.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfSoTien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSoTienActionPerformed(evt);
-            }
-        });
 
         jLabel18.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 102, 102));
@@ -165,11 +154,6 @@ public class SuaXoaDongGopForm extends javax.swing.JFrame {
         tfNgayDong.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfNgayDong.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfNgayDong.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfNgayDong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNgayDongActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -260,31 +244,62 @@ public class SuaXoaDongGopForm extends javax.swing.JFrame {
 
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
         // TODO add your handling code here:
+        if (tfSoHoKhau.getText().isEmpty()
+                || tfIDKhoanDongGop.getText().isEmpty()
+                || tfSoTien.getText().isEmpty()
+                || tfNgayDong.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đủ các trường thông tin");
+        } else {
+            try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+                String sqlQuery = "UPDATE dong_gop\n"
+                        + "SET id_khoan_dong_gop = ?, \n"
+                        + "so_ho_khau = ?, \n"
+                        + "so_tien = ?, \n"
+                        + "ngay_dong = ? \n"
+                        + "WHERE id_dong_gop = ? ;";
+                System.out.println(sqlQuery);
+                PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
+                preparedStatement.setInt(1, Integer.parseInt(tfIDKhoanDongGop.getText()));
+                preparedStatement.setString(2, tfSoHoKhau.getText());
+                preparedStatement.setString(3, tfSoTien.getText());
+                preparedStatement.setString(4, tfNgayDong.getText());
+                preparedStatement.setInt(5, dongGop.getIdDongGop());
+                int row = preparedStatement.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                this.dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi\n"
+                        + "Vui lòng kiểm tra lại trường thông tin ngày tháng theo định dạng yyyy-mm-dd\n"
+                        + "Hoặc điền đủ các trường thông tin cần thiết");
+            }
+        }
     }//GEN-LAST:event_btnLuuMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
         // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?\n",
+                "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+                String sqlQuery = "DELETE FROM dong_gop\n"
+                        + "WHERE id_dong_gop = ? ;";
+                PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
+                preparedStatement.setInt(1, dongGop.getIdDongGop());
+                System.out.println(sqlQuery);
+                int row = preparedStatement.executeUpdate();
+
+                JOptionPane.showMessageDialog(this, "Đã xóa thành công");
+                conn.close();
+                this.dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu.");
+            }
+        }
     }//GEN-LAST:event_btnXoaMouseClicked
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaActionPerformed
-
-    private void tfSoHoKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSoHoKhauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSoHoKhauActionPerformed
-
-    private void tfIDKhoanDongGopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDKhoanDongGopActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfIDKhoanDongGopActionPerformed
-
-    private void tfSoTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSoTienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSoTienActionPerformed
-
-    private void tfNgayDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNgayDongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfNgayDongActionPerformed
 
     // --------------- display TextFields --------------------
     /**

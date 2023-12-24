@@ -51,29 +51,29 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel6" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="btnTrinhBanGhiKhoanPhi" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="btnTrinhBanGhiKhoanPhi" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnThemKhoanPhi" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnSuaKhoanPhi" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace pref="334" max="32767" attributes="0"/>
+                                  <EmptySpace pref="316" max="32767" attributes="0"/>
                                   <Component id="btnTimKhoanPhi" min="-2" pref="140" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="tfTimKhoanPhi" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="tfTimKhoanDongGop" min="-2" pref="165" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
                               <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
                               <Component id="jScrollPane2" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="btnTrinhBanGhiDongPhi" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="btnTrinhBanGhiDongPhi" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnThemDongPhi" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnSuaDongPhi" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btnTimDongPhi" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Component id="btnTimDongPhi" min="-2" pref="180" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="tfTimDongPhi" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="tfTimDongGop" min="-2" pref="165" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -96,7 +96,7 @@
                       <Component id="btnTrinhBanGhiKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnSuaKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnTimKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfTimKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfTimKhoanDongGop" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnThemKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -108,7 +108,7 @@
                       <Component id="btnTrinhBanGhiDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnSuaDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnTimDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfTimDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfTimDongGop" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnThemDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -252,7 +252,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tKhoanPhi">
+            <Component class="javax.swing.JTable" name="tKhoanDongGop">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="0" type="rgb"/>
@@ -278,7 +278,7 @@
                 <Property name="showGrid" type="boolean" value="true"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tKhoanPhiMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tKhoanDongGopMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
@@ -297,7 +297,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnTrinhBanGhiKhoanDongGopMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfTimKhoanPhi">
+        <Component class="javax.swing.JTextField" name="tfTimKhoanDongGop">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="0" type="rgb"/>
@@ -359,7 +359,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tDongPhi">
+            <Component class="javax.swing.JTable" name="tDongGop">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="0" type="rgb"/>
@@ -385,7 +385,7 @@
                 <Property name="showGrid" type="boolean" value="true"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tDongPhiMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tDongGopMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
@@ -440,18 +440,18 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="T&#xec;m theo t&#xea;n"/>
+            <Property name="text" type="java.lang.String" value="T&#xec;m theo s&#x1ed1; h&#x1ed9; kh&#x1ea9;u"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnTimDongGopMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfTimDongPhi">
+        <Component class="javax.swing.JTextField" name="tfTimDongGop">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nh&#xe2;p t&#xea;n"/>
+            <Property name="text" type="java.lang.String" value="Nh&#x1ead;p s&#x1ed1; h&#x1ed9; kh&#x1ea9;u"/>
             <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
@@ -459,9 +459,6 @@
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfTimDongGopActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

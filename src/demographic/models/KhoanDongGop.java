@@ -10,7 +10,7 @@ package demographic.models;
  */
 public class KhoanDongGop {
 
-    private String iDKhoanDongGop;
+    private int IDKhoanDongGop;
     private String tenKhoanDongGop;
     private String ngayBatDau;
     private String ngayKetThuc;
@@ -19,20 +19,20 @@ public class KhoanDongGop {
     public KhoanDongGop() {
     }
 
-    public KhoanDongGop(String iDKhoanDongGop, String tenKhoanDongGop, String ngayBatDau, String ngayKetThuc, String chiTiet) {
-        this.iDKhoanDongGop = iDKhoanDongGop;
+    public KhoanDongGop(int IDKhoanDongGop, String tenKhoanDongGop, String ngayBatDau, String ngayKetThuc, String chiTiet) {
+        this.IDKhoanDongGop = IDKhoanDongGop;
         this.tenKhoanDongGop = tenKhoanDongGop;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
         this.chiTiet = chiTiet;
     }
 
-    public String getiDKhoanDongGop() {
-        return iDKhoanDongGop;
+    public int getIDKhoanDongGop() {
+        return IDKhoanDongGop;
     }
 
-    public void setiDKhoanDongGop(String iDKhoanDongGop) {
-        this.iDKhoanDongGop = iDKhoanDongGop;
+    public void setIDKhoanDongGop(int IDKhoanDongGop) {
+        this.IDKhoanDongGop = IDKhoanDongGop;
     }
 
     public String getTenKhoanDongGop() {
@@ -65,6 +65,11 @@ public class KhoanDongGop {
 
     public void setChiTiet(String chiTiet) {
         this.chiTiet = chiTiet;
+    }
+
+    @Override
+    public String toString() {
+        return "KhoanDongGop{" + "IDKhoanDongGop=" + IDKhoanDongGop + ", tenKhoanDongGop=" + tenKhoanDongGop + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + ", chiTiet=" + chiTiet + '}';
     }
 
 }
