@@ -442,7 +442,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
     }//GEN-LAST:event_tfDiaChiActionPerformed
 
     private void tNhanKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tNhanKhauMouseClicked
-        displayNhanKhau();
+//        displayNhanKhau();
         DefaultTableModel model = (DefaultTableModel)tNhanKhau.getModel();
         int indexRow = tNhanKhau.getSelectedRow();
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());

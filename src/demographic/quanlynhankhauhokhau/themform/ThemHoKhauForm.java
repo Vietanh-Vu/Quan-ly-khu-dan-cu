@@ -621,7 +621,7 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
                 tfDiaChi.getText().isEmpty() ||
                 tfNgayLap.getText().isEmpty() ||
                 tfHoTen.getText().isEmpty() ||
-                tfBietDanh.getText().isEmpty() ||
+//                tfBietDanh.getText().isEmpty() ||
                 tfNgaySinh.getText().isEmpty() ||
                 tfSoCMND.getText().isEmpty() ||
                 tfNgayCap.getText().isEmpty() ||
@@ -630,8 +630,8 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
                 tfNoiSinh.getText().isEmpty() ||
                 tfDanToc.getText().isEmpty() ||
                 tfNoiLamViec.getText().isEmpty() ||
-                tfNgayDangKyThuongTru.getText().isEmpty() ||
-                tfDiaChiTruocKhiChuyen.getText().isEmpty() 
+                tfNgayDangKyThuongTru.getText().isEmpty() 
+//                tfDiaChiTruocKhiChuyen.getText().isEmpty() 
                 )  {
             JOptionPane.showMessageDialog(this, "Vui lòng điền đủ các trường thông tin");
         }

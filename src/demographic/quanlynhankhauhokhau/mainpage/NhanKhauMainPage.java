@@ -186,7 +186,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
 
         btnTim.setBackground(new java.awt.Color(0, 51, 51));
         btnTim.setForeground(new java.awt.Color(255, 255, 255));
-        btnTim.setText("Tìm theo số CMND");
+        btnTim.setText("Tìm theo họ tên");
         btnTim.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTimMouseClicked(evt);
@@ -265,7 +265,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
         });
 
         tfTim.setForeground(new java.awt.Color(0, 102, 102));
-        tfTim.setText("Nhập số CMND");
+        tfTim.setText("Nhập số Họ tên");
         tfTim.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         tfTim.setSelectedTextColor(new java.awt.Color(102, 102, 102));
 
@@ -527,7 +527,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
                     "  so_ho_khau AS 'Số hộ khẩu',\n" +
                     "  qua_doi AS 'Qua đời'\n" +
                     "FROM nhan_khau\n" +
-                    "WHERE nhan_khau.so_CMND = '" + thongTin + "' " +
+                    "WHERE nhan_khau.ho_ten = '" + thongTin + "' " +
                     "AND deleted = 0\n" +
                     "ORDER BY so_ho_khau;";
             

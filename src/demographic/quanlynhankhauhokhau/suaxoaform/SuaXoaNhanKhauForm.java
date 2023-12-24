@@ -615,7 +615,7 @@ public class SuaXoaNhanKhauForm extends javax.swing.JFrame {
                     + "biet_danh = '" + tfBietDanh.getText() + "',\n "
                     + "gioi_tinh = '" + cbGioiTinh.getSelectedItem() + "',\n "
                     + "ngay_sinh = " + (tfNgaySinh.getText().isEmpty() ? "NULL" : ("'" + tfNgaySinh.getText() + "'")) + ",\n "
-                    + "so_CMND = '" + tfSoCMND.getText() + "',\n "
+                    + "so_CMND = " + (tfSoCMND.getText().isEmpty() ? "NULL" : ("'" + tfSoCMND.getText() + "'")) + ",\n "
                     + "ngay_cap_CMND = " + (tfNgayCap.getText().isEmpty() ? "NULL" : ("'" + tfNgayCap.getText() + "'")) + ",\n "
                     + "noi_cap_CMND = '" + tfNoiCap.getText() + "',\n "
                     + "noi_sinh = '" + tfNoiSinh.getText() + "',\n "
@@ -642,7 +642,7 @@ public class SuaXoaNhanKhauForm extends javax.swing.JFrame {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Thông tin bạn điền có thể chưa chính xác.\n"
                         + "Có thể bạn đã nhập sai cú pháp ngày tháng phải là: yyyy-mm-dd.\n"
-                        + "Hoặc là bạn đã điền sai thông tin của họ tên và số CMND của chủ hộ.\n");
+                        + "Hoặc là bạn đã điền sai thông tin số hộ khẩu.\n");
             }
         }
     }//GEN-LAST:event_btnLuuMouseClicked

@@ -451,14 +451,20 @@ public class TachHoKhauForm extends javax.swing.JFrame {
                 // ----- update hộ khẩu mới và cũ ------
 
                 for (NhanKhau nhanKhau : listOfNhanKhau) {
-                    sql = "UPDATE nhan_khau\n" +
-                    "SET quan_he_voi_chu_ho = NULL,\n" +
-                    "so_ho_khau = '" + tfSoHoKhau.getText() + "'\n" +
-                    "WHERE nhan_khau_id = " + nhanKhau.getNhanKhauId() + ";";
-                
-                    if (nhanKhau.getSoCMND().equals(tfSoCMND.getText())) {
+                    
+                    if (nhanKhau.getSoCMND() == null){
+                        sql = "UPDATE nhan_khau\n" +
+                        "SET quan_he_voi_chu_ho = NULL,\n" +
+                        "so_ho_khau = '" + tfSoHoKhau.getText() + "'\n" +
+                        "WHERE nhan_khau_id = " + nhanKhau.getNhanKhauId() + ";";
+                    } else if (nhanKhau.getSoCMND().equals(tfSoCMND.getText())) {
                         sql = "UPDATE nhan_khau\n" +
                         "SET quan_he_voi_chu_ho = 'Chủ hộ',\n" +
+                        "so_ho_khau = '" + tfSoHoKhau.getText() + "'\n" +
+                        "WHERE nhan_khau_id = " + nhanKhau.getNhanKhauId() + ";";
+                    } else {
+                        sql = "UPDATE nhan_khau\n" +
+                        "SET quan_he_voi_chu_ho = NULL,\n" +
                         "so_ho_khau = '" + tfSoHoKhau.getText() + "'\n" +
                         "WHERE nhan_khau_id = " + nhanKhau.getNhanKhauId() + ";";
                     }
@@ -473,6 +479,7 @@ public class TachHoKhauForm extends javax.swing.JFrame {
                 this.dispose();
             }
             catch (Exception e){
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Bạn vui lòng kiểm tra lại các trường thông tin.\n"
                         + "Lỗi này xảy ra khi bạn nhập sai cú pháp ngày tháng, sai số CMND hoặc hộ đã tồn tại trong cơ sở dữ liệu.");
             }
