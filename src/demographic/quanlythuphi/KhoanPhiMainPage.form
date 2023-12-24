@@ -58,8 +58,6 @@
                                           <Component id="btnThemKhoanPhi" min="-2" pref="100" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="btnSuaKhoanPhi" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="btnXuatFileKhoanPhi" min="-2" pref="100" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="btnTimKhoanPhi" min="-2" pref="140" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -78,9 +76,7 @@
                                   <Component id="btnThemDongPhi" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnSuaDongPhi" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnXuatFileDongPhi" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace pref="153" max="32767" attributes="0"/>
+                                  <EmptySpace pref="271" max="32767" attributes="0"/>
                                   <Component id="btnTimDongPhi" min="-2" pref="177" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="tfTimDongPhi" min="-2" pref="165" max="-2" attributes="0"/>
@@ -109,7 +105,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnTrinhBanGhiKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnSuaKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnXuatFileKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnTimKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfTimKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnThemKhoanPhi" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -122,7 +117,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnTrinhBanGhiDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnSuaDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnXuatFileDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnTimDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfTimDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnThemDongPhi" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -315,20 +309,6 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnTrinhBanGhiKhoanPhiMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnXuatFileKhoanPhi">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="0" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnXuatFileKhoanPhiMouseClicked"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JTextField" name="tfTimKhoanPhi">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -462,20 +442,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSuaDongPhiMouseClicked"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnXuatFileDongPhi">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="0" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnXuatFileDongPhiMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTimDongPhi">

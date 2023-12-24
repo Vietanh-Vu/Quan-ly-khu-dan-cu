@@ -30,7 +30,7 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
     public SuaXoaDongPhiForm(DongPhi dongPhi) {
         initComponents();
         this.dongPhi = dongPhi;
-        System.out.println(this.dongPhi.toString());
+        System.out.println(this.dongPhi);
         displayTextField();
     }
 

@@ -78,7 +78,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tKhoanPhi = new javax.swing.JTable();
         btnTrinhBanGhiKhoanPhi = new javax.swing.JButton();
-        btnXuatFileKhoanPhi = new javax.swing.JButton();
         tfTimKhoanPhi = new javax.swing.JTextField();
         btnThemKhoanPhi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -88,7 +87,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         btnTrinhBanGhiDongPhi = new javax.swing.JButton();
         btnThemDongPhi = new javax.swing.JButton();
         btnSuaDongPhi = new javax.swing.JButton();
-        btnXuatFileDongPhi = new javax.swing.JButton();
         btnTimDongPhi = new javax.swing.JButton();
         tfTimDongPhi = new javax.swing.JTextField();
         tfSoTienPhaiDong = new javax.swing.JTextField();
@@ -211,15 +209,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
             }
         });
 
-        btnXuatFileKhoanPhi.setBackground(new java.awt.Color(0, 51, 51));
-        btnXuatFileKhoanPhi.setForeground(new java.awt.Color(255, 255, 255));
-        btnXuatFileKhoanPhi.setText("Xuất file");
-        btnXuatFileKhoanPhi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnXuatFileKhoanPhiMouseClicked(evt);
-            }
-        });
-
         tfTimKhoanPhi.setForeground(new java.awt.Color(0, 102, 102));
         tfTimKhoanPhi.setText("Nhâp tên");
         tfTimKhoanPhi.setDisabledTextColor(new java.awt.Color(204, 204, 204));
@@ -300,15 +289,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
             }
         });
 
-        btnXuatFileDongPhi.setBackground(new java.awt.Color(0, 51, 51));
-        btnXuatFileDongPhi.setForeground(new java.awt.Color(255, 255, 255));
-        btnXuatFileDongPhi.setText("Xuất file");
-        btnXuatFileDongPhi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnXuatFileDongPhiMouseClicked(evt);
-            }
-        });
-
         btnTimDongPhi.setBackground(new java.awt.Color(0, 51, 51));
         btnTimDongPhi.setForeground(new java.awt.Color(255, 255, 255));
         btnTimDongPhi.setText("Tìm theo số hộ khẩu");
@@ -354,8 +334,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                                         .addComponent(btnThemKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnSuaKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnXuatFileKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -371,9 +349,7 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                                 .addComponent(btnThemDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSuaDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnXuatFileDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
                                 .addComponent(btnTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(tfTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,7 +371,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                 .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTrinhBanGhiKhoanPhi)
                     .addComponent(btnSuaKhoanPhi)
-                    .addComponent(btnXuatFileKhoanPhi)
                     .addComponent(btnTimKhoanPhi)
                     .addComponent(tfTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemKhoanPhi))
@@ -407,7 +382,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                 .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTrinhBanGhiDongPhi)
                     .addComponent(btnSuaDongPhi)
-                    .addComponent(btnXuatFileDongPhi)
                     .addComponent(btnTimDongPhi)
                     .addComponent(tfTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemDongPhi))
@@ -431,11 +405,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    // ----------------- EXCEL EXTRACTION -------------------------------
-    private void btnXuatFileKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFileKhoanPhiMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXuatFileKhoanPhiMouseClicked
 
     private void btnTrinhBanGhiKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrinhBanGhiKhoanPhiMouseClicked
         // TODO add your handling code here:
@@ -589,7 +558,7 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
             }
 
             dongPhi = dongPhiMoi;
-
+            System.out.println(dongPhi);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
@@ -612,10 +581,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         SuaXoaDongPhiForm newForm = new SuaXoaDongPhiForm(dongPhi);
         newForm.setVisible(true);
     }//GEN-LAST:event_btnSuaDongPhiMouseClicked
-
-    private void btnXuatFileDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFileDongPhiMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXuatFileDongPhiMouseClicked
 
     private void btnTimDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimDongPhiMouseClicked
         // TODO add your handling code here:'
@@ -1265,8 +1230,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
     private javax.swing.JButton btnTimKhoanPhi;
     private javax.swing.JButton btnTrinhBanGhiDongPhi;
     private javax.swing.JButton btnTrinhBanGhiKhoanPhi;
-    private javax.swing.JButton btnXuatFileDongPhi;
-    private javax.swing.JButton btnXuatFileKhoanPhi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
