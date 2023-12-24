@@ -10,7 +10,7 @@ package demographic.models;
  */
 public class KhoanPhi {
 
-    private String idKhoanPhi;
+    private int idKhoanPhi;
     private String tenKhoanPhi;
     private String tienPhi;
     private String ngayBatDau;
@@ -20,7 +20,7 @@ public class KhoanPhi {
     public KhoanPhi() {
     }
 
-    public KhoanPhi(String idKhoanPhi, String tenKhoanPhi, String tienPhi, String ngayBatDau, String ngayKetThuc, String chiTiet) {
+    public KhoanPhi(int idKhoanPhi, String tenKhoanPhi, String tienPhi, String ngayBatDau, String ngayKetThuc, String chiTiet) {
         this.idKhoanPhi = idKhoanPhi;
         this.tenKhoanPhi = tenKhoanPhi;
         this.tienPhi = tienPhi;
@@ -29,11 +29,11 @@ public class KhoanPhi {
         this.chiTiet = chiTiet;
     }
 
-    public String getIdKhoanPhi() {
+    public int getIdKhoanPhi() {
         return idKhoanPhi;
     }
 
-    public void setIdKhoanPhi(String idKhoanPhi) {
+    public void setIdKhoanPhi(int idKhoanPhi) {
         this.idKhoanPhi = idKhoanPhi;
     }
 
@@ -75,6 +75,11 @@ public class KhoanPhi {
 
     public void setChiTiet(String chiTiet) {
         this.chiTiet = chiTiet;
+    }
+
+    @Override
+    public String toString() {
+        return "KhoanPhi{" + "idKhoanPhi=" + idKhoanPhi + ", tenKhoanPhi=" + tenKhoanPhi + ", tienPhi=" + tienPhi + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + ", chiTiet=" + chiTiet + '}';
     }
 
 }

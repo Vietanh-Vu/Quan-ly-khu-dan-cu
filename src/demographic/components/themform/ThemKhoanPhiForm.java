@@ -4,10 +4,7 @@
  */
 package demographic.components.themform;
 
-import demographic.models.HoKhau;
-import demographic.models.KhoanPhi;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
 /**
@@ -17,9 +14,6 @@ import java.sql.*;
 public class ThemKhoanPhiForm extends javax.swing.JFrame {
 
     Connection conn = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
-    Statement st = null;
 
     /**
      * Creates new form Form
@@ -271,15 +265,16 @@ public class ThemKhoanPhiForm extends javax.swing.JFrame {
             try {
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
                 String sqlQuery = "INSERT INTO `khoan_thu_phi` "
-                        + "(`id_khoan_thu_phi`, `ten_khoan_thu_phi`, `tien_phi`, `ngay_bat_dau`, `ngay_ket_thuc`, `chi_tiet`)"
-                        + "VALUES ("
-                        + "'" + tfTenKhoanPhi.getText() + "',"
-                        + "'" + tfTienPhi.getText() + "',"
-                        + "'" + tfNgayBatDau.getText() + "',"
-                        + "'" + tfNgayKetThuc.getText() + "',"
-                        + "'" + tfChiTiet.getText() + "',"
-                        + ")";
-                rs = st.executeQuery(sqlQuery);
+                        + "(`ten_khoan_thu_phi`, `tien_phi`, `ngay_bat_dau`, `ngay_ket_thuc`, `chi_tiet`)"
+                        + "VALUES (?, ?, ?, ?, ?)";
+                System.out.println(sqlQuery);
+                PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
+                preparedStatement.setString(1, tfTenKhoanPhi.getText());
+                preparedStatement.setString(2, tfTienPhi.getText());
+                preparedStatement.setString(3, tfNgayBatDau.getText());
+                preparedStatement.setString(4, tfNgayKetThuc.getText());
+                preparedStatement.setString(5, tfChiTiet.getText());
+                int row = preparedStatement.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 this.dispose();
             } catch (Exception e) {

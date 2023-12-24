@@ -17,7 +17,7 @@ import java.sql.*;
  */
 public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
 
-    KhoanPhi khoanPhi;
+    private KhoanPhi khoanPhi;
 
     /**
      * Creates new form Form
@@ -30,6 +30,15 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         initComponents();
         this.khoanPhi = khoanPhi;
         System.out.println(this.khoanPhi.toString());
+        displayTextField();
+    }
+
+    public void displayTextField() {
+        tfTenKhoanPhi.setText(khoanPhi.getTenKhoanPhi());
+        tfTienPhi.setText(khoanPhi.getTienPhi());
+        tfNgayBatDau.setText(khoanPhi.getNgayBatDau());
+        tfNgayKetThuc.setText(khoanPhi.getNgayKetThuc());
+        tfChiTiet.setText(khoanPhi.getChiTiet());
     }
 
     /**
@@ -96,11 +105,6 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
         btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnXoaMouseClicked(evt);
-            }
-        });
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
             }
         });
 
@@ -289,15 +293,64 @@ public class SuaXoaKhoanPhiForm extends javax.swing.JFrame {
 
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
         // TODO add your handling code here:
+        if (tfNgayBatDau.getText().isEmpty()
+                || tfNgayKetThuc.getText().isEmpty()
+                || tfTenKhoanPhi.getText().isEmpty()
+                || tfTienPhi.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đủ các trường thông tin");
+        } else {
+            try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+                String sqlQuery = "UPDATE khoan_thu_phi\n"
+                        + "SET ten_khoan_thu_phi = ? , \n"
+                        + "    ngay_bat_dau = ?, \n"
+                        + "    ngay_ket_thuc = ?, \n"
+                        + "    tien_phi = ?,\n"
+                        + "    chi_tiet = ?\n"
+                        + "WHERE id_khoan_thu_phi = ?";
+                System.out.println(sqlQuery);
+                PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
+                preparedStatement.setString(1, tfTenKhoanPhi.getText());
+                preparedStatement.setString(2, tfNgayBatDau.getText());
+                preparedStatement.setString(3, tfNgayKetThuc.getText());
+                preparedStatement.setString(4, tfTienPhi.getText());
+                preparedStatement.setString(5, tfChiTiet.getText());
+                preparedStatement.setInt(6, khoanPhi.getIdKhoanPhi());
+                int row = preparedStatement.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                this.dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi\n"
+                        + "Vui lòng kiểm tra lại trường thông tin ngày tháng theo định dạng yyyy-mm-dd\n"
+                        + "Hoặc điền đủ các trường thông tin cần thiết");
+            }
+        }
     }//GEN-LAST:event_btnLuuMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaMouseClicked
+        int response = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?\n",
+                "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+                String sqlQuery = "DELETE FROM khoan_thu_phi\n"
+                        + "WHERE id_khoan_thu_phi = ?;";
+                PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
+                preparedStatement.setInt(1, khoanPhi.getIdKhoanPhi());
+                System.out.println(sqlQuery);
+                int row = preparedStatement.executeUpdate();
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaActionPerformed
+                JOptionPane.showMessageDialog(this, "Đã xóa thành công");
+                conn.close();
+                this.dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu.");
+            }
+        }
+    }//GEN-LAST:event_btnXoaMouseClicked
 
     private void tfTenKhoanPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTenKhoanPhiActionPerformed
         // TODO add your handling code here:
