@@ -265,7 +265,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
         });
 
         tfTim.setForeground(new java.awt.Color(0, 102, 102));
-        tfTim.setText("Nhập số Họ tên");
+        tfTim.setText("Nhập họ tên");
         tfTim.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         tfTim.setSelectedTextColor(new java.awt.Color(102, 102, 102));
 
@@ -533,7 +533,7 @@ public class NhanKhauMainPage extends javax.swing.JFrame {
             
             rs = st.executeQuery(sql) ;
             tNhanKhau.setModel(DbUtils.resultSetToTableModel(rs));
-            tfTim.setText("Nhập số CMND");
+            tfTim.setText("Nhập họ tên");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu.");
