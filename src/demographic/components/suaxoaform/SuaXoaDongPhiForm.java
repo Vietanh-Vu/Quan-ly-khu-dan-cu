@@ -124,11 +124,6 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
         tfIDKhoanThuPhi.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfIDKhoanThuPhi.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfIDKhoanThuPhi.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfIDKhoanThuPhi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfIDKhoanThuPhiActionPerformed(evt);
-            }
-        });
 
         jLabel12.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 102, 102));
@@ -140,11 +135,6 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
         tfSoHoKhau.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfSoHoKhau.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfSoHoKhau.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfSoHoKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSoHoKhauActionPerformed(evt);
-            }
-        });
 
         jLabel13.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 102, 102));
@@ -156,11 +146,6 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
         tfSoTien.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfSoTien.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfSoTien.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfSoTien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSoTientfNgayBatDauActionPerformed(evt);
-            }
-        });
 
         jLabel16.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 102, 102));
@@ -173,11 +158,6 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
         tfDaDong.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfDaDong.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfDaDong.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfDaDong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDaDongActionPerformed(evt);
-            }
-        });
 
         jLabel18.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 102, 102));
@@ -189,11 +169,6 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
         tfNgayDong.setMargin(new java.awt.Insets(4, 6, 4, 6));
         tfNgayDong.setSelectedTextColor(new java.awt.Color(0, 102, 102));
         tfNgayDong.setSelectionColor(new java.awt.Color(0, 102, 102));
-        tfNgayDong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNgayDongActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -330,6 +305,7 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
                         + "Vui lòng kiểm tra lại trường thông tin ngày tháng theo định dạng yyyy-mm-dd\n"
                         + "Hoặc điền đủ các trường thông tin cần thiết");
             }
+        }
     }//GEN-LAST:event_btnLuuMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
@@ -340,7 +316,7 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
             try {
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
                 String sqlQuery = "DELETE FROM dong_phi\n"
-                        + "WHERE id_dong_phi = ?";
+                        + "WHERE id_khoan_thu_phi = ?;";
                 PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
                 preparedStatement.setInt(1, dongPhi.getIdDongPhi());
                 System.out.println(sqlQuery);
@@ -356,27 +332,6 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnXoaMouseClicked
 
-    private void tfIDKhoanThuPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDKhoanThuPhiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfIDKhoanThuPhiActionPerformed
-
-    private void tfSoHoKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSoHoKhauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSoHoKhauActionPerformed
-
-    private void tfSoTientfNgayBatDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSoTientfNgayBatDauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSoTientfNgayBatDauActionPerformed
-
-    private void tfDaDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDaDongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDaDongActionPerformed
-
-    private void tfNgayDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNgayDongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfNgayDongActionPerformed
-
-    // --------------- display TextFields --------------------
     /**
      * @param args the command line arguments
      */

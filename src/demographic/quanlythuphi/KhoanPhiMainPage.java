@@ -445,7 +445,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tKhoanPhiMouseClicked
 
-    // -------------------------- EDIT DATA --------------------------------
     private void btnSuaKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaKhoanPhiMouseClicked
         // TODO add your handling code here:
         if (khoanPhi == null) {
@@ -578,8 +577,13 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
 
     private void btnSuaDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaDongPhiMouseClicked
         // TODO add your handling code here:
-        SuaXoaDongPhiForm newForm = new SuaXoaDongPhiForm(dongPhi);
-        newForm.setVisible(true);
+        if (dongPhi == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng trong bảng\n"
+                    + "để theo dõi thêm thông tin về đóng phí đó.");
+        } else {
+            SuaXoaDongPhiForm newForm = new SuaXoaDongPhiForm(dongPhi);
+            newForm.setVisible(true);
+        }
     }//GEN-LAST:event_btnSuaDongPhiMouseClicked
 
     private void btnTimDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimDongPhiMouseClicked
