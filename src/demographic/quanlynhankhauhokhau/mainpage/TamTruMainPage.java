@@ -14,6 +14,7 @@ import demographic.login.MainFormForUser;
 import demographic.models.HoKhau;
 import demographic.models.TamTru;
 import demographic.models.TamVang;
+import demographic.quanlynhankhauhokhau.themform.ThemTamTruForm;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -446,7 +447,7 @@ public class TamTruMainPage extends javax.swing.JFrame {
     // -------------------------- EDIT DATA --------------------------------
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
         // TODO add your handling code here:
-        ThemTamVangForm newForm = new ThemTamVangForm();
+        ThemTamTruForm newForm = new ThemTamTruForm();
         newForm.setVisible(true);
         displayTamTru();
     }//GEN-LAST:event_btnThemMouseClicked

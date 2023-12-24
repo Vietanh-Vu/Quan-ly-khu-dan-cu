@@ -384,7 +384,7 @@ public class ThemTamTruForm extends javax.swing.JFrame {
             try {
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
                                 
-                String sql = "INSERT INTO tam_tru (ho_ten, ngay_sinh, so_CMND, ngay_cap, noi_cap, gioi_tinh, dia_chi_thuong_tru, cho_o_hien_tai, ly_do)\n" +
+                String sql = "INSERT INTO tam_tru (ho_ten, ngay_sinh, so_CMND, ngay_cap, noi_cap, gioi_tinh, dia_chi_thuong_tru, cho_o_hien_tai, ly_do, ngay_tam_tru)\n" +
                         "VALUES \n" +
                         "('" + tfHoTen.getText() + "', "
                         + "'" + tfNgaySinh.getText() + "',"
@@ -394,7 +394,8 @@ public class ThemTamTruForm extends javax.swing.JFrame {
                         + "'" + cbGioiTinh.getSelectedItem() + "', "
                         + "'" + tfDiaChiThuongTru.getText() + "', "
                         + "'" + tfChoOHienTai.getText() + "', "
-                        + "'" + tfChoOHienTai.getText() +"')";
+                        + "'" + tfLyDo.getText() +"',"
+                        + "'" + tfNgayTamTru.getText() +"')";
                 
                 System.out.println(sql);
                 PreparedStatement add = conn.prepareStatement(sql);
