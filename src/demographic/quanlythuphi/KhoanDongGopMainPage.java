@@ -101,6 +101,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
         lbHoKhau = new javax.swing.JLabel();
         lbNhanKhau = new javax.swing.JLabel();
         lbThoat = new javax.swing.JLabel();
+        lbChungCu = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnTimKhoanPhi = new javax.swing.JButton();
         btnSuaKhoanPhi = new javax.swing.JButton();
@@ -146,10 +147,19 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
         lbThoat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbThoat.setForeground(new java.awt.Color(255, 255, 255));
         lbThoat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbThoat.setText("Thoát    ");
+        lbThoat.setText("Thoát  ");
         lbThoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbThoatMouseClicked(evt);
+            }
+        });
+
+        lbChungCu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbChungCu.setForeground(new java.awt.Color(255, 255, 255));
+        lbChungCu.setText("Chung cư");
+        lbChungCu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbChungCulbDongGopMouseClicked(evt);
             }
         });
 
@@ -164,6 +174,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbChungCu)
                     .addComponent(lbNhanKhau)
                     .addComponent(lbHoKhau))
                 .addContainerGap(56, Short.MAX_VALUE))
@@ -175,9 +186,11 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
                 .addComponent(lbNhanKhau)
                 .addGap(18, 18, 18)
                 .addComponent(lbHoKhau)
+                .addGap(18, 18, 18)
+                .addComponent(lbChungCu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbThoat)
-                .addGap(33, 33, 33))
+                .addGap(45, 45, 45))
         );
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -370,8 +383,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
         );
         khoanPhiPanelLayout.setVerticalGroup(
             khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(khoanPhiPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, khoanPhiPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
@@ -385,9 +397,9 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
                     .addComponent(btnThemKhoanPhi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTrinhBanGhiDongPhi)
                     .addComponent(btnSuaDongPhi)
@@ -396,7 +408,8 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
                     .addComponent(btnThemDongPhi))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -612,6 +625,14 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
         }
     }//GEN-LAST:event_btnTimDongGopMouseClicked
+
+    private void lbChungCulbDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbChungCulbDongGopMouseClicked
+        // TODO add your handling code here:
+        ChungCuMainPage newMainPage = new ChungCuMainPage();
+        newMainPage.setVisible(true);
+        newMainPage.user = this.user;
+        this.dispose();
+    }//GEN-LAST:event_lbChungCulbDongGopMouseClicked
 
     // ------------ START TO CODE HERE -----------------
     // ------------- User parameter --------------------
@@ -1707,6 +1728,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel khoanPhiPanel;
+    private javax.swing.JLabel lbChungCu;
     private javax.swing.JLabel lbHoKhau;
     private javax.swing.JLabel lbNhanKhau;
     private javax.swing.JLabel lbThoat;

@@ -316,7 +316,7 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
             try {
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
                 String sqlQuery = "DELETE FROM dong_phi\n"
-                        + "WHERE id_khoan_thu_phi = ?;";
+                        + "WHERE id_dong_phi = ?;";
                 PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
                 preparedStatement.setInt(1, dongPhi.getIdDongPhi());
                 System.out.println(sqlQuery);

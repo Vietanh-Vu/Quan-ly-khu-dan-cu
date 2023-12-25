@@ -34,7 +34,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author vietanh
  */
-public class KhoanPhiMainPage extends javax.swing.JFrame {
+public class ChungCuMainPage extends javax.swing.JFrame {
 
     public User user;
     private KhoanPhi khoanPhi = null;
@@ -52,10 +52,9 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
     /**
      * Creates new form NhanKhauMainPage
      */
-    public KhoanPhiMainPage() {
+    public ChungCuMainPage() {
         initComponents();
-        displayDongPhi();
-        displayKhoanPhi();
+        display();
     }
 
     /**
@@ -72,24 +71,21 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         lbHoKhau = new javax.swing.JLabel();
         lbNhanKhau = new javax.swing.JLabel();
         lbThoat = new javax.swing.JLabel();
+        lbChungCu = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnTimKhoanPhi = new javax.swing.JButton();
-        btnSuaKhoanPhi = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tKhoanPhi = new javax.swing.JTable();
-        btnTrinhBanGhiKhoanPhi = new javax.swing.JButton();
-        tfTimKhoanPhi = new javax.swing.JTextField();
-        btnThemKhoanPhi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tDongPhi = new javax.swing.JTable();
+        tChungCu = new javax.swing.JTable();
         btnTrinhBanGhiDongPhi = new javax.swing.JButton();
-        btnThemDongPhi = new javax.swing.JButton();
-        btnSuaDongPhi = new javax.swing.JButton();
+        btnLuu = new javax.swing.JButton();
         btnTimDongPhi = new javax.swing.JButton();
         tfTimDongPhi = new javax.swing.JTextField();
-        tfSoTienPhaiDong = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        tfSoHoKhau = new javax.swing.JTextField();
+        tfDienTich = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cbLoaiChungCu = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,10 +114,19 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         lbThoat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbThoat.setForeground(new java.awt.Color(255, 255, 255));
         lbThoat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbThoat.setText("Thoát    ");
+        lbThoat.setText("Thoát ");
         lbThoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbThoatMouseClicked(evt);
+            }
+        });
+
+        lbChungCu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbChungCu.setForeground(new java.awt.Color(255, 255, 255));
+        lbChungCu.setText("Chung cư");
+        lbChungCu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbChungCulbDongGopMouseClicked(evt);
             }
         });
 
@@ -136,6 +141,7 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbChungCu)
                     .addComponent(lbNhanKhau)
                     .addComponent(lbHoKhau))
                 .addContainerGap(56, Short.MAX_VALUE))
@@ -147,9 +153,11 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                 .addComponent(lbNhanKhau)
                 .addGap(18, 18, 18)
                 .addComponent(lbHoKhau)
+                .addGap(18, 18, 18)
+                .addComponent(lbChungCu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbThoat)
-                .addGap(33, 33, 33))
+                .addGap(45, 45, 45))
         );
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -158,109 +166,31 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         jLabel6.setText("QUẢN LÝ KHOẢN PHÍ");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        btnTimKhoanPhi.setBackground(new java.awt.Color(0, 51, 51));
-        btnTimKhoanPhi.setForeground(new java.awt.Color(255, 255, 255));
-        btnTimKhoanPhi.setText("Tìm theo tên");
-        btnTimKhoanPhi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTimKhoanPhiMouseClicked(evt);
-            }
-        });
-
-        btnSuaKhoanPhi.setBackground(new java.awt.Color(0, 51, 51));
-        btnSuaKhoanPhi.setForeground(new java.awt.Color(255, 255, 255));
-        btnSuaKhoanPhi.setText("Sửa");
-        btnSuaKhoanPhi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSuaKhoanPhiMouseClicked(evt);
-            }
-        });
-
-        tKhoanPhi.setForeground(new java.awt.Color(0, 102, 102));
-        tKhoanPhi.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tKhoanPhi.setGridColor(new java.awt.Color(188, 206, 206));
-        tKhoanPhi.setRowHeight(26);
-        tKhoanPhi.setSelectionBackground(new java.awt.Color(0, 102, 102));
-        tKhoanPhi.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tKhoanPhi.setShowGrid(true);
-        tKhoanPhi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tKhoanPhiMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tKhoanPhi);
-
-        btnTrinhBanGhiKhoanPhi.setBackground(new java.awt.Color(0, 51, 51));
-        btnTrinhBanGhiKhoanPhi.setForeground(new java.awt.Color(255, 255, 255));
-        btnTrinhBanGhiKhoanPhi.setText("Trình bản ghi");
-        btnTrinhBanGhiKhoanPhi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTrinhBanGhiKhoanPhiMouseClicked(evt);
-            }
-        });
-
-        tfTimKhoanPhi.setForeground(new java.awt.Color(0, 102, 102));
-        tfTimKhoanPhi.setText("Nhâp tên");
-        tfTimKhoanPhi.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        tfTimKhoanPhi.setSelectedTextColor(new java.awt.Color(102, 102, 102));
-        tfTimKhoanPhi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTimKhoanPhiActionPerformed(evt);
-            }
-        });
-
-        btnThemKhoanPhi.setBackground(new java.awt.Color(0, 51, 51));
-        btnThemKhoanPhi.setForeground(new java.awt.Color(255, 255, 255));
-        btnThemKhoanPhi.setText("Thêm");
-        btnThemKhoanPhi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnThemKhoanPhiMouseClicked(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("KHOẢN PHÍ");
+        jLabel1.setText("DANH SÁCH CÁC CHUNG CƯ TRONG KHU VỰC");
 
-        jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("ĐÓNG PHÍ");
-
-        tDongPhi.setForeground(new java.awt.Color(0, 102, 102));
-        tDongPhi.setModel(new javax.swing.table.DefaultTableModel(
+        tChungCu.setForeground(new java.awt.Color(0, 102, 102));
+        tChungCu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tDongPhi.setGridColor(new java.awt.Color(188, 206, 206));
-        tDongPhi.setRowHeight(26);
-        tDongPhi.setSelectionBackground(new java.awt.Color(0, 102, 102));
-        tDongPhi.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tDongPhi.setShowGrid(true);
-        tDongPhi.addMouseListener(new java.awt.event.MouseAdapter() {
+        tChungCu.setGridColor(new java.awt.Color(188, 206, 206));
+        tChungCu.setRowHeight(26);
+        tChungCu.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        tChungCu.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tChungCu.setShowGrid(true);
+        tChungCu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tDongPhiMouseClicked(evt);
+                tChungCuMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tDongPhi);
+        jScrollPane2.setViewportView(tChungCu);
 
         btnTrinhBanGhiDongPhi.setBackground(new java.awt.Color(0, 51, 51));
         btnTrinhBanGhiDongPhi.setForeground(new java.awt.Color(255, 255, 255));
@@ -271,21 +201,12 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
             }
         });
 
-        btnThemDongPhi.setBackground(new java.awt.Color(0, 51, 51));
-        btnThemDongPhi.setForeground(new java.awt.Color(255, 255, 255));
-        btnThemDongPhi.setText("Thêm");
-        btnThemDongPhi.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLuu.setBackground(new java.awt.Color(0, 51, 51));
+        btnLuu.setForeground(new java.awt.Color(255, 255, 255));
+        btnLuu.setText("Lưu");
+        btnLuu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnThemDongPhiMouseClicked(evt);
-            }
-        });
-
-        btnSuaDongPhi.setBackground(new java.awt.Color(0, 51, 51));
-        btnSuaDongPhi.setForeground(new java.awt.Color(255, 255, 255));
-        btnSuaDongPhi.setText("Sửa");
-        btnSuaDongPhi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSuaDongPhiMouseClicked(evt);
+                btnLuuMouseClicked(evt);
             }
         });
 
@@ -308,10 +229,25 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
             }
         });
 
-        tfSoTienPhaiDong.setText("Số tiền còn phải đóng: ");
-        tfSoTienPhaiDong.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel2.setText("Số hộ khẩu");
+
+        tfSoHoKhau.setEditable(false);
+        tfSoHoKhau.setForeground(new java.awt.Color(0, 102, 102));
+
+        tfDienTich.setForeground(new java.awt.Color(0, 102, 102));
+
+        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel3.setText("Diện tích");
+
+        jLabel4.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel4.setText("Loại chung cư");
+
+        cbLoaiChungCu.setForeground(new java.awt.Color(0, 102, 102));
+        cbLoaiChungCu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "chua_ro", "thuong", "cao_cap", "gia_re", " " }));
+        cbLoaiChungCu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSoTienPhaiDongActionPerformed(evt);
+                cbLoaiChungCuActionPerformed(evt);
             }
         });
 
@@ -321,43 +257,39 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
             khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(khoanPhiPanelLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(khoanPhiPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(khoanPhiPanelLayout.createSequentialGroup()
-                                .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(khoanPhiPanelLayout.createSequentialGroup()
-                                        .addComponent(btnTrinhBanGhiKhoanPhi)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnThemKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnSuaKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tfTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2))
-                                .addContainerGap())
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, khoanPhiPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(khoanPhiPanelLayout.createSequentialGroup()
                                 .addComponent(btnTrinhBanGhiDongPhi)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnThemDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSuaDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
+                                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(tfTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, khoanPhiPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tfSoTienPhaiDong, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                .addGap(14, 14, 14))
+                            .addGroup(khoanPhiPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfSoHoKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbLoaiChungCu, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfDienTich, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(131, 131, 131))))))
         );
         khoanPhiPanelLayout.setVerticalGroup(
             khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,29 +299,23 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(21, 21, 21)
+                .addGap(42, 42, 42)
                 .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTrinhBanGhiKhoanPhi)
-                    .addComponent(btnSuaKhoanPhi)
-                    .addComponent(btnTimKhoanPhi)
-                    .addComponent(tfTimKhoanPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThemKhoanPhi))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(tfSoHoKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(tfDienTich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(cbLoaiChungCu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
                 .addGroup(khoanPhiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTrinhBanGhiDongPhi)
-                    .addComponent(btnSuaDongPhi)
+                    .addComponent(btnLuu)
                     .addComponent(btnTimDongPhi)
-                    .addComponent(tfTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThemDongPhi))
+                    .addComponent(tfTimDongPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfSoTienPhaiDong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -406,81 +332,9 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTrinhBanGhiKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrinhBanGhiKhoanPhiMouseClicked
+    private void tfTimDongPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTimDongPhiActionPerformed
         // TODO add your handling code here:
-        displayKhoanPhi();
-    }//GEN-LAST:event_btnTrinhBanGhiKhoanPhiMouseClicked
-
-    private void tKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tKhoanPhiMouseClicked
-        DefaultTableModel model = (DefaultTableModel) tKhoanPhi.getModel();
-        int indexRow = tKhoanPhi.getSelectedRow();
-        key = String.valueOf(model.getValueAt(indexRow, 0).toString());
-
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
-            String sqlQuery = "SELECT * FROM khoan_thu_phi WHERE id_khoan_thu_phi = ?";
-            PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
-            preparedStatement.setInt(1, Integer.parseInt(key));
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            KhoanPhi khoanPhiMoi = new KhoanPhi();
-
-            while (resultSet.next()) {
-                khoanPhiMoi.setIdKhoanPhi(resultSet.getInt("id_khoan_thu_phi"));
-                khoanPhiMoi.setTenKhoanPhi(resultSet.getString("ten_khoan_thu_phi"));
-                khoanPhiMoi.setTienPhi(resultSet.getString("tien_phi"));
-                khoanPhiMoi.setNgayBatDau(resultSet.getString("ngay_bat_dau"));
-                khoanPhiMoi.setNgayKetThuc(resultSet.getString("ngay_ket_thuc"));
-                khoanPhiMoi.setChiTiet(resultSet.getString("chi_tiet"));
-                System.out.println(khoanPhiMoi);
-
-            }
-
-            khoanPhi = khoanPhiMoi;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
-        }
-    }//GEN-LAST:event_tKhoanPhiMouseClicked
-
-    private void btnSuaKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaKhoanPhiMouseClicked
-        // TODO add your handling code here:
-        if (khoanPhi == null) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khoản phí trong bảng\n"
-                    + "để theo dõi thêm thông tin về khoản phí đó.");
-        } else {
-            SuaXoaKhoanPhiForm newForm = new SuaXoaKhoanPhiForm(khoanPhi);
-            newForm.setVisible(true);
-        }
-
-    }//GEN-LAST:event_btnSuaKhoanPhiMouseClicked
-
-    private void btnTimKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKhoanPhiMouseClicked
-        // TODO add your handling code here:
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
-            String sqlQuery = "SELECT id_khoan_thu_phi AS 'ID Khoản Phí', "
-                    + "ten_khoan_thu_phi AS 'Tên Khoản Phí', "
-                    + "tien_phi AS 'Tiền Phí', "
-                    + "ngay_bat_dau AS 'Ngày Bắt Đầu', "
-                    + "ngay_ket_thuc AS 'Ngày kết thúc', "
-                    + "chi_tiet AS 'Chi tiết' "
-                    + "FROM `khoan_thu_phi` "
-                    + "WHERE LOWER(ten_khoan_thu_phi) LIKE LOWER(?)";
-
-            PreparedStatement ps = conn.prepareStatement(sqlQuery);
-            ps.setString(1, "%" + tfTimKhoanPhi.getText() + "%");
-
-            rs = ps.executeQuery();
-            tKhoanPhi.setModel(DbUtils.resultSetToTableModel(rs));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
-        }
-    }//GEN-LAST:event_btnTimKhoanPhiMouseClicked
+    }//GEN-LAST:event_tfTimDongPhiActionPerformed
 
     // -------------------- BACK TO MAIN FORM ----------------------------
     private void lbThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbThoatMouseClicked
@@ -505,7 +359,7 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
 
     private void IbDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IbDongPhiMouseClicked
         // TODO add your handling code here:
-        KhoanPhiMainPage newFrame = new KhoanPhiMainPage();
+        ChungCuMainPage newFrame = new ChungCuMainPage();
         newFrame.setVisible(true);
         newFrame.user = user;
         this.dispose();
@@ -519,92 +373,49 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lbDongGopMouseClicked
 
-    private void btnThemKhoanPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemKhoanPhiMouseClicked
-        // TODO add your handling code here:
-        ThemKhoanPhiForm newForm = new ThemKhoanPhiForm();
-        newForm.setVisible(true);
-    }//GEN-LAST:event_btnThemKhoanPhiMouseClicked
-
-    private void tfTimKhoanPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTimKhoanPhiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTimKhoanPhiActionPerformed
-
-    private void tDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tDongPhiMouseClicked
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) tDongPhi.getModel();
-        int indexRow = tDongPhi.getSelectedRow();
-        key = String.valueOf(model.getValueAt(indexRow, 0).toString());
-
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
-            String sqlQuery = "SELECT * FROM dong_phi WHERE id_dong_phi = ?";
-            PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
-            preparedStatement.setInt(1, Integer.parseInt(key));
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            DongPhi dongPhiMoi = new DongPhi();
-
-            while (resultSet.next()) {
-                dongPhiMoi.setIdDongPhi(resultSet.getInt("id_dong_phi"));
-                dongPhiMoi.setIdKhoanThuPhi(resultSet.getInt("id_khoan_thu_phi"));
-                dongPhiMoi.setSoHoKhau(resultSet.getString("so_ho_khau"));
-                dongPhiMoi.setSoTien(resultSet.getString("so_tien"));
-                dongPhiMoi.setDaDong(resultSet.getInt("da_dong"));
-                dongPhiMoi.setNgayDong(resultSet.getString("ngay_dong"));
-                dongPhiMoi.setPhiChungCu(resultSet.getInt("phi_chung_cu"));
-                System.out.println(dongPhiMoi);
-            }
-
-            dongPhi = dongPhiMoi;
-            System.out.println(dongPhi);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
-        }
-    }//GEN-LAST:event_tDongPhiMouseClicked
-
     private void btnTrinhBanGhiDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrinhBanGhiDongPhiMouseClicked
         // TODO add your handling code here:
-        displayDongPhi();
+        display();
     }//GEN-LAST:event_btnTrinhBanGhiDongPhiMouseClicked
 
-    private void btnThemDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemDongPhiMouseClicked
+    private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
         // TODO add your handling code here:
-        ThemDongPhiForm newForm = new ThemDongPhiForm();
-        newForm.setVisible(true);
-    }//GEN-LAST:event_btnThemDongPhiMouseClicked
-
-    private void btnSuaDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaDongPhiMouseClicked
-        // TODO add your handling code here:
-        if (dongPhi == null) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng trong bảng\n"
-                    + "để theo dõi thêm thông tin về đóng phí đó.");
-        } else {
-            SuaXoaDongPhiForm newForm = new SuaXoaDongPhiForm(dongPhi);
-            newForm.setVisible(true);
-        }
-    }//GEN-LAST:event_btnSuaDongPhiMouseClicked
+        try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+                String sqlQuery = "UPDATE chung_cu\n"
+                        + "SET loai_chung_cu = ? , \n"
+                        + "    dien_tich = ? \n"
+                        + "WHERE so_ho_khau = ?";
+                System.out.println(sqlQuery);
+                PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
+                preparedStatement.setString(1, cbLoaiChungCu.getSelectedItem().toString());
+                preparedStatement.setInt(2, Integer.parseInt(tfDienTich.getText()));
+                preparedStatement.setString(3, tfSoHoKhau.getText());
+                int row = preparedStatement.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi\n"
+                        + "Vui lòng kiểm tra lại trường thông tin ngày tháng theo định dạng yyyy-mm-dd\n"
+                        + "Hoặc điền đủ các trường thông tin cần thiết");
+            }
+    }//GEN-LAST:event_btnLuuMouseClicked
 
     private void btnTimDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimDongPhiMouseClicked
         // TODO add your handling code here:'
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
             st = conn.createStatement();
-            String sqlQuery = "SELECT "
-                    + "id_dong_phi AS 'ID Đóng Phí',"
-                    + "id_khoan_thu_phi AS 'ID Khoản Thu Phí',"
-                    + "so_ho_khau AS 'Số hộ khẩu',"
-                    + "so_tien AS 'Số tiền',"
-                    + "da_dong AS 'Đã đóng',"
-                    + "ngay_dong AS 'Ngày đóng'"
-                    + "FROM `dong_phi` "
-                    + "WHERE `so_ho_khau` LIKE ?";
+            String sqlQuery = "SELECT so_ho_khau AS 'Số hộ khẩu',"
+                    + "loai_chung_cu AS 'Loại chung cư',"
+                    + "dien_tich AS 'Diện tích'\n"
+            + "FROM `chung_cu` "
+            + "WHERE `so_ho_khau` LIKE ?";
             PreparedStatement ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, "%" + tfTimDongPhi.getText() + "%");
 
             rs = ps.executeQuery();
-            tDongPhi.setModel(DbUtils.resultSetToTableModel(rs));
+            tChungCu.setModel(DbUtils.resultSetToTableModel(rs));
 
             String sqlQuery1 = "SELECT SUM(CAST(so_tien AS UNSIGNED)) AS total_money_left FROM dong_phi WHERE so_ho_khau = ? AND da_dong = 0 GROUP BY so_ho_khau;";
             ps = conn.prepareStatement(sqlQuery1);
@@ -615,7 +426,7 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                 resultTotalMoney = rs.getInt("total_money_left");
             }
 
-            tfSoTienPhaiDong.setText("Số tiền còn phải đóng của hộ " + tfTimDongPhi.getText() + " là: " + String.valueOf(resultTotalMoney));
+//            tfSoTienPhaiDong.setText("Số tiền còn phải đóng của hộ " + tfTimDongPhi.getText() + " là: " + String.valueOf(resultTotalMoney));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -623,27 +434,54 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTimDongPhiMouseClicked
 
-    private void tfTimDongPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTimDongPhiActionPerformed
+    private void tChungCuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tChungCuMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfTimDongPhiActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tChungCu.getModel();
+        int indexRow = tChungCu.getSelectedRow();
+        key = String.valueOf(model.getValueAt(indexRow, 0).toString());
 
-    private void tfSoTienPhaiDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSoTienPhaiDongActionPerformed
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            String sqlQuery = "SELECT * FROM chung_cu WHERE so_ho_khau = '" + key + "'";
+            PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
+            System.out.println(sqlQuery);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                tfSoHoKhau.setText(resultSet.getString("so_ho_khau"));
+                cbLoaiChungCu.setSelectedItem(resultSet.getString("loai_chung_cu"));
+                tfDienTich.setText(String.valueOf(resultSet.getInt("dien_tich")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu");
+        }
+    }//GEN-LAST:event_tChungCuMouseClicked
+
+    private void cbLoaiChungCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLoaiChungCuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfSoTienPhaiDongActionPerformed
+    }//GEN-LAST:event_cbLoaiChungCuActionPerformed
 
-    private void displayKhoanPhi() {
+    private void lbChungCulbDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbChungCulbDongGopMouseClicked
+        // TODO add your handling code here:
+        ChungCuMainPage newMainPage = new ChungCuMainPage();
+        newMainPage.setVisible(true);
+        newMainPage.user = this.user;
+        this.dispose();
+    }//GEN-LAST:event_lbChungCulbDongGopMouseClicked
+
+    private void display() {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
             st = conn.createStatement();
-            String sql = "SELECT id_khoan_thu_phi AS 'ID Khoản Phí',"
-                    + "ten_khoan_thu_phi AS 'Tên Khoản Phí',"
-                    + "tien_phi AS 'Tiền Phí',"
-                    + "ngay_bat_dau AS 'Ngày Bắt Đầu',"
-                    + "ngay_ket_thuc AS 'Ngày kết thúc',"
-                    + "chi_tiet AS 'Chi tiết'"
-                    + "FROM khoan_thu_phi";
+            String sql = "SELECT so_ho_khau AS 'Số hộ khẩu',"
+                    + "loai_chung_cu AS 'Loại chung cư',"
+                    + "dien_tich AS 'Diện tích'\n"
+                    + "FROM chung_cu";
             rs = st.executeQuery(sql);
-            tKhoanPhi.setModel(DbUtils.resultSetToTableModel(rs));
+            tChungCu.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu: Không đọc được khoan_thu_phi");
@@ -651,25 +489,6 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         }
     }
 
-    private void displayDongPhi() {
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
-            st = conn.createStatement();
-            String sql = "SELECT "
-                    + "id_dong_phi AS 'ID Đóng Phí',"
-                    + "id_khoan_thu_phi AS 'ID Khoản Thu Phí',"
-                    + "so_ho_khau AS 'Số hộ khẩu',"
-                    + "so_tien AS 'Số tiền',"
-                    + "da_dong AS 'Đã đóng',"
-                    + "ngay_dong AS 'Ngày đóng'"
-                    + " FROM dong_phi";
-            rs = st.executeQuery(sql);
-            tDongPhi.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu: Không đọc được dong_phi");
-        }
-    }
 
     public void openFile(String file) {
         try {
@@ -696,14 +515,526 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KhoanPhiMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChungCuMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KhoanPhiMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChungCuMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KhoanPhiMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChungCuMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KhoanPhiMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChungCuMainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1220,34 +1551,31 @@ public class KhoanPhiMainPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KhoanPhiMainPage().setVisible(true);
+                new ChungCuMainPage().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSuaDongPhi;
-    private javax.swing.JButton btnSuaKhoanPhi;
-    private javax.swing.JButton btnThemDongPhi;
-    private javax.swing.JButton btnThemKhoanPhi;
+    private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnTimDongPhi;
-    private javax.swing.JButton btnTimKhoanPhi;
     private javax.swing.JButton btnTrinhBanGhiDongPhi;
-    private javax.swing.JButton btnTrinhBanGhiKhoanPhi;
+    private javax.swing.JComboBox<String> cbLoaiChungCu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel khoanPhiPanel;
+    private javax.swing.JLabel lbChungCu;
     private javax.swing.JLabel lbHoKhau;
     private javax.swing.JLabel lbNhanKhau;
     private javax.swing.JLabel lbThoat;
-    private javax.swing.JTable tDongPhi;
-    private javax.swing.JTable tKhoanPhi;
-    private javax.swing.JTextField tfSoTienPhaiDong;
+    private javax.swing.JTable tChungCu;
+    private javax.swing.JTextField tfDienTich;
+    private javax.swing.JTextField tfSoHoKhau;
     private javax.swing.JTextField tfTimDongPhi;
-    private javax.swing.JTextField tfTimKhoanPhi;
     // End of variables declaration//GEN-END:variables
 }
