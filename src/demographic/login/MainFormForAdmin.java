@@ -7,6 +7,7 @@ package demographic.login;
 import demographic.models.User;
 import demographic.login.Login;
 import demographic.quanlynhankhauhokhau.mainpage.HoKhauMainPage;
+import demographic.quanlythuphi.mainpage.KhoanPhiMainPage;
 
 /**
  *
@@ -99,6 +100,11 @@ public class MainFormForAdmin extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Quản lý thu chi");
         jButton2.setMargin(new java.awt.Insets(5, 14, 5, 14));
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -240,6 +246,14 @@ public class MainFormForAdmin extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        KhoanPhiMainPage newMainPage = new KhoanPhiMainPage();
+        newMainPage.setVisible(true);
+        newMainPage.user = this.user;
+        this.dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
