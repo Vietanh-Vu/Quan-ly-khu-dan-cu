@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2023 at 06:04 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Dec 25, 2023 at 05:15 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,23 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chung_cu`
+-- Table structure for table `dip_tang_thuong`
 --
 
-CREATE TABLE `chung_cu` (
-  `so_ho_khau` varchar(20) NOT NULL,
-  `loai_chung_cu` enum('cao_cap','thuong','gia_re') DEFAULT NULL,
-  `dien_tich` decimal(10,1) NOT NULL
+CREATE TABLE `dip_tang_thuong` (
+  `id_dip_tang_thuong` int(11) NOT NULL,
+  `thanh_tich` varchar(1024) NOT NULL,
+  `hoc_ky` varchar(1024) NOT NULL,
+  `ngay_tang_thuong` date NOT NULL,
+  `tong_so_tien` int(11) NOT NULL DEFAULT 0,
+  `so_cuon_vo` int(11) NOT NULL,
+  `gia_tien` int(11) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `chung_cu`
+-- Dumping data for table `dip_tang_thuong`
 --
 
-INSERT INTO `chung_cu` (`so_ho_khau`, `loai_chung_cu`, `dien_tich`) VALUES
-('SHK003', 'cao_cap', 150.0),
-('SHK001', 'thuong', 100.0),
-('SHK004', 'gia_re', 60.0);
+INSERT INTO `dip_tang_thuong` (`id_dip_tang_thuong`, `thanh_tich`, `hoc_ky`, `ngay_tang_thuong`, `tong_so_tien`, `so_cuon_vo`, `gia_tien`, `isDeleted`) VALUES
+(17, 'Gioi', '20102', '2023-12-25', 0, 5, 10000, 1);
 
 -- --------------------------------------------------------
 
@@ -126,6 +129,37 @@ CREATE TRIGGER `calculate_so_tien_dong_phi` BEFORE INSERT ON `dong_phi` FOR EACH
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hoc_sinh`
+--
+
+CREATE TABLE `hoc_sinh` (
+  `nhan_khau_id` int(11) NOT NULL,
+  `truong` varchar(1024) DEFAULT NULL,
+  `lop` varchar(1024) DEFAULT NULL,
+  `thanh_tich` varchar(1024) DEFAULT NULL,
+  `hoc_ky` varchar(10) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL DEFAULT 0,
+  `ho_ten` varchar(100) NOT NULL,
+  `so_ho_khau` varchar(1024) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hoc_sinh`
+--
+
+INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `hoc_ky`, `isDeleted`, `ho_ten`, `so_ho_khau`) VALUES
+(2, ' ', ' ', ' ', '20101', 1, 'Tran Thi B', ''),
+(2, ' ', ' ', ' ', '20102', 0, 'Tran Thi B', 'SHK001'),
+(9, ' ', ' ', ' ', '20101', 0, 'Le Thi I', ''),
+(9, ' ', ' ', ' ', '20102', 0, 'Le Thi I', 'SHK003'),
+(12, ' ', ' ', ' ', '20101', 0, 'Nguyen Thi M', ''),
+(12, ' ', ' ', ' ', '20102', 0, 'Nguyen Thi M', 'SHK003'),
+(18, ' ', ' ', ' ', '20101', 0, 'Nguyen Thi Y', ''),
+(18, ' ', ' ', ' ', '20102', 0, 'Nguyen Thi Y', 'SHK002');
 
 -- --------------------------------------------------------
 
@@ -245,6 +279,28 @@ INSERT INTO `khoan_thu_phi` (`id_khoan_thu_phi`, `ten_khoan_thu_phi`, `tien_phi`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ngan_quy_tang_thuong`
+--
+
+CREATE TABLE `ngan_quy_tang_thuong` (
+  `id_ngan_quy_tang_thuong` int(11) NOT NULL,
+  `so_tien_thay_doi` int(11) NOT NULL DEFAULT 0,
+  `ngay_thay_doi` date NOT NULL,
+  `tong_so_tien` int(11) NOT NULL DEFAULT 0,
+  `chi_tiet` varchar(1024) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ngan_quy_tang_thuong`
+--
+
+INSERT INTO `ngan_quy_tang_thuong` (`id_ngan_quy_tang_thuong`, `so_tien_thay_doi`, `ngay_thay_doi`, `tong_so_tien`, `chi_tiet`, `isDeleted`) VALUES
+(17, 0, '2023-12-25', 0, 'Thuong hoc sinh Gioi hoc ky 20102', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `nhan_khau`
 --
 
@@ -327,6 +383,20 @@ INSERT INTO `tam_vang` (`tam_vang_id`, `nhan_khau_id`, `ngay_bat_dau`, `ngay_ket
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tang_thuong`
+--
+
+CREATE TABLE `tang_thuong` (
+  `id_dip_tang_thuong` int(11) DEFAULT NULL,
+  `so_ho_khau` varchar(255) NOT NULL,
+  `hoc_ky` varchar(256) NOT NULL,
+  `chi_tiet_phan_qua` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`chi_tiet_phan_qua`)),
+  `isDeleted` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -351,10 +421,11 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `is_admin`, `password`) VAL
 --
 
 --
--- Indexes for table `chung_cu`
+-- Indexes for table `dip_tang_thuong`
 --
-ALTER TABLE `chung_cu`
-  ADD KEY `chung_cu_ibfk_1` (`so_ho_khau`);
+ALTER TABLE `dip_tang_thuong`
+  ADD PRIMARY KEY (`id_dip_tang_thuong`),
+  ADD UNIQUE KEY `thanh_tich` (`thanh_tich`,`hoc_ky`,`isDeleted`) USING HASH;
 
 --
 -- Indexes for table `dong_gop`
@@ -371,6 +442,13 @@ ALTER TABLE `dong_phi`
   ADD PRIMARY KEY (`id_dong_phi`),
   ADD KEY `dong_phi_ibfk_1` (`id_khoan_thu_phi`),
   ADD KEY `dong_phi_ibfk_2` (`so_ho_khau`);
+
+--
+-- Indexes for table `hoc_sinh`
+--
+ALTER TABLE `hoc_sinh`
+  ADD PRIMARY KEY (`nhan_khau_id`,`hoc_ky`),
+  ADD KEY `nhan_khau_id` (`nhan_khau_id`);
 
 --
 -- Indexes for table `ho_khau`
@@ -400,6 +478,12 @@ ALTER TABLE `khoan_thu_phi`
   ADD PRIMARY KEY (`id_khoan_thu_phi`);
 
 --
+-- Indexes for table `ngan_quy_tang_thuong`
+--
+ALTER TABLE `ngan_quy_tang_thuong`
+  ADD PRIMARY KEY (`id_ngan_quy_tang_thuong`);
+
+--
 -- Indexes for table `nhan_khau`
 --
 ALTER TABLE `nhan_khau`
@@ -415,6 +499,12 @@ ALTER TABLE `tam_vang`
   ADD KEY `so_CMND` (`so_CMND`);
 
 --
+-- Indexes for table `tang_thuong`
+--
+ALTER TABLE `tang_thuong`
+  ADD PRIMARY KEY (`so_ho_khau`,`hoc_ky`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -423,6 +513,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `dip_tang_thuong`
+--
+ALTER TABLE `dip_tang_thuong`
+  MODIFY `id_dip_tang_thuong` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `dong_gop`
@@ -483,12 +579,6 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `chung_cu`
---
-ALTER TABLE `chung_cu`
-  ADD CONSTRAINT `chung_cu_ibfk_1` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau` (`so_ho_khau`);
-
---
 -- Constraints for table `dong_gop`
 --
 ALTER TABLE `dong_gop`
@@ -501,6 +591,12 @@ ALTER TABLE `dong_gop`
 ALTER TABLE `dong_phi`
   ADD CONSTRAINT `dong_phi_ibfk_1` FOREIGN KEY (`id_khoan_thu_phi`) REFERENCES `khoan_thu_phi` (`id_khoan_thu_phi`),
   ADD CONSTRAINT `dong_phi_ibfk_2` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau` (`so_ho_khau`);
+
+--
+-- Constraints for table `hoc_sinh`
+--
+ALTER TABLE `hoc_sinh`
+  ADD CONSTRAINT `hoc_sinh_ibfk_1` FOREIGN KEY (`nhan_khau_id`) REFERENCES `nhan_khau` (`nhan_khau_id`);
 
 --
 -- Constraints for table `ho_khau`
