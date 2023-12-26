@@ -285,6 +285,7 @@ public class DanhSachTangThuong extends javax.swing.JFrame {
     private void btnTangThuongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTangThuongMouseClicked
         // TODO add your handling code here:
         DanhSachTangThuong newFrame = new DanhSachTangThuong();
+        newFrame.user = user;
         newFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTangThuongMouseClicked
@@ -292,6 +293,7 @@ public class DanhSachTangThuong extends javax.swing.JFrame {
     private void btnDipThuongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDipThuongMouseClicked
         // TODO add your handling code here:
         DanhSachDipThuong newFrame = new DanhSachDipThuong();
+        newFrame.user = user;
         newFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnDipThuongMouseClicked
@@ -299,6 +301,7 @@ public class DanhSachTangThuong extends javax.swing.JFrame {
     private void btnQuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuyMouseClicked
         // TODO add your handling code here:
         DanhSachQuy newFrame = new DanhSachQuy();
+        newFrame.user = user;
         newFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnQuyMouseClicked
@@ -306,6 +309,7 @@ public class DanhSachTangThuong extends javax.swing.JFrame {
     private void btnHocSinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHocSinhMouseClicked
         // TODO add your handling code here:
         DanhSachHocSinh newFrame = new DanhSachHocSinh();
+        newFrame.user = user;
         newFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHocSinhMouseClicked

@@ -312,6 +312,7 @@ public class DanhSachHocSinh extends javax.swing.JFrame {
     // Event click Tang Thuong
     private void btnTangThuongClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHoKhauMouseClicked
         DanhSachTangThuong newFrame = new DanhSachTangThuong();
+        newFrame.user = user;
         newFrame.setVisible(true);
         this.dispose();
     }
@@ -319,6 +320,7 @@ public class DanhSachHocSinh extends javax.swing.JFrame {
     // Event click Dip Thuong
     private void btnDipThuongClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHoKhauMouseClicked
         DanhSachDipThuong newFrame = new DanhSachDipThuong();
+        newFrame.user = user;
         newFrame.setVisible(true);
         this.dispose();
     }
@@ -326,6 +328,7 @@ public class DanhSachHocSinh extends javax.swing.JFrame {
     // Event click Hoc Sinh
     private void btnHocSinhClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHoKhauMouseClicked
         DanhSachHocSinh newFrame = new DanhSachHocSinh();
+        newFrame.user = user;
         newFrame.setVisible(true);
         this.dispose();
     }
@@ -333,6 +336,7 @@ public class DanhSachHocSinh extends javax.swing.JFrame {
     // Evene click Ngan Quy
     private void btnQuyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHoKhauMouseClicked
         DanhSachQuy newFrame = new DanhSachQuy();
+        newFrame.user = user;
         newFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTangThuongMouseClicked
