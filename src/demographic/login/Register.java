@@ -6,6 +6,7 @@ package demographic.login;
 
 //import com.sun.jdi.connect.spi.Connection;
 import demographic.login.MainFormForAdmin;
+import demographic.models.User;
 import java.sql.*;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JOptionPane;
@@ -17,11 +18,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Register extends javax.swing.JFrame {
 
+    public User user;
+    
     /**
      * Creates new form NhanKhau
      */
     public Register() {
         initComponents();
+        tfUsername.setText(user.getUserName());
+        displayPeople();
+    }
+    
+    public Register(User user) {
+        initComponents();
+        this.user = user;
+        tfUsername.setText(user.getUserName());
         displayPeople();
     }
 
@@ -46,15 +57,13 @@ public class Register extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         tfEmail = new javax.swing.JTextField();
         cbLaAdmin = new javax.swing.JComboBox<>();
-        btnTim = new javax.swing.JButton();
-        btnLuu = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tAccount = new javax.swing.JTable();
-        btnTim1 = new javax.swing.JButton();
         pfPassword = new javax.swing.JPasswordField();
         pfConfirmPassword = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,7 +99,7 @@ public class Register extends javax.swing.JFrame {
         );
 
         jLabel6.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel6.setText("Quản lý tải khoản");
+        jLabel6.setText("THÔNG TIN TÀI KHOẢN");
 
         jLabel8.setText("Username");
 
@@ -114,31 +123,7 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
-        cbLaAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
-
-        btnTim.setText("Tìm");
-        btnTim.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTimMouseClicked(evt);
-            }
-        });
-        btnTim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimActionPerformed(evt);
-            }
-        });
-
-        btnLuu.setText("Lưu");
-        btnLuu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLuuMouseClicked(evt);
-            }
-        });
-        btnLuu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLuuActionPerformed(evt);
-            }
-        });
+        cbLaAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", " " }));
 
         btnXoa.setText("Xóa");
         btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -183,17 +168,8 @@ public class Register extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tAccount);
 
-        btnTim1.setText("Trình bản ghi");
-        btnTim1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTim1MouseClicked(evt);
-            }
-        });
-        btnTim1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTim1ActionPerformed(evt);
-            }
-        });
+        jLabel7.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel7.setText("DANH SÁCH TÀI KHOẢN");
 
         javax.swing.GroupLayout nhanKhauPanelLayout = new javax.swing.GroupLayout(nhanKhauPanel);
         nhanKhauPanel.setLayout(nhanKhauPanelLayout);
@@ -203,9 +179,9 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                        .addGap(84, 84, 84)
                         .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(nhanKhauPanelLayout.createSequentialGroup()
+                                .addGap(84, 84, 84)
                                 .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,38 +189,37 @@ public class Register extends javax.swing.JFrame {
                                 .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
                                     .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
+                                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(pfConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbLaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nhanKhauPanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                                        .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel6))
-                                        .addGap(23, 23, 23))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nhanKhauPanelLayout.createSequentialGroup()
-                                        .addComponent(pfConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(cbLaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nhanKhauPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(285, 285, 285))
+                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
+                        .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                                .addComponent(btnTim1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(278, 278, 278)
+                                .addComponent(jLabel6))
+                            .addGroup(nhanKhauPanelLayout.createSequentialGroup()
+                                .addGap(246, 246, 246)
                                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 67, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nhanKhauPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         nhanKhauPanelLayout.setVerticalGroup(
             nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,36 +229,27 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(32, 32, 32)
                 .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
+                    .addComponent(jLabel8)
+                    .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbLaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pfConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(nhanKhauPanelLayout.createSequentialGroup()
-                        .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel9))
-                        .addGap(28, 28, 28)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addComponent(jLabel9)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTim)
-                    .addComponent(btnLuu)
+                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pfConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbLaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(nhanKhauPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSua)
-                    .addComponent(btnXoa)
-                    .addComponent(btnTim1))
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -302,32 +268,22 @@ public class Register extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTim1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTim1ActionPerformed
-
-    private void btnTim1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTim1MouseClicked
-        // TODO add your handling code here:
-        key = 0;
-        displayPeople();
-    }//GEN-LAST:event_btnTim1MouseClicked
-
     private void tAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tAccountMouseClicked
         DefaultTableModel model = (DefaultTableModel)tAccount.getModel();
         int indexRow = tAccount.getSelectedRow();
         key = Integer.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
             String query = "SELECT * FROM users where user_id = \"" + key + "\"";
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             
             while (resultSet.next()) {
-                tfUsername.setText(resultSet.getString("username"));
-                cbLaAdmin.setSelectedItem(resultSet.getString("isAdmin"));
-                tfEmail.setText(resultSet.getString("email"));
-                pfPassword.setText(resultSet.getString("password"));
-                pfConfirmPassword.setText(resultSet.getString("password"));
+//                tfUsername.setText(resultSet.getString("username"));
+//                cbLaAdmin.setSelectedItem(resultSet.getString("isAdmin"));
+//                tfEmail.setText(resultSet.getString("email"));
+//                pfPassword.setText(resultSet.getString("password"));
+//                pfConfirmPassword.setText(resultSet.getString("password"));
             }
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, e);
@@ -341,25 +297,27 @@ public class Register extends javax.swing.JFrame {
     // -------------------------- EDIT DATA --------------------------------
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
-        if (key == 0) {
-            JOptionPane.showMessageDialog(this, "Select a person to edit");
-        }
-        else if (key != 0 && pfPassword.getText().equals(pfConfirmPassword.getText())) {
+        
+        if ( pfPassword.getText().equals(pfConfirmPassword.getText())) {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
                 String query = "Update users Set "
                 + "username = ?, "
                 + "password = ?, "
                 + "email = ?, "
-                + "isAdmin = ? "
-                + "where user_id = \"" + key + "\"";
+                + "is_admin = ? "
+                + "where user_id = \"" + user.userId + "\"";
                 PreparedStatement update = conn.prepareStatement(query);
+                if (user.getUserName().equals("admin") && !tfUsername.getText().equals("admin")){
+                    JOptionPane.showMessageDialog(this, "Không thể sửa username tài khoản admin");
+                    return;
+                }
                 update.setString(1, tfUsername.getText());
                 update.setString(2, pfPassword.getText());
                 update.setString(4, cbLaAdmin.getSelectedItem().toString());
                 update.setString(3, tfEmail.getText());
                 int row = update.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Đã sửa thông tin của tài khoản!" + tfUsername.getText());
+                JOptionPane.showMessageDialog(this, "Đã sửa thông tin của tài khoản " + tfUsername.getText());
                 conn.close();
                 displayPeople();
                 clearAfterAdding();
@@ -380,87 +338,27 @@ public class Register extends javax.swing.JFrame {
     // ----------------- DELETE DATA ---------------
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
         // TODO add your handling code here:
-        if (key == 0) {
-            JOptionPane.showMessageDialog(this, "Select an account");
-        }
-        else {
+        
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-                String query = "Delete From users where user_id = \"" + key + "\"";
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                if (user.getUserName().equals("admin")){
+                    JOptionPane.showMessageDialog(this, "Không thể xóa tài khoản admin");
+                    return;
+                }
+                String query = "Delete From users where user_id = \"" + user.getUserId() + "\" AND username != 'admin' ";
+                System.out.print(query);
                 Statement deletePerson = conn.createStatement();
                 deletePerson.executeUpdate(query);
                 JOptionPane.showMessageDialog(this, "Deleted!");
-                displayPeople();
+                Login login = new Login();
+                login.setVisible(true);
+                this.dispose();
             } catch (Exception e){
-                JOptionPane.showMessageDialog(this, e);
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Không thể xóa tài khoản admin");
             }
-        }
+        
     }//GEN-LAST:event_btnXoaMouseClicked
-
-    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLuuActionPerformed
-
-    // ------------- Save the data --------------------
-    private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
-        // TODO add your handling code here:
-        if (tfUsername.getText().isEmpty() ||
-            tfEmail.getText().isEmpty() ||
-            pfPassword.getText().isEmpty() ||
-            pfConfirmPassword.getText().isEmpty() 
-            ) {
-            JOptionPane.showMessageDialog(this, "Missing information");
-        }
-        else if (pfPassword.getText().equals(pfConfirmPassword.getText())){
-            try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-                PreparedStatement add = conn.prepareStatement("INSERT INTO users (username, password, email, isAdmin) VALUES (?,?,?,?) ");
-                add.setString(1, tfUsername.getText());
-                add.setString(2,pfPassword.getText());
-                add.setString(3, tfEmail.getText());
-                add.setString(4, cbLaAdmin.getSelectedItem().toString());
-                int row = add.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Đã thêm " + tfUsername.getText());
-                conn.close();
-                displayPeople();
-                clearAfterAdding();
-            }
-            catch (Exception e){
-                JOptionPane.showMessageDialog(this, e);
-            }
-        }
-        else {
-            JOptionPane.showMessageDialog(this,
-                    "Confirm password does not match",
-                    "Try again",
-                    JOptionPane.ERROR_MESSAGE);            
-        }
-    }//GEN-LAST:event_btnLuuMouseClicked
-
-    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTimActionPerformed
-
-    private void btnTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimMouseClicked
-        // TODO add your handling code here:
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
-            st = conn.createStatement();
-
-            String username = tfUsername.getText();
-            String laAdmin = cbLaAdmin.getSelectedItem().toString();
-            String email = tfEmail.getText();
-            String sql = " SELECT user_id as 'User Id', username as 'Username', email as 'Email', isAdmin as 'La Admin' FROM users "+
-                "WHERE (username = \"" + username + "\" or \"\" = \"" + username + "\") " +
-                "AND (isAdmin = \"" + laAdmin + "\" or \"\" = \"" + laAdmin + "\") " +
-                "AND (email = \"" + email + "\" or \"\" = \"" + email + "\") ";
-            rs = st.executeQuery(sql) ;
-          
-            tAccount.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e) {
-
-        }
-    }//GEN-LAST:event_btnTimMouseClicked
 
     private void tfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsernameActionPerformed
         // TODO add your handling code here:
@@ -469,7 +367,23 @@ public class Register extends javax.swing.JFrame {
     // -------------------- BACK TO MAIN FORM ----------------------------
     private void lbThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbThoatMouseClicked
         // TODO add your handling code here:
-        new MainFormForAdmin().setVisible(true);
+        if(user.isAdmin == 1){
+            MainFormForAdmin mainForm = new MainFormForAdmin();
+            mainForm.setVisible(true);
+            mainForm.user = user;
+            this.dispose();
+        }
+        else if (user.isAdmin == 0) {
+            MainFormForUser mainForm = new MainFormForUser();
+            mainForm.setVisible(true);
+            mainForm.user = user;
+            this.dispose();
+        }
+        else {
+            MainFormForUser mainForm = new MainFormForUser();
+            mainForm.setVisible(true);
+            this.dispose();
+        }
         this.dispose();
     }//GEN-LAST:event_lbThoatMouseClicked
 
@@ -487,12 +401,12 @@ public class Register extends javax.swing.JFrame {
     // ------------- DISPLAY PEOPLE ---------------------
     private void displayPeople(){
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demographic","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
             st = conn.createStatement();
-            rs = st.executeQuery("SELECT user_id as 'User Id', username as 'Username', email as 'Email', isAdmin as 'La Admin' FROM users");
+            rs = st.executeQuery("SELECT user_id as 'User Id', username as 'Username', email as 'Email', is_admin as 'La Admin' FROM users");
             tAccount.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-            
+            e.printStackTrace();
         }
     }
     
@@ -553,16 +467,14 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnTim;
-    private javax.swing.JButton btnTim1;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbLaAdmin;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;

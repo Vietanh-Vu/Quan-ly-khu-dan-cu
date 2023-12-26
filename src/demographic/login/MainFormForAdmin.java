@@ -233,8 +233,9 @@ public class MainFormForAdmin extends javax.swing.JFrame {
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
+        Register newReg = new Register(user);
+        newReg.setVisible(true);
         this.dispose();
-        new Register().setVisible(true);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
