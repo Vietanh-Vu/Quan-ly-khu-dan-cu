@@ -21,7 +21,6 @@ public class ListOfNganQuy {
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(selectQuery);
-            NganQuyTangThuong.setTongSoTien(NganQuyTangThuong.getSoTienBanDau());
             while (resultSet.next()) {
                 NganQuyTangThuong nganQuyTangThuong = new NganQuyTangThuong(
                         resultSet.getInt("id_ngan_quy_tang_thuong"),
@@ -29,8 +28,12 @@ public class ListOfNganQuy {
                         resultSet.getString("ngay_thay_doi"),
                         resultSet.getString("chi_tiet"),
                         NganQuyTangThuong.getTongSoTien(),
+                        resultSet.getInt("so_tien_ban_dau"),
                         resultSet.getBoolean("isDeleted")
                         );
+                if (nganQuyTangThuongList.isEmpty()) {
+                    NganQuyTangThuong.setTongSoTien(NganQuyTangThuong.getSoTienBanDau());
+                }
                 if (!nganQuyTangThuong.isDeleted()) {
                     NganQuyTangThuong.setTongSoTien(NganQuyTangThuong.getTongSoTien()
                         - nganQuyTangThuong.getSoTienThayDoi());

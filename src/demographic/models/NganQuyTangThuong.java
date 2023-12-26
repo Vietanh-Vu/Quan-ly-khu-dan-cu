@@ -31,12 +31,13 @@ public class NganQuyTangThuong implements DBActing{
     }
 
     public NganQuyTangThuong(int idNganQuyTangThuong, int soTienThayDoi, String ngayThayDoi,
-                             String chiTiet, int tongSoTien, boolean isDeleted) {
+                             String chiTiet, int tongSoTien, int soTienBanDau, boolean isDeleted) {
         this.idNganQuyTangThuong = idNganQuyTangThuong;
         this.soTienThayDoi = soTienThayDoi;
         this.ngayThayDoi = ngayThayDoi;
         this.chiTiet = chiTiet;
         NganQuyTangThuong.tongSoTien = tongSoTien;
+        NganQuyTangThuong.soTienBanDau = soTienBanDau;
         this.isDeleted = isDeleted;
     }
 
@@ -53,14 +54,16 @@ public class NganQuyTangThuong implements DBActing{
                     "  `so_tien_thay_doi`,\n" +
                     "  `ngay_thay_doi`,\n" +
                     "  `tong_so_tien`,\n" +
-                    "  `chi_tiet`\n" +
+                    "  `chi_tiet`,\n" +
+                    "   `so_tien_ban_dau`\n" +
                     ") VALUES (\n" +
                     "   " + idNganQuyTangThuong +
                     ",  " + this.getSoTienThayDoi() +
                     ", '" + this.getNgayThayDoi() +
                     "', " + tongSoTien +
                     ", '" + this.getChiTiet() +
-                    "');\n";
+                    "', " + soTienBanDau +
+                    ");\n";
 
             PreparedStatement add = connection.prepareStatement(insertQuery);
             int row = add.executeUpdate();
@@ -83,11 +86,12 @@ public class NganQuyTangThuong implements DBActing{
 
             String updateQuery = "UPDATE `ngan_quy_tang_thuong`\n" +
                     "SET\n" +
-                    "`so_tien_thay_doi` = " + soTienThayDoi +
-                    ", `tong_so_tien` = " + tongSoTien +
-                    ", `chi_tiet` = '" + chiTiet +
-                    "'WHERE\n" +
-                    "`id_ngan_quy_tang_thuong` = " + idNganQuyTangThuong + ";";
+                    "   `so_tien_thay_doi` = " + soTienThayDoi +
+                    ",  `tong_so_tien` = " + tongSoTien +
+                    ",  `chi_tiet` = '" + chiTiet +
+                    "', `so_tien_ban_dau` = " + soTienBanDau +
+                    "   WHERE\n" +
+                    "   `id_ngan_quy_tang_thuong` = " + idNganQuyTangThuong + ";";
 
             PreparedStatement edit = connection.prepareStatement(updateQuery);
             int row = edit.executeUpdate();

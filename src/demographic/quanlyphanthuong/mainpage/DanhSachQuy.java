@@ -8,6 +8,7 @@ import demographic.login.MainFormForAdmin;
 import demographic.models.ListOfNganQuy;
 import demographic.models.NganQuyTangThuong;
 import demographic.models.User;
+import demographic.quanlyphanthuong.themform.ThemTien;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -50,12 +51,22 @@ public class DanhSachQuy extends javax.swing.JFrame {
         tQuy = new javax.swing.JTable();
         lbTongTien = new javax.swing.JLabel();
         tfTongTien = new javax.swing.JTextField();
+        btnThemBot = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(828, 449));
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+
+        btnThemBot.setBackground(new java.awt.Color(0, 51, 51));
+        btnThemBot.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemBot.setText("Thêm/Bớt ngân quỹ");
+        btnThemBot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnThemBotMouseClicked(evt);
+            }
+        });
 
         btnTangThuong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnTangThuong.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,6 +185,8 @@ public class DanhSachQuy extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnThemBot)
+                        .addGap(30, 30, 30)
                         .addComponent(lbTongTien)
                         .addGap(18, 18, 18)
                         .addComponent(tfTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,6 +201,7 @@ public class DanhSachQuy extends javax.swing.JFrame {
                 .addComponent(Danh_sach_quy_title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThemBot)
                     .addComponent(lbTongTien)
                     .addComponent(tfTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -214,6 +228,12 @@ public class DanhSachQuy extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemBotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTangThuongMouseClicked
+        // TODO add your handling code here:
+        ThemTien newForm = new ThemTien(listOfNganQuy);
+        newForm.setVisible(true);
+    }
 
     private void btnTangThuongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTangThuongMouseClicked
         // TODO add your handling code here:
@@ -317,5 +337,6 @@ public class DanhSachQuy extends javax.swing.JFrame {
     private javax.swing.JLabel lbTongTien;
     private javax.swing.JTable tQuy;
     private javax.swing.JTextField tfTongTien;
+    private JButton btnThemBot;
     // End of variables declaration//GEN-END:variables
 }
