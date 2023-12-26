@@ -7,6 +7,7 @@ package demographic.quanlyphanthuong.mainpage;
 import demographic.login.MainFormForAdmin;
 import demographic.models.ListOfNganQuy;
 import demographic.models.NganQuyTangThuong;
+import demographic.models.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DanhSachQuy extends javax.swing.JFrame {
     private ListOfNganQuy listOfNganQuy = new ListOfNganQuy();
+    public User user;
+
     /**
      * Creates new form Danh_sach_quy
      */
@@ -242,6 +245,7 @@ public class DanhSachQuy extends javax.swing.JFrame {
 
     private void btnThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThoatMouseClicked
         MainFormForAdmin newForm = new MainFormForAdmin();
+        newForm.user = user;
         newForm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnThoatMouseClicked

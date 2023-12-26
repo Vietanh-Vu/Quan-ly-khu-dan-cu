@@ -17,6 +17,7 @@ import demographic.textHandle.WriteMapToText;
  */
 public class DanhSachTangThuong extends javax.swing.JFrame {
     private ListOfTangThuong listOfTangThuong = new ListOfTangThuong();
+    public User user;
     /**
      * Creates new form Danh_sach_phan_thuong
      */
@@ -311,6 +312,7 @@ public class DanhSachTangThuong extends javax.swing.JFrame {
 
     private void btnThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThoatMouseClicked
         MainFormForAdmin newForm = new MainFormForAdmin();
+        newForm.user = user;
         newForm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnThoatMouseClicked

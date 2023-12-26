@@ -228,6 +228,7 @@ public class MainFormForAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (user.getIsAdmin() == 1) {
             DanhSachDipThuong newForm = new DanhSachDipThuong();
+            newForm.user = user;
             newForm.setVisible(true);
             this.dispose();
         }

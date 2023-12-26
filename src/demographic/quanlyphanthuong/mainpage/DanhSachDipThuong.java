@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import demographic.login.MainFormForAdmin;
 import demographic.models.DipTangThuong;
 import demographic.models.ListOfDipTangThuong;
+import demographic.models.User;
 import demographic.quanlyphanthuong.suaForm.SuaDipThuong;
 import demographic.quanlyphanthuong.themform.ThemDipThuong;
 import demographic.textHandle.WriteMapToText;
@@ -25,6 +26,7 @@ public class DanhSachDipThuong extends javax.swing.JFrame {
     private int dipThuongID = -1;
     private String HocKy = "";
     private String thanhTich = "";
+    public User user;
     /**
      * Creates new form Danh_sach_dip_thuong
      */
@@ -411,6 +413,7 @@ public class DanhSachDipThuong extends javax.swing.JFrame {
     private void btnThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThoatMouseClicked
         // TODO add your handling code here:
         MainFormForAdmin newForm = new MainFormForAdmin();
+        newForm.user = user;
         newForm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnThoatMouseClicked

@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import demographic.login.MainFormForAdmin;
 import demographic.models.HocSinh;
 import demographic.models.ListOfHocSinh;
+import demographic.models.User;
 import demographic.quanlyphanthuong.suaForm.SuaHocSinh;
 import demographic.quanlyphanthuong.themform.ThemDipThuongHocSinh;
 
@@ -23,6 +24,7 @@ public class DanhSachHocSinh extends javax.swing.JFrame {
     private int nhanKhauId = -1;
     private String dipThuong = "";
     private HocSinh hocSinh = null;
+    public User user;
 
     /**
      * Creates new form Danh_sach_hoc_sinh
@@ -338,6 +340,7 @@ public class DanhSachHocSinh extends javax.swing.JFrame {
     // Event click Thoat
     private void btnThoatClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHoKhauMouseClicked
         MainFormForAdmin newForm = new MainFormForAdmin();
+        newForm.user = user;
         newForm.setVisible(true);
         this.dispose();
     }
