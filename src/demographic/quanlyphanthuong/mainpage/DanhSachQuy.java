@@ -77,7 +77,7 @@ public class DanhSachQuy extends javax.swing.JFrame {
 
         btnQuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnQuy.setForeground(new java.awt.Color(255, 255, 255));
-        btnQuy.setText("Quỹ");
+        btnQuy.setText("Ngân Quỹ");
         btnQuy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnQuyMouseClicked(evt);
