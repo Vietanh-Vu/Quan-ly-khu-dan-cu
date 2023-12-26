@@ -7,9 +7,9 @@ public class ReadMapFromText {
     public static Map<String, Integer> readMapFromText(String text) {
         Map<String, Integer> map = new HashMap<>();
 
-        String[] pairs = text.split(", ");
+        String[] pairs = text.split(",");
         for (String pair : pairs) {
-            String[] parts = pair.split(": ");
+            String[] parts = pair.split(":");
             if (parts.length == 2) {
                 String key = parts[0].trim();
                 int value = Integer.parseInt(parts[1].trim());
