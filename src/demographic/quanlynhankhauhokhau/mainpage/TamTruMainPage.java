@@ -5,6 +5,7 @@
 package demographic.quanlynhankhauhokhau.mainpage;
 
 //import com.sun.jdi.connect.spi.Connection;
+import demographic.dbConnector.Connector;
 import demographic.quanlynhankhauhokhau.suaxoaform.SuaXoaTamTruForm;
 import demographic.quanlynhankhauhokhau.suaxoaform.SuaXoaTamVangForm;
 import demographic.quanlynhankhauhokhau.themform.ThemTamVangForm;
@@ -412,7 +413,7 @@ public class TamTruMainPage extends javax.swing.JFrame {
         int indexRow = tTamTru.getSelectedRow();
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             String query = "SELECT * FROM tam_tru where tam_tru_id = " + key + "";
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -459,7 +460,7 @@ public class TamTruMainPage extends javax.swing.JFrame {
     private void btnTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimMouseClicked
         // TODO add your handling code here:
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String thongTin = tfTim.getText();
             String sql = "SELECT \n" +
@@ -588,7 +589,7 @@ public class TamTruMainPage extends javax.swing.JFrame {
     // ------------- DISPLAY PEOPLE ---------------------
     private void displayTamTru(){
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sql = "SELECT \n" +
                     "    tam_tru_id AS 'ID Tạm trú',\n" +

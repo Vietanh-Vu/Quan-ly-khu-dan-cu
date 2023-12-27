@@ -5,6 +5,7 @@
 package demographic.quanlynhankhauhokhau.themform;
 
 //import com.sun.jdi.connect.spi.Connection;
+import demographic.dbConnector.Connector;
 import demographic.models.User;
 import demographic.login.MainFormForAdmin;
 import demographic.login.MainFormForUser;
@@ -637,7 +638,7 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
         }
         else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                conn = Connector.getConnection();
                 
                 // ----- thêm chủ hộ vào nhân khẩu -----
                 String sql = "INSERT INTO nhan_khau (ho_ten, biet_danh, gioi_tinh, ngay_sinh, "
@@ -710,7 +711,7 @@ public class ThemHoKhauForm extends javax.swing.JFrame {
             catch (Exception e){
                 try {
                     // ------------ xóa những gì mới cập nhật -----------------
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                    conn = Connector.getConnection();
                     
                     String sql = "DELETE FROM nhan_khau WHERE so_CMND = ?";
                     PreparedStatement add = conn.prepareStatement(sql);

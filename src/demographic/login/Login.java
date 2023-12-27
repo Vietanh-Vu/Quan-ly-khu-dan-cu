@@ -4,6 +4,7 @@
  */
 package demographic.login;
 
+import demographic.dbConnector.Connector;
 import demographic.models.User;
 import javax.swing.JOptionPane;
 import java.sql.*;
@@ -225,7 +226,7 @@ public class Login extends javax.swing.JFrame {
         final String PASSWORD = "";
 
         try {
-            Connection conn = DriverManager.getConnection(DB_URL,USER_NAME,PASSWORD);
+            Connection conn = Connector.getConnection();
             // Connect successfully
             Statement stmt = conn.createStatement();
             String sql = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";

@@ -4,6 +4,8 @@
  */
 package demographic.quanlynhankhauhokhau.suaxoaform;
 
+import demographic.dbConnector.Connector;
+import demographic.dbConnector.Connector;
 import demographic.models.HoKhau;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -428,7 +430,7 @@ public class TachHoKhauForm extends javax.swing.JFrame {
         }
         else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                conn = Connector.getConnection();
                 
                 // ----- thêm chủ hộ vào nhân khẩu -----
                 
@@ -503,7 +505,7 @@ public class TachHoKhauForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String hoTen = cbNhanKhau.getSelectedItem().toString();
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sql ="SELECT * FROM nhan_khau\n"
                     + " WHERE so_ho_khau = \'" + hoKhau.getSoHoKhau() + "\'\n"
@@ -551,7 +553,7 @@ public class TachHoKhauForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String hoTen = cbNhanKhau.getSelectedItem().toString();
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sql ="SELECT * FROM nhan_khau\n"
                     + " WHERE so_ho_khau = \'" + hoKhau.getSoHoKhau() + "\'\n"
@@ -642,7 +644,7 @@ public class TachHoKhauForm extends javax.swing.JFrame {
     
     private void getNhanKhau() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sql ="SELECT * FROM nhan_khau\n"
                     + " WHERE so_ho_khau = \'" + hoKhau.getSoHoKhau() + "\'\n"
@@ -662,7 +664,7 @@ public class TachHoKhauForm extends javax.swing.JFrame {
     
     private void getNhanKhauCMND() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sql ="SELECT * FROM nhan_khau\n"
                     + " WHERE so_ho_khau = \'" + hoKhau.getSoHoKhau() + "\'\n"

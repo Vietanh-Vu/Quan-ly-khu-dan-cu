@@ -5,6 +5,7 @@
 package demographic.quanlythuphi.mainpage;
 
 //import com.sun.jdi.connect.spi.Connection;
+import demographic.dbConnector.Connector;
 import demographic.models.*;
 import demographic.models.User;
 import demographic.login.MainFormForAdmin;
@@ -48,7 +49,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
 
     private void displayKhoanDongGop() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sql = "SELECT "
                     + "id_khoan_dong_gop AS 'ID Khoản Đóng Góp',"
@@ -68,7 +69,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
 
     private void displayDongGop() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sql = "SELECT "
                     + "id_dong_gop AS 'ID Đóng Góp',"
@@ -436,7 +437,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            conn = Connector.getConnection();
             String sqlQuery = "SELECT * FROM khoan_dong_gop WHERE id_khoan_dong_gop = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
             preparedStatement.setInt(1, Integer.parseInt(key));
@@ -478,7 +479,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
     private void btnTimKhoanDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKhoanDongGopMouseClicked
         // TODO add your handling code here:
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            conn = Connector.getConnection();
             String sqlQuery = "SELECT "
                     + "id_khoan_dong_gop AS 'ID Khoản Đóng Góp',"
                     + "ten_khoan_dong_gop AS 'Tên Khoản Đóng Góp',"
@@ -551,7 +552,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            conn = Connector.getConnection();
             String sqlQuery = "SELECT * FROM dong_gop WHERE id_dong_gop = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
             preparedStatement.setInt(1, Integer.parseInt(key));
@@ -603,7 +604,7 @@ public class KhoanDongGopMainPage extends javax.swing.JFrame {
     private void btnTimDongGopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimDongGopMouseClicked
         // TODO add your handling code here:
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sqlQuery = "SELECT "
                     + "id_dong_gop AS 'ID Đóng Góp',"
