@@ -60,6 +60,11 @@ public class HocSinh implements DBActing {
             int row = add.executeUpdate();
 
             // --- thêm một đoạn dialog báo thêm thành công ở đây
+            
+            ListOfDipTangThuong listOfDipTangThuong = new ListOfDipTangThuong();
+            for (DipTangThuong dipTangThuong: listOfDipTangThuong.getDipTangThuongList()) {
+                dipTangThuong.editRow();
+            }
 
             add.close();
             connection.close();
@@ -92,6 +97,10 @@ public class HocSinh implements DBActing {
 
             edit.close();
             connection.close();
+            ListOfDipTangThuong listOfDipTangThuong = new ListOfDipTangThuong();
+            for (DipTangThuong dipTangThuong: listOfDipTangThuong.getDipTangThuongList()) {
+                dipTangThuong.editRow();
+            }
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,6 +130,10 @@ public class HocSinh implements DBActing {
 
             edit.close();
             connection.close();
+            ListOfDipTangThuong listOfDipTangThuong = new ListOfDipTangThuong();
+            for (DipTangThuong dipTangThuong: listOfDipTangThuong.getDipTangThuongList()) {
+                dipTangThuong.editRow();
+            }
             return true;
         } catch (Exception e) {
             e.printStackTrace();
