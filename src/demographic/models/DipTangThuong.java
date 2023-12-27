@@ -68,6 +68,7 @@ public class DipTangThuong implements DBActing {
         try {
             Connection connection = Connector.getConnection();
 
+            thanhTich = dipThuong.matches("^\\d{5}$") ? thanhTich : dipThuong;
             listOfHocSinh = filter(new ListOfHocSinh());
             tongSoPhanQua = listOfHocSinh.size();
             calculateTongSoTien();
@@ -137,6 +138,7 @@ public class DipTangThuong implements DBActing {
         try {
             Connection connection = Connector.getConnection();
 
+            thanhTich = dipThuong.matches("^\\d{5}$") ? thanhTich : dipThuong;
             listOfHocSinh = filter(new ListOfHocSinh());
             tongSoPhanQua = listOfHocSinh.size();
 //            for (HocSinh hocSinh: listOfHocSinh) {
