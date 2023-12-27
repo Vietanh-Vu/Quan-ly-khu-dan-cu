@@ -354,7 +354,7 @@ public class ChungCuMainPage extends javax.swing.JFrame {
 
     private void IbDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IbDongPhiMouseClicked
         // TODO add your handling code here:
-        ChungCuMainPage newFrame = new ChungCuMainPage();
+        KhoanPhiMainPage newFrame = new KhoanPhiMainPage();
         newFrame.setVisible(true);
         newFrame.user = user;
         this.dispose();
