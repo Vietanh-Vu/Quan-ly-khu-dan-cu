@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class DipTangThuong implements DBActing {
     // Attribute
@@ -202,7 +203,8 @@ public class DipTangThuong implements DBActing {
 
             String updateQuery = "UPDATE `dip_tang_thuong`\n" +
                     "SET\n" +
-                    "  `isDeleted` = " + (isDeleted ? 1 : 0) +
+                    "  `hoc_ky` = '" + idDipTangThuong +
+                    "' `isDeleted` = " + (isDeleted ? 1 : 0) +
                     " WHERE\n" +
                     "  `id_dip_tang_thuong` = " + idDipTangThuong + ";";
 
