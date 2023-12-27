@@ -4,6 +4,7 @@
  */
 package demographic.quanlynhankhauhokhau.themform;
 
+import demographic.dbConnector.Connector;
 import demographic.models.HoKhau;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -382,7 +383,7 @@ public class ThemTamTruForm extends javax.swing.JFrame {
         }
         else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                Connection conn = Connector.getConnection();
                                 
                 String sql = "INSERT INTO tam_tru (ho_ten, ngay_sinh, so_CMND, ngay_cap, noi_cap, gioi_tinh, dia_chi_thuong_tru, cho_o_hien_tai, ly_do, ngay_tam_tru)\n" +
                         "VALUES \n" +

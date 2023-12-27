@@ -4,6 +4,7 @@
  */
 package demographic.quanlynhankhauhokhau.suaxoaform;
 
+import demographic.dbConnector.Connector;
 import demographic.models.HoKhau;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -206,7 +207,7 @@ public class DinhChinhForm extends javax.swing.JFrame {
     private void btnTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimMouseClicked
         // TODO add your handling code here:
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String thongTin = tfSoHoKhau.getText();
             String sql = "SELECT\n" +
@@ -255,7 +256,7 @@ public class DinhChinhForm extends javax.swing.JFrame {
             + "Nếu xóa, bạn sẽ xóa cả dữ liệu nhân khẩu của hộ!", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION){
             try{
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                conn = Connector.getConnection();
                 String sql = "UPDATE ho_khau "
                 + "SET deleted = 1\n "
                 + "WHERE ho_khau_id = " + hoKhau.getHoKhauId() + ";";
@@ -308,7 +309,7 @@ public class DinhChinhForm extends javax.swing.JFrame {
     // ---------------- display thông tin nhân khẩu của hộ --------
     private void display(){
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sql = "SELECT\n" +
                     "  `ho_khau_log`.`so_ho_khau` AS 'Số hộ khẩu',\n" +

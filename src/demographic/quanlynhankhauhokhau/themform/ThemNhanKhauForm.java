@@ -4,6 +4,7 @@
  */
 package demographic.quanlynhankhauhokhau.themform;
 
+import demographic.dbConnector.Connector;
 import demographic.models.HoKhau;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -591,7 +592,7 @@ public class ThemNhanKhauForm extends javax.swing.JFrame {
         }
         else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                Connection conn = Connector.getConnection();
                 
                 // ----- thêm chủ hộ vào nhân khẩu -----
                 String ngayCap = "";

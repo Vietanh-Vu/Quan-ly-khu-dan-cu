@@ -4,6 +4,7 @@
  */
 package demographic.quanlythuphi.themform;
 
+import demographic.dbConnector.Connector;
 import javax.swing.JOptionPane;
 import java.sql.*;
 
@@ -283,7 +284,7 @@ public class ThemKhoanPhiForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng điền đủ các trường thông tin");
         } else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+                conn = Connector.getConnection();
                 String sqlQuery = "INSERT INTO `khoan_thu_phi` "
                         + "(`ten_khoan_thu_phi`, `tien_phi`, `ngay_bat_dau`, `ngay_ket_thuc`, `chi_tiet`, `loai_phi`)"
                         + "VALUES (?, ?, ?, ?, ?, ?)";

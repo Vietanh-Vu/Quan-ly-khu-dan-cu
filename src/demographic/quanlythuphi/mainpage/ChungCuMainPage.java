@@ -5,6 +5,8 @@
 package demographic.quanlythuphi.mainpage;
 
 //import com.sun.jdi.connect.spi.Connection;
+
+import demographic.dbConnector.Connector;
 import demographic.models.User;
 import demographic.login.MainFormForAdmin;
 import demographic.login.MainFormForUser;
@@ -376,7 +378,7 @@ public class ChungCuMainPage extends javax.swing.JFrame {
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
         // TODO add your handling code here:
         try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+                Connection conn = Connector.getConnection();
                 String sqlQuery = "UPDATE chung_cu\n"
                         + "SET loai_chung_cu = ? , \n"
                         + "    dien_tich = ? \n"
@@ -399,7 +401,7 @@ public class ChungCuMainPage extends javax.swing.JFrame {
     private void btnTimDongPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimDongPhiMouseClicked
         // TODO add your handling code here:'
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sqlQuery = "SELECT so_ho_khau AS 'Số hộ khẩu',"
                     + "loai_chung_cu AS 'Loại chung cư',"
@@ -436,7 +438,7 @@ public class ChungCuMainPage extends javax.swing.JFrame {
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            conn = Connector.getConnection();
             String sqlQuery = "SELECT * FROM chung_cu WHERE so_ho_khau = '" + key + "'";
             PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
             System.out.println(sqlQuery);
@@ -469,7 +471,7 @@ public class ChungCuMainPage extends javax.swing.JFrame {
 
     private void display() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             String sql = "SELECT so_ho_khau AS 'Số hộ khẩu',"
                     + "loai_chung_cu AS 'Loại chung cư',"

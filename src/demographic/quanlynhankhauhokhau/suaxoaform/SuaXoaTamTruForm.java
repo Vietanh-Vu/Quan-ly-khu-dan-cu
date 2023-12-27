@@ -4,6 +4,7 @@
  */
 package demographic.quanlynhankhauhokhau.suaxoaform;
 
+import demographic.dbConnector.Connector;
 import demographic.models.HoKhau;
 import demographic.models.TamTru;
 import javax.swing.JOptionPane;
@@ -410,7 +411,7 @@ public class SuaXoaTamTruForm extends javax.swing.JFrame {
         }
         else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                Connection conn = Connector.getConnection();
                                 
                 String sql = "UPDATE tam_tru " +
                 "SET ho_ten = '" + tfHoTen.getText() + "', " +
@@ -464,7 +465,7 @@ public class SuaXoaTamTruForm extends javax.swing.JFrame {
                 , "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION){
             try{
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                Connection conn = Connector.getConnection();
                 String sql = "UPDATE tam_tru "
                         + "SET deleted = 1\n "
                         + "WHERE tam_tru_id = " + tamTru.getTamTruId()+ ";"; 
