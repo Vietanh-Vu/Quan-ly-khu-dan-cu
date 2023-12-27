@@ -4,6 +4,7 @@
  */
 package demographic.quanlynhankhauhokhau.suaxoaform;
 
+import demographic.dbConnector.Connector;
 import demographic.models.HoKhau;
 import demographic.models.KhaiTu;
 import demographic.models.TamTru;
@@ -322,7 +323,7 @@ public class SuaXoaKhaiTuForm extends javax.swing.JFrame {
         }
         else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                Connection conn = Connector.getConnection();
                                 
                 String sql = "UPDATE khai_tu\n" +
                         "SET ly_do = '" + tfLyDo.getText() + "',"
@@ -368,7 +369,7 @@ public class SuaXoaKhaiTuForm extends javax.swing.JFrame {
                 , "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION){
             try{
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                Connection conn = Connector.getConnection();
                 String sql = "UPDATE khai_tu "
                         + "SET deleted = 1\n "
                         + "WHERE khai_tu_id = " + khaiTu.getKhaiTuId()+ ";"; 
@@ -402,7 +403,7 @@ public class SuaXoaKhaiTuForm extends javax.swing.JFrame {
         tfLyDo.setText(khaiTu.getLyDo());
         
          try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            Connection conn = Connector.getConnection();
             Statement st = conn.createStatement();
             String sql = "SELECT \n" +
                         "    kt.khai_tu_id,\n" +

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Dec 27, 2023 at 01:10 AM
+-- Generation Time: Dec 27, 2023 at 02:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -51,7 +51,7 @@ INSERT INTO `chung_cu` (`so_ho_khau`, `loai_chung_cu`, `dien_tich`) VALUES
 CREATE TABLE `dip_tang_thuong` (
   `id_dip_tang_thuong` int(11) NOT NULL,
   `thanh_tich` varchar(1024) NOT NULL,
-  `hoc_ky` varchar(1024) NOT NULL,
+  `dip_thuong` varchar(1024) NOT NULL,
   `ngay_tang_thuong` date NOT NULL,
   `chi_tiet` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`chi_tiet`)),
   `tong_so_tien` int(11) NOT NULL DEFAULT 0,
@@ -62,10 +62,12 @@ CREATE TABLE `dip_tang_thuong` (
 -- Dumping data for table `dip_tang_thuong`
 --
 
-INSERT INTO `dip_tang_thuong` (`id_dip_tang_thuong`, `thanh_tich`, `hoc_ky`, `ngay_tang_thuong`, `chi_tiet`, `tong_so_tien`, `isDeleted`) VALUES
+INSERT INTO `dip_tang_thuong` (`id_dip_tang_thuong`, `thanh_tich`, `dip_thuong`, `ngay_tang_thuong`, `chi_tiet`, `tong_so_tien`, `isDeleted`) VALUES
 (30, 'Trung bình', '20101', '2023-12-26', '{\"5 cuon vo\":50000}', 50000, 0),
-(31, 'Tết thiếu nhi 2010', 'Tết thiếu nhi 2010', '2023-12-26', '{\"1 gói bim bim\":5000,\"1 cái kẹo\":3000}', 0, 0),
-(32, 'Tết thiếu nhi 2009', 'Tết thiếu nhi 2009', '2023-12-26', '{\"1 gói bim bim\":6000,\"1 cái kẹo\":3000}', 63000, 0);
+(31, 'Giỏi', '20101', '2023-12-26', '{\"1 gói bim bim\":5000,\"1 cái kẹo\":3000}', 0, 0),
+(32, 'Tết thiếu nhi 2009', 'Tết thiếu nhi 2009', '2023-12-26', '{\"1 gói bim bim\":6000,\"1 cái kẹo\":3000}', 63000, 0),
+(33, '', 'Noel 2005', '2023-12-27', '{\"qch\":10000}', 150000, 0),
+(34, 'Trung thu 2006', 'Trung thu 2006', '2023-12-27', '{\"qch\":10000}', 140000, 0);
 
 -- --------------------------------------------------------
 
@@ -179,7 +181,7 @@ CREATE TABLE `hoc_sinh` (
   `truong` varchar(1024) DEFAULT NULL,
   `lop` varchar(1024) DEFAULT NULL,
   `thanh_tich` varchar(1024) DEFAULT NULL,
-  `hoc_ky` varchar(255) NOT NULL,
+  `dip_thuong` varchar(255) NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0,
   `ho_ten` varchar(100) NOT NULL,
   `so_ho_khau` varchar(1024) NOT NULL
@@ -189,15 +191,17 @@ CREATE TABLE `hoc_sinh` (
 -- Dumping data for table `hoc_sinh`
 --
 
-INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `hoc_ky`, `isDeleted`, `ho_ten`, `so_ho_khau`) VALUES
+INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `dip_thuong`, `isDeleted`, `ho_ten`, `so_ho_khau`) VALUES
 (1, ' ', ' ', ' ', '20001', 0, 'Nguyen Van A', 'SHK001'),
 (1, ' ', ' ', ' ', '20051', 0, 'Nguyen Van A', 'SHK001'),
+(1, ' ', ' ', ' ', 'Noel 2005', 0, 'Nguyen Van A', 'SHK001'),
 (1, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Van A', 'SHK001'),
 (1, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Van A', 'SHK001'),
 (1, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Van A', 'SHK001'),
 (2, 'Nguyen Trai', '10A2', 'Giỏi', '20051', 0, 'Tran Thi B', 'SHK001'),
 (2, 'Ham Rong', '10A1', 'Trung bình', '20101', 0, 'Tran Thi B', 'SHK001'),
 (2, ' ', ' ', ' ', '20102', 0, 'Tran Thi B', 'SHK001'),
+(2, ' ', ' ', ' ', 'Noel 2005', 0, 'Tran Thi B', 'SHK001'),
 (2, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Tran Thi B', 'SHK001'),
 (2, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Tran Thi B', 'SHK001'),
 (2, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Tran Thi B', 'SHK001'),
@@ -205,9 +209,11 @@ INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `hoc_ky`,
 (2, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Tran Thi B', 'SHK001'),
 (2, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Tran Thi B', 'SHK001'),
 (3, ' ', ' ', ' ', '20001', 0, 'Le Van C', 'SHK001'),
+(3, ' ', ' ', ' ', 'Noel 2005', 0, 'Le Van C', 'SHK001'),
 (3, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Le Van C', 'SHK001'),
 (4, ' ', ' ', ' ', '20001', 0, 'Pham Thi D', 'SHK001'),
 (4, ' ', ' ', ' ', '20051', 0, 'Pham Thi D', 'SHK001'),
+(4, ' ', ' ', ' ', 'Noel 2005', 0, 'Pham Thi D', 'SHK001'),
 (4, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Pham Thi D', 'SHK001'),
 (4, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Pham Thi D', 'SHK001'),
 (4, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Pham Thi D', 'SHK001'),
@@ -217,12 +223,15 @@ INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `hoc_ky`,
 (5, ' ', ' ', ' ', '20001', 0, 'Vo Van E', 'SHK002'),
 (6, ' ', ' ', ' ', '20001', 0, 'Do Thi F', 'SHK002'),
 (6, ' ', ' ', ' ', '20051', 0, 'Do Thi F', 'SHK002'),
+(6, ' ', ' ', ' ', 'Noel 2005', 0, 'Do Thi F', 'SHK002'),
 (6, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Do Thi F', 'SHK002'),
 (6, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Do Thi F', 'SHK002'),
 (6, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Do Thi F', 'SHK002'),
 (7, ' ', ' ', ' ', '20001', 0, 'Nguyen Van G', 'SHK002'),
+(7, ' ', ' ', ' ', 'Noel 2005', 0, 'Nguyen Van G', 'SHK002'),
 (8, ' ', ' ', ' ', '20001', 0, 'Tran Van H', 'SHK002'),
 (8, ' ', ' ', ' ', '20051', 0, 'Tran Van H', 'SHK002'),
+(8, ' ', ' ', ' ', 'Noel 2005', 0, 'Tran Van H', 'SHK002'),
 (8, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Tran Van H', 'SHK002'),
 (8, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Tran Van H', 'SHK002'),
 (8, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Tran Van H', 'SHK002'),
@@ -232,6 +241,7 @@ INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `hoc_ky`,
 (9, ' ', ' ', ' ', '20051', 0, 'Le Thi I', 'SHK003'),
 (9, ' ', ' ', ' ', '20101', 0, 'Le Thi I', 'SHK003'),
 (9, ' ', ' ', ' ', '20102', 0, 'Le Thi I', 'SHK003'),
+(9, ' ', ' ', ' ', 'Noel 2005', 0, 'Le Thi I', 'SHK003'),
 (9, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Le Thi I', 'SHK003'),
 (9, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Le Thi I', 'SHK003'),
 (9, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Le Thi I', 'SHK003'),
@@ -240,6 +250,7 @@ INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `hoc_ky`,
 (9, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Le Thi I', 'SHK003'),
 (10, ' ', ' ', ' ', '20001', 0, 'Pham Van K', 'SHK003'),
 (10, ' ', ' ', ' ', '20051', 0, 'Pham Van K', 'SHK003'),
+(10, ' ', ' ', ' ', 'Noel 2005', 0, 'Pham Van K', 'SHK003'),
 (10, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Pham Van K', 'SHK003'),
 (10, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Pham Van K', 'SHK003'),
 (10, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Pham Van K', 'SHK003'),
@@ -247,11 +258,13 @@ INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `hoc_ky`,
 (10, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Pham Van K', 'SHK003'),
 (11, ' ', ' ', ' ', '20001', 0, 'Hoang Van L', 'SHK003'),
 (11, ' ', ' ', ' ', '20051', 0, 'Hoang Van L', 'SHK003'),
+(11, ' ', ' ', ' ', 'Noel 2005', 0, 'Hoang Van L', 'SHK003'),
 (11, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Hoang Van L', 'SHK003'),
 (11, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Hoang Van L', 'SHK003'),
 (12, ' ', ' ', ' ', '20051', 0, 'Nguyen Thi M', 'SHK003'),
 (12, ' ', ' ', ' ', '20101', 0, 'Nguyen Thi M', 'SHK003'),
 (12, ' ', ' ', ' ', '20102', 0, 'Nguyen Thi M', 'SHK003'),
+(12, ' ', ' ', ' ', 'Noel 2005', 0, 'Nguyen Thi M', 'SHK003'),
 (12, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Nguyen Thi M', 'SHK003'),
 (12, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Thi M', 'SHK003'),
 (12, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Thi M', 'SHK003'),
@@ -261,15 +274,18 @@ INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `hoc_ky`,
 (13, ' ', ' ', ' ', '20001', 0, 'Do Van N', 'SHK004'),
 (14, ' ', ' ', ' ', '20001', 0, 'Le Thi O', 'SHK004'),
 (16, ' ', ' ', ' ', '20001', 0, 'Tran Thi Q', 'SHK004'),
+(16, ' ', ' ', ' ', 'Noel 2005', 0, 'Tran Thi Q', 'SHK004'),
 (16, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Tran Thi Q', 'SHK004'),
 (17, ' ', ' ', ' ', '20001', 0, 'Nguyen Van X', 'SHK001'),
 (17, ' ', ' ', ' ', '20051', 0, 'Nguyen Van X', 'SHK001'),
+(17, ' ', ' ', ' ', 'Noel 2005', 0, 'Nguyen Van X', 'SHK001'),
 (17, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Van X', 'SHK001'),
 (17, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Van X', 'SHK001'),
 (17, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Van X', 'SHK001'),
 (18, ' ', ' ', ' ', '20051', 0, 'Nguyen Thi Y', 'SHK002'),
 (18, ' ', ' ', ' ', '20101', 0, 'Nguyen Thi Y', 'SHK002'),
 (18, ' ', ' ', ' ', '20102', 0, 'Nguyen Thi Y', 'SHK002'),
+(18, ' ', ' ', ' ', 'Noel 2005', 0, 'Nguyen Thi Y', 'SHK002'),
 (18, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Nguyen Thi Y', 'SHK002'),
 (18, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Thi Y', 'SHK002'),
 (18, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Thi Y', 'SHK002'),
@@ -278,6 +294,7 @@ INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `hoc_ky`,
 (18, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Nguyen Thi Y', 'SHK002'),
 (19, ' ', ' ', ' ', '20001', 0, 'Nguyen Van rA', 'SHK005'),
 (19, ' ', ' ', ' ', '20051', 0, 'Nguyen Van rA', 'SHK005'),
+(19, ' ', ' ', ' ', 'Noel 2005', 0, 'Nguyen Van rA', 'SHK005'),
 (19, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Van rA', 'SHK005'),
 (19, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Van rA', 'SHK005'),
 (19, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Van rA', 'SHK005');
@@ -525,8 +542,10 @@ CREATE TABLE `ngan_quy_tang_thuong` (
 
 INSERT INTO `ngan_quy_tang_thuong` (`id_ngan_quy_tang_thuong`, `so_tien_thay_doi`, `ngay_thay_doi`, `tong_so_tien`, `chi_tiet`, `isDeleted`, `so_tien_ban_dau`) VALUES
 (30, 50000, '2023-12-26', 887000, 'Thuong hoc sinh Trung bình hoc ky 20101', 0, 1000000),
-(31, 0, '2023-12-26', 887000, 'Thuong hoc sinh Tết thiếu nhi 2010 hoc ky Tết thiếu nhi 2010', 0, 1000000),
-(32, 63000, '2023-12-26', 887000, 'Thuong hoc sinh Tết thiếu nhi 2009 hoc ky Tết thiếu nhi 2009', 0, 1000000);
+(31, 0, '2023-12-26', 887000, 'Thuong hoc sinh Giỏi hoc ky 20101', 0, 1000000),
+(32, 63000, '2023-12-26', 887000, 'Thuong hoc sinh Tết thiếu nhi 2009 hoc ky Tết thiếu nhi 2009', 0, 1000000),
+(33, 150000, '2023-12-27', 597000, 'Thuong hoc sinh  hoc ky Noel 2005', 0, 1000000),
+(34, 140000, '2023-12-27', 747000, 'Thưởng Trung thu 2006 học kỳ Trung thu 2006', 0, 1000000);
 
 -- --------------------------------------------------------
 
@@ -676,7 +695,7 @@ INSERT INTO `tam_vang` (`tam_vang_id`, `nhan_khau_id`, `ngay_bat_dau`, `ngay_ket
 CREATE TABLE `tang_thuong` (
   `id_dip_tang_thuong` int(11) DEFAULT NULL,
   `so_ho_khau` varchar(255) NOT NULL,
-  `hoc_ky` varchar(256) NOT NULL,
+  `dip_thuong` varchar(256) NOT NULL,
   `chi_tiet_phan_qua` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`chi_tiet_phan_qua`)),
   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -685,11 +704,21 @@ CREATE TABLE `tang_thuong` (
 -- Dumping data for table `tang_thuong`
 --
 
-INSERT INTO `tang_thuong` (`id_dip_tang_thuong`, `so_ho_khau`, `hoc_ky`, `chi_tiet_phan_qua`, `isDeleted`) VALUES
+INSERT INTO `tang_thuong` (`id_dip_tang_thuong`, `so_ho_khau`, `dip_thuong`, `chi_tiet_phan_qua`, `isDeleted`) VALUES
 (30, 'SHK001', '20101', '{\"Trung bình\":1}', 0),
+(33, 'SHK001', 'Noel 2005', '{\"\":5}', 0),
 (32, 'SHK001', 'Tết thiếu nhi 2009', '{\"Tết thiếu nhi 2009\":2}', 0),
+(34, 'SHK001', 'Trung thu 2006', '{\"Trung thu 2006\":5}', 0),
+(33, 'SHK002', 'Noel 2005', '{\"\":4}', 0),
 (32, 'SHK002', 'Tết thiếu nhi 2009', '{\"Tết thiếu nhi 2009\":2}', 0),
-(32, 'SHK003', 'Tết thiếu nhi 2009', '{\"Tết thiếu nhi 2009\":3}', 0);
+(34, 'SHK002', 'Trung thu 2006', '{\"Trung thu 2006\":3}', 0),
+(33, 'SHK003', 'Noel 2005', '{\"\":4}', 0),
+(32, 'SHK003', 'Tết thiếu nhi 2009', '{\"Tết thiếu nhi 2009\":3}', 0),
+(34, 'SHK003', 'Trung thu 2006', '{\"Trung thu 2006\":4}', 0),
+(33, 'SHK004', 'Noel 2005', '{\"\":1}', 0),
+(34, 'SHK004', 'Trung thu 2006', '{\"Trung thu 2006\":1}', 0),
+(33, 'SHK005', 'Noel 2005', '{\"\":1}', 0),
+(34, 'SHK005', 'Trung thu 2006', '{\"Trung thu 2006\":1}', 0);
 
 -- --------------------------------------------------------
 
@@ -728,7 +757,7 @@ ALTER TABLE `chung_cu`
 --
 ALTER TABLE `dip_tang_thuong`
   ADD PRIMARY KEY (`id_dip_tang_thuong`),
-  ADD UNIQUE KEY `thanh_tich` (`thanh_tich`,`hoc_ky`,`isDeleted`) USING HASH;
+  ADD UNIQUE KEY `thanh_tich` (`thanh_tich`,`dip_thuong`,`isDeleted`) USING HASH;
 
 --
 -- Indexes for table `dong_gop`
@@ -750,7 +779,7 @@ ALTER TABLE `dong_phi`
 -- Indexes for table `hoc_sinh`
 --
 ALTER TABLE `hoc_sinh`
-  ADD PRIMARY KEY (`nhan_khau_id`,`hoc_ky`),
+  ADD PRIMARY KEY (`nhan_khau_id`,`dip_thuong`),
   ADD KEY `nhan_khau_id` (`nhan_khau_id`);
 
 --
@@ -817,7 +846,7 @@ ALTER TABLE `tam_vang`
 -- Indexes for table `tang_thuong`
 --
 ALTER TABLE `tang_thuong`
-  ADD PRIMARY KEY (`so_ho_khau`,`hoc_ky`);
+  ADD PRIMARY KEY (`so_ho_khau`,`dip_thuong`);
 
 --
 -- Indexes for table `users`
@@ -833,7 +862,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `dip_tang_thuong`
 --
 ALTER TABLE `dip_tang_thuong`
-  MODIFY `id_dip_tang_thuong` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_dip_tang_thuong` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `dong_gop`
@@ -945,6 +974,12 @@ ALTER TABLE `tam_vang`
   ADD CONSTRAINT `tam_vang_ibfk_1` FOREIGN KEY (`nhan_khau_id`) REFERENCES `nhan_khau` (`nhan_khau_id`),
   ADD CONSTRAINT `tam_vang_ibfk_2` FOREIGN KEY (`so_CMND`) REFERENCES `nhan_khau` (`so_CMND`);
 COMMIT;
+
+ALTER TABLE `tam_tru`
+    MODIFY `tam_tru_id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE chung_cu
+DROP FOREIGN KEY chung_cu_ibfk_1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

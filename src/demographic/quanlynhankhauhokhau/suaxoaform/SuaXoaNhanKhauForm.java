@@ -4,6 +4,7 @@
  */
 package demographic.quanlynhankhauhokhau.suaxoaform;
 
+import demographic.dbConnector.Connector;
 import demographic.models.HoKhau;
 import demographic.models.NhanKhau;
 import javax.swing.JOptionPane;
@@ -609,7 +610,7 @@ public class SuaXoaNhanKhauForm extends javax.swing.JFrame {
         }
         else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                Connection conn = Connector.getConnection();
                 String sql = "UPDATE nhan_khau "
                     + "SET ho_ten = '" + tfHoTen.getText() + "',\n "
                     + "biet_danh = '" + tfBietDanh.getText() + "',\n "
@@ -653,7 +654,7 @@ public class SuaXoaNhanKhauForm extends javax.swing.JFrame {
                 , "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION){
             try{
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                Connection conn = Connector.getConnection();
                 String sql = "UPDATE nhan_khau "
                         + "SET deleted = 1\n "
                         + "WHERE nhan_khau_id = " + nhanKhau.getNhanKhauId() + ";"; 

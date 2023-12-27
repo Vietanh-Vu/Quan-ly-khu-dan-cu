@@ -4,6 +4,7 @@
  */
 package demographic.quanlythuphi.suaxoaform;
 
+import demographic.dbConnector.Connector;
 import demographic.models.DongPhi;
 import demographic.models.HoKhau;
 import demographic.models.KhoanPhi;
@@ -281,7 +282,7 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng điền đủ các trường thông tin");
         } else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+                Connection conn = Connector.getConnection();
                 String sqlQuery = "UPDATE dong_phi\n"
                         + "SET id_khoan_thu_phi = ? , \n"
                         + "    so_ho_khau = ?, \n"
@@ -313,7 +314,7 @@ public class SuaXoaDongPhiForm extends javax.swing.JFrame {
                 "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu", "root", "");
+                Connection conn = Connector.getConnection();
                 String sqlQuery = "DELETE FROM dong_phi\n"
                         + "WHERE id_dong_phi = ?;";
                 PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);

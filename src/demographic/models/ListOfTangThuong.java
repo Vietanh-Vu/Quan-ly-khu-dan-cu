@@ -26,7 +26,7 @@ public class ListOfTangThuong {
                 TangThuong tangThuong = new TangThuong(
                         resultSet.getInt("id_dip_tang_thuong"),
                         resultSet.getString("so_ho_khau"),
-                        resultSet.getString("hoc_ky"),
+                        resultSet.getString("dip_thuong"),
                         ReadFromJson.jsonToMap(resultSet.getString("chi_tiet_phan_qua")),
                         resultSet.getBoolean("isDeleted")
                 );
@@ -39,11 +39,11 @@ public class ListOfTangThuong {
     }
 
     // Search by so ho khau and hoc ky
-    public List<TangThuong> searchBySoHoKhauAndHocKy(String soHoKhau, String hocKy) {
+    public List<TangThuong> searchBySoHoKhauAndDipThuong(String soHoKhau, String DipThuong) {
         List<TangThuong> filteredList = new ArrayList<>();
         for (TangThuong tangThuong: tangThuongList) {
             if (tangThuong.getSoHoKhau().toLowerCase().contains(soHoKhau.toLowerCase())
-                    && tangThuong.getHocKy().toLowerCase().contains(hocKy.toLowerCase())) {
+                    && tangThuong.getDipThuong().toLowerCase().contains(DipThuong.toLowerCase())) {
                 filteredList.add(tangThuong);
             }
         }

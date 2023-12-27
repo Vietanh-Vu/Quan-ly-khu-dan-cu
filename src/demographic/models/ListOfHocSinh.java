@@ -23,7 +23,7 @@ public class ListOfHocSinh {
             ResultSet resultSet = statement.executeQuery(selectQuery);
             while (resultSet.next()) {
                 HocSinh hocSinh = new HocSinh(resultSet.getInt("nhan_khau_id"),
-                        resultSet.getString("hoc_ky"), resultSet.getString("ho_ten"), resultSet.getString("so_ho_khau"),
+                        resultSet.getString("dip_thuong"), resultSet.getString("ho_ten"), resultSet.getString("so_ho_khau"),
                         resultSet.getString("truong"), resultSet.getString("lop"), resultSet.getString("thanh_tich"),
                         resultSet.getBoolean("isDeleted"));
                 hocSinhList.add(hocSinh);
@@ -35,9 +35,9 @@ public class ListOfHocSinh {
     }
 
     // Method to add a new list of Hoc Sinh base on hoc ky
-    public boolean addNewHocKy(String hocKy) {
-        if (Character.isDigit(hocKy.charAt(0))) {
-            int year = Integer.parseInt(hocKy.substring(0, 4));
+    public boolean addNewDipThuong(String DipThuong) {
+        if (Character.isDigit(DipThuong.charAt(0))) {
+            int year = Integer.parseInt(DipThuong.substring(0, 4));
 
             try {
                 Connection connection = Connector.getConnection();
@@ -52,7 +52,7 @@ public class ListOfHocSinh {
                 ResultSet resultSet = statement.executeQuery(selectQuery);
                 while (resultSet.next()) {
                     HocSinh hocSinh = new HocSinh(resultSet.getInt("nhan_khau_id"),
-                            hocKy, resultSet.getString("ho_ten"), resultSet.getString("so_ho_khau"));
+                            DipThuong, resultSet.getString("ho_ten"), resultSet.getString("so_ho_khau"));
                     hocSinh.addNewRow();
                     hocSinhList.add(hocSinh);
                     System.out.println(hocSinh.getNhanKhauId());
@@ -64,7 +64,7 @@ public class ListOfHocSinh {
                 return false;
             }
         } else {
-            int year = Integer.parseInt(hocKy.substring(hocKy.length() - 4));
+            int year = Integer.parseInt(DipThuong.substring(DipThuong.length() - 4));
 
             try {
                 Connection connection = Connector.getConnection();
@@ -79,7 +79,7 @@ public class ListOfHocSinh {
                 ResultSet resultSet = statement.executeQuery(selectQuery);
                 while (resultSet.next()) {
                     HocSinh hocSinh = new HocSinh(resultSet.getInt("nhan_khau_id"),
-                            hocKy, resultSet.getString("ho_ten"), resultSet.getString("so_ho_khau"));
+                            DipThuong, resultSet.getString("ho_ten"), resultSet.getString("so_ho_khau"));
                     hocSinh.addNewRow();
                     hocSinhList.add(hocSinh);
                     System.out.println(hocSinh.getNhanKhauId());
@@ -93,34 +93,34 @@ public class ListOfHocSinh {
         }
     }
 
-    // Method to get list of HocSinh base on hocKy
-    public List<HocSinh> getListOfHocSinhByHocKy(String hocKy) {
+    // Method to get list of HocSinh base on DipThuong
+    public List<HocSinh> getListOfHocSinhByDipThuong(String DipThuong) {
         List<HocSinh> filteredList = new ArrayList<>();
         for (HocSinh hocSinh: hocSinhList) {
-            if (hocSinh.getHocKy().contains(hocKy)) {
+            if (hocSinh.getDipThuong().contains(DipThuong)) {
                 filteredList.add(hocSinh);
             }
         }
         return filteredList;
     }
 
-    // Method to get list of HocSinh base on hocKy and thanhTich
-    public List<HocSinh> getListOfHocSinhByHocKyAndThanhTich(String hocKy, String thanhTich) {
+    // Method to get list of HocSinh base on DipThuong and thanhTich
+    public List<HocSinh> getListOfHocSinhByDipThuongAndThanhTich(String DipThuong, String thanhTich) {
         List<HocSinh> filteredList = new ArrayList<>();
         for (HocSinh hocSinh: hocSinhList) {
-            if (hocSinh.getHocKy().equals(hocKy) && hocSinh.getThanhTich().equals(thanhTich)) {
+            if (hocSinh.getDipThuong().equals(DipThuong) && hocSinh.getThanhTich().equals(thanhTich)) {
                 filteredList.add(hocSinh);
             }
         }
         return filteredList;
     }
 
-    // Method to get HocSinh by hoTen, soHoKhau and hocKy
-    public HocSinh getHocSinhByHoTenSoHoKhauHocKy(String hoTen, String soHoKhau, String hocKy) {
+    // Method to get HocSinh by hoTen, soHoKhau and DipThuong
+    public HocSinh getHocSinhByHoTenSoHoKhauDipThuong(String hoTen, String soHoKhau, String DipThuong) {
         for (HocSinh hocSinh: hocSinhList) {
             if (hocSinh.getHoTen().equals(hoTen)
                     && hocSinh.getSoHoKhau().equals(soHoKhau)
-                    && hocSinh.getHocKy().equals(hocKy)) {
+                    && hocSinh.getDipThuong().equals(DipThuong)) {
                 return hocSinh;
             }
         }
@@ -138,11 +138,11 @@ public class ListOfHocSinh {
         return filteredList;
     }
 
-    // Method to get HocSinh by nhanKhauId and hocKy
-    public HocSinh getHocSinhByNhanKhauIdHocKy(int nhanKhauId, String hocKy) {
+    // Method to get HocSinh by nhanKhauId and DipThuong
+    public HocSinh getHocSinhByNhanKhauIdDipThuong(int nhanKhauId, String DipThuong) {
         for (HocSinh hocSinh: hocSinhList) {
             if (hocSinh.getNhanKhauId() == nhanKhauId
-                && hocSinh.getHocKy().equals(hocKy)) {
+                && hocSinh.getDipThuong().equals(DipThuong)) {
                 return hocSinh;
             }
         }

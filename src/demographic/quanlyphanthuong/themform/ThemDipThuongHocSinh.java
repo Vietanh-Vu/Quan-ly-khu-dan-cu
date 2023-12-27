@@ -154,7 +154,7 @@ public class ThemDipThuongHocSinh extends javax.swing.JFrame {
         String dipThuong = tfHocKi.getText();
         if (dipThuong.matches("^\\d{5}$")
             | dipThuong.matches("^.+ \\d{4}$")) {
-            boolean status = listOfHocSinh.addNewHocKy(dipThuong);
+            boolean status = listOfHocSinh.addNewDipThuong(dipThuong);
             if (status) {
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 this.dispose();

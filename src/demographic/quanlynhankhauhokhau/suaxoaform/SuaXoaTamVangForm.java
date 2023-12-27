@@ -4,6 +4,7 @@
  */
 package demographic.quanlynhankhauhokhau.suaxoaform;
 
+import demographic.dbConnector.Connector;
 import demographic.models.HoKhau;
 import demographic.models.TamVang;
 import javax.swing.JOptionPane;
@@ -412,7 +413,7 @@ public class SuaXoaTamVangForm extends javax.swing.JFrame {
         }
         else {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                Connection conn = Connector.getConnection();
                                 
                 String sql = "UPDATE tam_vang\n" +
                     "SET ngay_bat_dau = '" + tfNgayBatDau.getText() + "',\n" +
@@ -464,7 +465,7 @@ public class SuaXoaTamVangForm extends javax.swing.JFrame {
                 , "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION){
             try{
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                Connection conn = Connector.getConnection();
                 String sql = "UPDATE tam_vang "
                         + "SET deleted = 1\n "
                         + "WHERE tam_vang_id = " + tamVang.getTamVangId()+ ";"; 
@@ -496,7 +497,7 @@ public class SuaXoaTamVangForm extends javax.swing.JFrame {
         String soHoKhau = "";
         try {
             
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");            
+            Connection conn = Connector.getConnection();            
             Statement st = conn.createStatement();
             
             String soCMND = tamVang.getSoCMND();

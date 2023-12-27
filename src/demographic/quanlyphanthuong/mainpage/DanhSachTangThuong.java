@@ -273,7 +273,7 @@ public class DanhSachTangThuong extends javax.swing.JFrame {
         // TODO add your handling code here:
         String dipThuong = tfDipThuong.getText();
         String soHoKhau = tfSoHoKhau.getText();
-        listOfTangThuong.setTangThuongList(listOfTangThuong.searchBySoHoKhauAndHocKy(soHoKhau, dipThuong));
+        listOfTangThuong.setTangThuongList(listOfTangThuong.searchBySoHoKhauAndDipThuong(soHoKhau, dipThuong));
         display();
 
     }//GEN-LAST:event_btnTimMouseClicked
@@ -328,7 +328,7 @@ public class DanhSachTangThuong extends javax.swing.JFrame {
         defaultTableModel.fireTableDataChanged();
 
         for(TangThuong tangThuong: listOfTangThuong.getTangThuongList()){
-            String data[] = {Integer.toString(tangThuong.getIdDipTangThuong()), tangThuong.getHocKy(),
+            String data[] = {Integer.toString(tangThuong.getIdDipTangThuong()), tangThuong.getDipThuong(),
                     tangThuong.getSoHoKhau(),
                 WriteMapToText.writeMapToText(tangThuong.getChiTietPhanQua())};
             defaultTableModel.addRow(data);

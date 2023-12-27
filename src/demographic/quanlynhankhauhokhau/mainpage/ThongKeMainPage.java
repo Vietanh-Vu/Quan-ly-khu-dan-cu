@@ -5,6 +5,7 @@
 package demographic.quanlynhankhauhokhau.mainpage;
 
 //import com.sun.jdi.connect.spi.Connection;
+import demographic.dbConnector.Connector;
 import demographic.quanlynhankhauhokhau.suaxoaform.SuaXoaTamTruForm;
 import demographic.quanlynhankhauhokhau.suaxoaform.SuaXoaTamVangForm;
 import demographic.quanlynhankhauhokhau.themform.ThemTamVangForm;
@@ -252,7 +253,7 @@ public class ThongKeMainPage extends javax.swing.JFrame {
         int indexRow = tThongKe.getSelectedRow();
         key = String.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             String query = "SELECT * FROM tam_tru where tam_tru_id = " + key + "";
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -365,7 +366,7 @@ public class ThongKeMainPage extends javax.swing.JFrame {
     // ------------- DISPLAY PEOPLE ---------------------
     private void display(){
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             
             String sql = "SELECT COUNT(*) AS soLuongNhanKhau\n" +

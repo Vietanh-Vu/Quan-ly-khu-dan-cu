@@ -305,7 +305,7 @@ public class DanhSachHocSinh extends javax.swing.JFrame {
     // Event click Button Tim
     private void btnTimClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHoKhauMouseClicked
         String dipThuong = tfDipThuong.getText();
-        listOfHocSinh.setHocSinhList(listOfHocSinh.getListOfHocSinhByHocKy(dipThuong));
+        listOfHocSinh.setHocSinhList(listOfHocSinh.getListOfHocSinhByDipThuong(dipThuong));
         display();
     }
 
@@ -388,7 +388,7 @@ public class DanhSachHocSinh extends javax.swing.JFrame {
         int indexRow = tHocSinh.getSelectedRow();
         nhanKhauId = Integer.parseInt(model.getValueAt(indexRow, 0).toString());
         dipThuong = String.valueOf(model.getValueAt(indexRow, 4).toString());
-        hocSinh = listOfHocSinh.getHocSinhByNhanKhauIdHocKy(nhanKhauId, dipThuong);
+        hocSinh = listOfHocSinh.getHocSinhByNhanKhauIdDipThuong(nhanKhauId, dipThuong);
     }//GEN-LAST:event_tHoKhauMouseClicked
 
     private void display() {
@@ -398,7 +398,7 @@ public class DanhSachHocSinh extends javax.swing.JFrame {
 
         for(HocSinh hocSinh: listOfHocSinh.getHocSinhList()){
             String data[] = {Integer.toString(hocSinh.getNhanKhauId()), hocSinh.getTruong(),
-                    hocSinh.getLop(), hocSinh.getThanhTich(), hocSinh.getHocKy(),
+                    hocSinh.getLop(), hocSinh.getThanhTich(), hocSinh.getDipThuong(),
                     hocSinh.getHoTen(), hocSinh.getSoHoKhau()};
             defaultTableModel.addRow(data);
         }

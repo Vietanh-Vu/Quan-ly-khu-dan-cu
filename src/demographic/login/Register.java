@@ -5,6 +5,7 @@
 package demographic.login;
 
 //import com.sun.jdi.connect.spi.Connection;
+import demographic.dbConnector.Connector;
 import demographic.login.MainFormForAdmin;
 import demographic.models.User;
 import java.sql.*;
@@ -273,7 +274,7 @@ public class Register extends javax.swing.JFrame {
         int indexRow = tAccount.getSelectedRow();
         key = Integer.valueOf(model.getValueAt(indexRow, 0).toString());
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             String query = "SELECT * FROM users where user_id = \"" + key + "\"";
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -300,7 +301,7 @@ public class Register extends javax.swing.JFrame {
         
         if ( pfPassword.getText().equals(pfConfirmPassword.getText())) {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                conn = Connector.getConnection();
                 String query = "Update users Set "
                 + "username = ?, "
                 + "password = ?, "
@@ -340,7 +341,7 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
         
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+                conn = Connector.getConnection();
                 if (user.getUserName().equals("admin")){
                     JOptionPane.showMessageDialog(this, "Không thể xóa tài khoản admin");
                     return;
@@ -401,7 +402,7 @@ public class Register extends javax.swing.JFrame {
     // ------------- DISPLAY PEOPLE ---------------------
     private void displayPeople(){
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/quan_ly_khu_dan_cu","root","");
+            conn = Connector.getConnection();
             st = conn.createStatement();
             rs = st.executeQuery("SELECT user_id as 'User Id', username as 'Username', email as 'Email', is_admin as 'La Admin' FROM users");
             tAccount.setModel(DbUtils.resultSetToTableModel(rs));
