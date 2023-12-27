@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : lun. 25 déc. 2023 à 18:35
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Host: 127.0.0.1:3307
+-- Generation Time: Dec 27, 2023 at 01:10 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `quan_ly_khu_dan_cu`
+-- Database: `quan_ly_khu_dan_cu`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `chung_cu`
+-- Table structure for table `chung_cu`
 --
 
 CREATE TABLE `chung_cu` (
@@ -34,7 +34,7 @@ CREATE TABLE `chung_cu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `chung_cu`
+-- Dumping data for table `chung_cu`
 --
 
 INSERT INTO `chung_cu` (`so_ho_khau`, `loai_chung_cu`, `dien_tich`) VALUES
@@ -45,32 +45,32 @@ INSERT INTO `chung_cu` (`so_ho_khau`, `loai_chung_cu`, `dien_tich`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `dip_tang_thuong`
+-- Table structure for table `dip_tang_thuong`
 --
 
 CREATE TABLE `dip_tang_thuong` (
-                                   `id_dip_tang_thuong` int(11) NOT NULL,
-                                   `thanh_tich` varchar(1024) NOT NULL,
-                                   `hoc_ky` varchar(1024) NOT NULL,
-                                   `ngay_tang_thuong` date NOT NULL,
-                                   `chi_tiet` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`chi_tiet`)),
-                                   `tong_so_tien` int(11) NOT NULL DEFAULT 0,
-                                   `isDeleted` tinyint(1) NOT NULL DEFAULT 0
+  `id_dip_tang_thuong` int(11) NOT NULL,
+  `thanh_tich` varchar(1024) NOT NULL,
+  `hoc_ky` varchar(1024) NOT NULL,
+  `ngay_tang_thuong` date NOT NULL,
+  `chi_tiet` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`chi_tiet`)),
+  `tong_so_tien` int(11) NOT NULL DEFAULT 0,
+  `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `dip_tang_thuong`
+-- Dumping data for table `dip_tang_thuong`
 --
 
 INSERT INTO `dip_tang_thuong` (`id_dip_tang_thuong`, `thanh_tich`, `hoc_ky`, `ngay_tang_thuong`, `chi_tiet`, `tong_so_tien`, `isDeleted`) VALUES
-                                                                                                                                              (30, 'Trung bình', '20101', '2023-12-26', '{\"5 cuon vo\":50000}', 50000, 0),
-                                                                                                                                              (31, 'Tết thiếu nhi 2010', 'Tết thiếu nhi 2010', '2023-12-26', '{\"1 gói bim bim\":5000,\"1 cái kẹo\":3000}', 0, 0),
-                                                                                                                                              (32, 'Tết thiếu nhi 2009', 'Tết thiếu nhi 2009', '2023-12-26', '{\"1 gói bim bim\":6000,\"1 cái kẹo\":3000}', 63000, 0);
+(30, 'Trung bình', '20101', '2023-12-26', '{\"5 cuon vo\":50000}', 50000, 0),
+(31, 'Tết thiếu nhi 2010', 'Tết thiếu nhi 2010', '2023-12-26', '{\"1 gói bim bim\":5000,\"1 cái kẹo\":3000}', 0, 0),
+(32, 'Tết thiếu nhi 2009', 'Tết thiếu nhi 2009', '2023-12-26', '{\"1 gói bim bim\":6000,\"1 cái kẹo\":3000}', 63000, 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `dong_gop`
+-- Table structure for table `dong_gop`
 --
 
 CREATE TABLE `dong_gop` (
@@ -82,7 +82,7 @@ CREATE TABLE `dong_gop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `dong_gop`
+-- Dumping data for table `dong_gop`
 --
 
 INSERT INTO `dong_gop` (`so_ho_khau`, `id_khoan_dong_gop`, `so_tien`, `ngay_dong`, `id_dong_gop`) VALUES
@@ -93,7 +93,7 @@ INSERT INTO `dong_gop` (`so_ho_khau`, `id_khoan_dong_gop`, `so_tien`, `ngay_dong
 -- --------------------------------------------------------
 
 --
--- Structure de la table `dong_phi`
+-- Table structure for table `dong_phi`
 --
 
 CREATE TABLE `dong_phi` (
@@ -106,7 +106,7 @@ CREATE TABLE `dong_phi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `dong_phi`
+-- Dumping data for table `dong_phi`
 --
 
 INSERT INTO `dong_phi` (`id_dong_phi`, `id_khoan_thu_phi`, `so_ho_khau`, `so_tien`, `da_dong`, `ngay_dong`) VALUES
@@ -124,7 +124,7 @@ INSERT INTO `dong_phi` (`id_dong_phi`, `id_khoan_thu_phi`, `so_ho_khau`, `so_tie
 (42, 16, 'SHK004', '100000', 0, NULL);
 
 --
--- Déclencheurs `dong_phi`
+-- Triggers `dong_phi`
 --
 DELIMITER $$
 CREATE TRIGGER `tr_calculate_so_tien_dong_phi` BEFORE INSERT ON `dong_phi` FOR EACH ROW BEGIN
@@ -175,14 +175,14 @@ DELIMITER ;
 --
 
 CREATE TABLE `hoc_sinh` (
-                            `nhan_khau_id` int(11) NOT NULL,
-                            `truong` varchar(1024) DEFAULT NULL,
-                            `lop` varchar(1024) DEFAULT NULL,
-                            `thanh_tich` varchar(1024) DEFAULT NULL,
-                            `hoc_ky` varchar(255) NOT NULL,
-                            `isDeleted` tinyint(1) NOT NULL DEFAULT 0,
-                            `ho_ten` varchar(100) NOT NULL,
-                            `so_ho_khau` varchar(1024) NOT NULL
+  `nhan_khau_id` int(11) NOT NULL,
+  `truong` varchar(1024) DEFAULT NULL,
+  `lop` varchar(1024) DEFAULT NULL,
+  `thanh_tich` varchar(1024) DEFAULT NULL,
+  `hoc_ky` varchar(255) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL DEFAULT 0,
+  `ho_ten` varchar(100) NOT NULL,
+  `so_ho_khau` varchar(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -190,102 +190,102 @@ CREATE TABLE `hoc_sinh` (
 --
 
 INSERT INTO `hoc_sinh` (`nhan_khau_id`, `truong`, `lop`, `thanh_tich`, `hoc_ky`, `isDeleted`, `ho_ten`, `so_ho_khau`) VALUES
-                                                                                                                          (1, ' ', ' ', ' ', '20001', 0, 'Nguyen Van A', 'SHK001'),
-                                                                                                                          (1, ' ', ' ', ' ', '20051', 0, 'Nguyen Van A', 'SHK001'),
-                                                                                                                          (1, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Van A', 'SHK001'),
-                                                                                                                          (1, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Van A', 'SHK001'),
-                                                                                                                          (1, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Van A', 'SHK001'),
-                                                                                                                          (2, 'Nguyen Trai', '10A2', 'Giỏi', '20051', 0, 'Tran Thi B', 'SHK001'),
-                                                                                                                          (2, 'Ham Rong', '10A1', 'Trung bình', '20101', 0, 'Tran Thi B', 'SHK001'),
-                                                                                                                          (2, ' ', ' ', ' ', '20102', 0, 'Tran Thi B', 'SHK001'),
-                                                                                                                          (2, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Tran Thi B', 'SHK001'),
-                                                                                                                          (2, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Tran Thi B', 'SHK001'),
-                                                                                                                          (2, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Tran Thi B', 'SHK001'),
-                                                                                                                          (2, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Tran Thi B', 'SHK001'),
-                                                                                                                          (2, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Tran Thi B', 'SHK001'),
-                                                                                                                          (2, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Tran Thi B', 'SHK001'),
-                                                                                                                          (3, ' ', ' ', ' ', '20001', 0, 'Le Van C', 'SHK001'),
-                                                                                                                          (3, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Le Van C', 'SHK001'),
-                                                                                                                          (4, ' ', ' ', ' ', '20001', 0, 'Pham Thi D', 'SHK001'),
-                                                                                                                          (4, ' ', ' ', ' ', '20051', 0, 'Pham Thi D', 'SHK001'),
-                                                                                                                          (4, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Pham Thi D', 'SHK001'),
-                                                                                                                          (4, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Pham Thi D', 'SHK001'),
-                                                                                                                          (4, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Pham Thi D', 'SHK001'),
-                                                                                                                          (4, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Pham Thi D', 'SHK001'),
-                                                                                                                          (4, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Pham Thi D', 'SHK001'),
-                                                                                                                          (4, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Pham Thi D', 'SHK001'),
-                                                                                                                          (5, ' ', ' ', ' ', '20001', 0, 'Vo Van E', 'SHK002'),
-                                                                                                                          (6, ' ', ' ', ' ', '20001', 0, 'Do Thi F', 'SHK002'),
-                                                                                                                          (6, ' ', ' ', ' ', '20051', 0, 'Do Thi F', 'SHK002'),
-                                                                                                                          (6, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Do Thi F', 'SHK002'),
-                                                                                                                          (6, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Do Thi F', 'SHK002'),
-                                                                                                                          (6, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Do Thi F', 'SHK002'),
-                                                                                                                          (7, ' ', ' ', ' ', '20001', 0, 'Nguyen Van G', 'SHK002'),
-                                                                                                                          (8, ' ', ' ', ' ', '20001', 0, 'Tran Van H', 'SHK002'),
-                                                                                                                          (8, ' ', ' ', ' ', '20051', 0, 'Tran Van H', 'SHK002'),
-                                                                                                                          (8, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Tran Van H', 'SHK002'),
-                                                                                                                          (8, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Tran Van H', 'SHK002'),
-                                                                                                                          (8, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Tran Van H', 'SHK002'),
-                                                                                                                          (8, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Tran Van H', 'SHK002'),
-                                                                                                                          (8, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Tran Van H', 'SHK002'),
-                                                                                                                          (8, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Tran Van H', 'SHK002'),
-                                                                                                                          (9, ' ', ' ', ' ', '20051', 0, 'Le Thi I', 'SHK003'),
-                                                                                                                          (9, ' ', ' ', ' ', '20101', 0, 'Le Thi I', 'SHK003'),
-                                                                                                                          (9, ' ', ' ', ' ', '20102', 0, 'Le Thi I', 'SHK003'),
-                                                                                                                          (9, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Le Thi I', 'SHK003'),
-                                                                                                                          (9, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Le Thi I', 'SHK003'),
-                                                                                                                          (9, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Le Thi I', 'SHK003'),
-                                                                                                                          (9, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Le Thi I', 'SHK003'),
-                                                                                                                          (9, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Le Thi I', 'SHK003'),
-                                                                                                                          (9, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Le Thi I', 'SHK003'),
-                                                                                                                          (10, ' ', ' ', ' ', '20001', 0, 'Pham Van K', 'SHK003'),
-                                                                                                                          (10, ' ', ' ', ' ', '20051', 0, 'Pham Van K', 'SHK003'),
-                                                                                                                          (10, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Pham Van K', 'SHK003'),
-                                                                                                                          (10, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Pham Van K', 'SHK003'),
-                                                                                                                          (10, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Pham Van K', 'SHK003'),
-                                                                                                                          (10, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Pham Van K', 'SHK003'),
-                                                                                                                          (10, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Pham Van K', 'SHK003'),
-                                                                                                                          (11, ' ', ' ', ' ', '20001', 0, 'Hoang Van L', 'SHK003'),
-                                                                                                                          (11, ' ', ' ', ' ', '20051', 0, 'Hoang Van L', 'SHK003'),
-                                                                                                                          (11, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Hoang Van L', 'SHK003'),
-                                                                                                                          (11, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Hoang Van L', 'SHK003'),
-                                                                                                                          (12, ' ', ' ', ' ', '20051', 0, 'Nguyen Thi M', 'SHK003'),
-                                                                                                                          (12, ' ', ' ', ' ', '20101', 0, 'Nguyen Thi M', 'SHK003'),
-                                                                                                                          (12, ' ', ' ', ' ', '20102', 0, 'Nguyen Thi M', 'SHK003'),
-                                                                                                                          (12, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Nguyen Thi M', 'SHK003'),
-                                                                                                                          (12, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Thi M', 'SHK003'),
-                                                                                                                          (12, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Thi M', 'SHK003'),
-                                                                                                                          (12, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Thi M', 'SHK003'),
-                                                                                                                          (12, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Nguyen Thi M', 'SHK003'),
-                                                                                                                          (12, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Nguyen Thi M', 'SHK003'),
-                                                                                                                          (13, ' ', ' ', ' ', '20001', 0, 'Do Van N', 'SHK004'),
-                                                                                                                          (14, ' ', ' ', ' ', '20001', 0, 'Le Thi O', 'SHK004'),
-                                                                                                                          (16, ' ', ' ', ' ', '20001', 0, 'Tran Thi Q', 'SHK004'),
-                                                                                                                          (16, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Tran Thi Q', 'SHK004'),
-                                                                                                                          (17, ' ', ' ', ' ', '20001', 0, 'Nguyen Van X', 'SHK001'),
-                                                                                                                          (17, ' ', ' ', ' ', '20051', 0, 'Nguyen Van X', 'SHK001'),
-                                                                                                                          (17, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Van X', 'SHK001'),
-                                                                                                                          (17, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Van X', 'SHK001'),
-                                                                                                                          (17, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Van X', 'SHK001'),
-                                                                                                                          (18, ' ', ' ', ' ', '20051', 0, 'Nguyen Thi Y', 'SHK002'),
-                                                                                                                          (18, ' ', ' ', ' ', '20101', 0, 'Nguyen Thi Y', 'SHK002'),
-                                                                                                                          (18, ' ', ' ', ' ', '20102', 0, 'Nguyen Thi Y', 'SHK002'),
-                                                                                                                          (18, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Nguyen Thi Y', 'SHK002'),
-                                                                                                                          (18, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Thi Y', 'SHK002'),
-                                                                                                                          (18, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Thi Y', 'SHK002'),
-                                                                                                                          (18, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Thi Y', 'SHK002'),
-                                                                                                                          (18, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Nguyen Thi Y', 'SHK002'),
-                                                                                                                          (18, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Nguyen Thi Y', 'SHK002'),
-                                                                                                                          (19, ' ', ' ', ' ', '20001', 0, 'Nguyen Van rA', 'SHK005'),
-                                                                                                                          (19, ' ', ' ', ' ', '20051', 0, 'Nguyen Van rA', 'SHK005'),
-                                                                                                                          (19, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Van rA', 'SHK005'),
-                                                                                                                          (19, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Van rA', 'SHK005'),
-                                                                                                                          (19, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Van rA', 'SHK005');
+(1, ' ', ' ', ' ', '20001', 0, 'Nguyen Van A', 'SHK001'),
+(1, ' ', ' ', ' ', '20051', 0, 'Nguyen Van A', 'SHK001'),
+(1, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Van A', 'SHK001'),
+(1, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Van A', 'SHK001'),
+(1, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Van A', 'SHK001'),
+(2, 'Nguyen Trai', '10A2', 'Giỏi', '20051', 0, 'Tran Thi B', 'SHK001'),
+(2, 'Ham Rong', '10A1', 'Trung bình', '20101', 0, 'Tran Thi B', 'SHK001'),
+(2, ' ', ' ', ' ', '20102', 0, 'Tran Thi B', 'SHK001'),
+(2, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Tran Thi B', 'SHK001'),
+(2, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Tran Thi B', 'SHK001'),
+(2, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Tran Thi B', 'SHK001'),
+(2, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Tran Thi B', 'SHK001'),
+(2, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Tran Thi B', 'SHK001'),
+(2, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Tran Thi B', 'SHK001'),
+(3, ' ', ' ', ' ', '20001', 0, 'Le Van C', 'SHK001'),
+(3, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Le Van C', 'SHK001'),
+(4, ' ', ' ', ' ', '20001', 0, 'Pham Thi D', 'SHK001'),
+(4, ' ', ' ', ' ', '20051', 0, 'Pham Thi D', 'SHK001'),
+(4, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Pham Thi D', 'SHK001'),
+(4, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Pham Thi D', 'SHK001'),
+(4, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Pham Thi D', 'SHK001'),
+(4, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Pham Thi D', 'SHK001'),
+(4, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Pham Thi D', 'SHK001'),
+(4, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Pham Thi D', 'SHK001'),
+(5, ' ', ' ', ' ', '20001', 0, 'Vo Van E', 'SHK002'),
+(6, ' ', ' ', ' ', '20001', 0, 'Do Thi F', 'SHK002'),
+(6, ' ', ' ', ' ', '20051', 0, 'Do Thi F', 'SHK002'),
+(6, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Do Thi F', 'SHK002'),
+(6, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Do Thi F', 'SHK002'),
+(6, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Do Thi F', 'SHK002'),
+(7, ' ', ' ', ' ', '20001', 0, 'Nguyen Van G', 'SHK002'),
+(8, ' ', ' ', ' ', '20001', 0, 'Tran Van H', 'SHK002'),
+(8, ' ', ' ', ' ', '20051', 0, 'Tran Van H', 'SHK002'),
+(8, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Tran Van H', 'SHK002'),
+(8, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Tran Van H', 'SHK002'),
+(8, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Tran Van H', 'SHK002'),
+(8, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Tran Van H', 'SHK002'),
+(8, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Tran Van H', 'SHK002'),
+(8, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Tran Van H', 'SHK002'),
+(9, ' ', ' ', ' ', '20051', 0, 'Le Thi I', 'SHK003'),
+(9, ' ', ' ', ' ', '20101', 0, 'Le Thi I', 'SHK003'),
+(9, ' ', ' ', ' ', '20102', 0, 'Le Thi I', 'SHK003'),
+(9, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Le Thi I', 'SHK003'),
+(9, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Le Thi I', 'SHK003'),
+(9, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Le Thi I', 'SHK003'),
+(9, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Le Thi I', 'SHK003'),
+(9, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Le Thi I', 'SHK003'),
+(9, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Le Thi I', 'SHK003'),
+(10, ' ', ' ', ' ', '20001', 0, 'Pham Van K', 'SHK003'),
+(10, ' ', ' ', ' ', '20051', 0, 'Pham Van K', 'SHK003'),
+(10, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Pham Van K', 'SHK003'),
+(10, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Pham Van K', 'SHK003'),
+(10, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Pham Van K', 'SHK003'),
+(10, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Pham Van K', 'SHK003'),
+(10, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Pham Van K', 'SHK003'),
+(11, ' ', ' ', ' ', '20001', 0, 'Hoang Van L', 'SHK003'),
+(11, ' ', ' ', ' ', '20051', 0, 'Hoang Van L', 'SHK003'),
+(11, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Hoang Van L', 'SHK003'),
+(11, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Hoang Van L', 'SHK003'),
+(12, ' ', ' ', ' ', '20051', 0, 'Nguyen Thi M', 'SHK003'),
+(12, ' ', ' ', ' ', '20101', 0, 'Nguyen Thi M', 'SHK003'),
+(12, ' ', ' ', ' ', '20102', 0, 'Nguyen Thi M', 'SHK003'),
+(12, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Nguyen Thi M', 'SHK003'),
+(12, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Thi M', 'SHK003'),
+(12, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Thi M', 'SHK003'),
+(12, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Thi M', 'SHK003'),
+(12, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Nguyen Thi M', 'SHK003'),
+(12, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Nguyen Thi M', 'SHK003'),
+(13, ' ', ' ', ' ', '20001', 0, 'Do Van N', 'SHK004'),
+(14, ' ', ' ', ' ', '20001', 0, 'Le Thi O', 'SHK004'),
+(16, ' ', ' ', ' ', '20001', 0, 'Tran Thi Q', 'SHK004'),
+(16, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Tran Thi Q', 'SHK004'),
+(17, ' ', ' ', ' ', '20001', 0, 'Nguyen Van X', 'SHK001'),
+(17, ' ', ' ', ' ', '20051', 0, 'Nguyen Van X', 'SHK001'),
+(17, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Van X', 'SHK001'),
+(17, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Van X', 'SHK001'),
+(17, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Van X', 'SHK001'),
+(18, ' ', ' ', ' ', '20051', 0, 'Nguyen Thi Y', 'SHK002'),
+(18, ' ', ' ', ' ', '20101', 0, 'Nguyen Thi Y', 'SHK002'),
+(18, ' ', ' ', ' ', '20102', 0, 'Nguyen Thi Y', 'SHK002'),
+(18, ' ', ' ', ' ', 'Tết thiếu nhi 2009', 0, 'Nguyen Thi Y', 'SHK002'),
+(18, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Thi Y', 'SHK002'),
+(18, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Thi Y', 'SHK002'),
+(18, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Thi Y', 'SHK002'),
+(18, ' ', ' ', ' ', 'Trung thu 2009', 0, 'Nguyen Thi Y', 'SHK002'),
+(18, ' ', ' ', ' ', 'Trung thu 2010', 0, 'Nguyen Thi Y', 'SHK002'),
+(19, ' ', ' ', ' ', '20001', 0, 'Nguyen Van rA', 'SHK005'),
+(19, ' ', ' ', ' ', '20051', 0, 'Nguyen Van rA', 'SHK005'),
+(19, ' ', ' ', ' ', 'Trung thu 2006', 0, 'Nguyen Van rA', 'SHK005'),
+(19, ' ', ' ', ' ', 'Trung thu 2007', 0, 'Nguyen Van rA', 'SHK005'),
+(19, ' ', ' ', ' ', 'Trung thu 2008', 0, 'Nguyen Van rA', 'SHK005');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ho_khau`
+-- Table structure for table `ho_khau`
 --
 
 CREATE TABLE `ho_khau` (
@@ -300,7 +300,7 @@ CREATE TABLE `ho_khau` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `ho_khau`
+-- Dumping data for table `ho_khau`
 --
 
 INSERT INTO `ho_khau` (`ho_khau_id`, `so_ho_khau`, `chu_ho_id`, `chu_ho_CMND`, `dia_chi`, `la_chung_cu`, `ngay_lap`, `deleted`) VALUES
@@ -313,7 +313,7 @@ INSERT INTO `ho_khau` (`ho_khau_id`, `so_ho_khau`, `chu_ho_id`, `chu_ho_CMND`, `
 (23, 'v c', 60, '4523', 'cf', 'Không', '2023-01-01', 0);
 
 --
--- Déclencheurs `ho_khau`
+-- Triggers `ho_khau`
 --
 DELIMITER $$
 CREATE TRIGGER `after_insert_ho_khau` AFTER INSERT ON `ho_khau` FOR EACH ROW BEGIN
@@ -367,7 +367,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ho_khau_log`
+-- Table structure for table `ho_khau_log`
 --
 
 CREATE TABLE `ho_khau_log` (
@@ -384,7 +384,7 @@ CREATE TABLE `ho_khau_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `ho_khau_log`
+-- Dumping data for table `ho_khau_log`
 --
 
 INSERT INTO `ho_khau_log` (`log_ho_khau_id`, `ho_khau_id`, `so_ho_khau`, `chu_ho_id`, `chu_ho_CMND`, `dia_chi`, `la_chung_cu`, `ngay_lap`, `deleted`, `log_time`) VALUES
@@ -414,7 +414,7 @@ INSERT INTO `ho_khau_log` (`log_ho_khau_id`, `ho_khau_id`, `so_ho_khau`, `chu_ho
 -- --------------------------------------------------------
 
 --
--- Structure de la table `khai_tu`
+-- Table structure for table `khai_tu`
 --
 
 CREATE TABLE `khai_tu` (
@@ -427,7 +427,7 @@ CREATE TABLE `khai_tu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `khai_tu`
+-- Dumping data for table `khai_tu`
 --
 
 INSERT INTO `khai_tu` (`khai_tu_id`, `nhan_khau_id`, `thoi_gian`, `ly_do`, `deleted`, `so_giay_khai_tu`) VALUES
@@ -436,7 +436,7 @@ INSERT INTO `khai_tu` (`khai_tu_id`, `nhan_khau_id`, `thoi_gian`, `ly_do`, `dele
 -- --------------------------------------------------------
 
 --
--- Structure de la table `khoan_dong_gop`
+-- Table structure for table `khoan_dong_gop`
 --
 
 CREATE TABLE `khoan_dong_gop` (
@@ -448,7 +448,7 @@ CREATE TABLE `khoan_dong_gop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `khoan_dong_gop`
+-- Dumping data for table `khoan_dong_gop`
 --
 
 INSERT INTO `khoan_dong_gop` (`id_khoan_dong_gop`, `ten_khoan_dong_gop`, `ngay_bat_dau`, `ngay_ket_thuc`, `chi_tiet`) VALUES
@@ -459,7 +459,7 @@ INSERT INTO `khoan_dong_gop` (`id_khoan_dong_gop`, `ten_khoan_dong_gop`, `ngay_b
 -- --------------------------------------------------------
 
 --
--- Structure de la table `khoan_thu_phi`
+-- Table structure for table `khoan_thu_phi`
 --
 
 CREATE TABLE `khoan_thu_phi` (
@@ -473,7 +473,7 @@ CREATE TABLE `khoan_thu_phi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `khoan_thu_phi`
+-- Dumping data for table `khoan_thu_phi`
 --
 
 INSERT INTO `khoan_thu_phi` (`id_khoan_thu_phi`, `ten_khoan_thu_phi`, `tien_phi`, `ngay_bat_dau`, `ngay_ket_thuc`, `chi_tiet`, `loai_phi`) VALUES
@@ -483,7 +483,7 @@ INSERT INTO `khoan_thu_phi` (`id_khoan_thu_phi`, `ten_khoan_thu_phi`, `tien_phi`
 (16, 'Phí trông xe máy tháng 11', '100000', '2023-11-01', '2023-11-30', '', 'phí theo hộ');
 
 --
--- Déclencheurs `khoan_thu_phi`
+-- Triggers `khoan_thu_phi`
 --
 DELIMITER $$
 CREATE TRIGGER `tr_update_dong_phi_after_khoan_thu_phi_update` AFTER UPDATE ON `khoan_thu_phi` FOR EACH ROW BEGIN
@@ -506,30 +506,32 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ngan_quy_tang_thuong`
+-- Table structure for table `ngan_quy_tang_thuong`
 --
 
 CREATE TABLE `ngan_quy_tang_thuong` (
-                                        `id_ngan_quy_tang_thuong` int(11) NOT NULL,
-                                        `so_tien_thay_doi` int(11) NOT NULL DEFAULT 0,
-                                        `ngay_thay_doi` date NOT NULL,
-                                        `tong_so_tien` int(11) NOT NULL DEFAULT 0,
-                                        `chi_tiet` varchar(1024) NOT NULL,
-                                        `isDeleted` tinyint(1) NOT NULL DEFAULT 0
+  `id_ngan_quy_tang_thuong` int(11) NOT NULL,
+  `so_tien_thay_doi` int(11) NOT NULL DEFAULT 0,
+  `ngay_thay_doi` date NOT NULL,
+  `tong_so_tien` int(11) NOT NULL DEFAULT 0,
+  `chi_tiet` varchar(1024) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL DEFAULT 0,
+  `so_tien_ban_dau` int(11) NOT NULL DEFAULT 10000000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ngan_quy_tang_thuong`
 --
 
-INSERT INTO `ngan_quy_tang_thuong` (`id_ngan_quy_tang_thuong`, `so_tien_thay_doi`, `ngay_thay_doi`, `tong_so_tien`, `chi_tiet`, `isDeleted`) VALUES
-                                                                                                                                                 (30, 50000, '2023-12-26', -50000, 'Thuong hoc sinh Trung bình hoc ky 20101', 0),
-                                                                                                                                                 (31, 0, '2023-12-26', 9950000, 'Thuong hoc sinh Tết thiếu nhi 2010 hoc ky Tết thiếu nhi 2010', 0),
-                                                                                                                                                 (32, 63000, '2023-12-26', 9887000, 'Thuong hoc sinh Tết thiếu nhi 2009 hoc ky Tết thiếu nhi 2009', 0);
+INSERT INTO `ngan_quy_tang_thuong` (`id_ngan_quy_tang_thuong`, `so_tien_thay_doi`, `ngay_thay_doi`, `tong_so_tien`, `chi_tiet`, `isDeleted`, `so_tien_ban_dau`) VALUES
+(30, 50000, '2023-12-26', 887000, 'Thuong hoc sinh Trung bình hoc ky 20101', 0, 1000000),
+(31, 0, '2023-12-26', 887000, 'Thuong hoc sinh Tết thiếu nhi 2010 hoc ky Tết thiếu nhi 2010', 0, 1000000),
+(32, 63000, '2023-12-26', 887000, 'Thuong hoc sinh Tết thiếu nhi 2009 hoc ky Tết thiếu nhi 2009', 0, 1000000);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `nhan_khau`
+-- Table structure for table `nhan_khau`
 --
 
 CREATE TABLE `nhan_khau` (
@@ -556,7 +558,7 @@ CREATE TABLE `nhan_khau` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `nhan_khau`
+-- Dumping data for table `nhan_khau`
 --
 
 INSERT INTO `nhan_khau` (`nhan_khau_id`, `ho_ten`, `biet_danh`, `gioi_tinh`, `ngay_sinh`, `so_CMND`, `ngay_cap_CMND`, `noi_cap_CMND`, `noi_sinh`, `nguyen_quan`, `dan_toc`, `nghe_nghiep`, `noi_lam_viec`, `quan_he_voi_chu_ho`, `ngay_dang_ky_thuong_tru`, `dia_chi_truoc_khi_chuyen`, `chuyen_di`, `deleted`, `so_ho_khau`, `qua_doi`) VALUES
@@ -586,7 +588,7 @@ INSERT INTO `nhan_khau` (`nhan_khau_id`, `ho_ten`, `biet_danh`, `gioi_tinh`, `ng
 (60, 'evd', '', 'Nam', '2023-01-01', '4523', '2023-01-01', 'scs', 'ssc ', 'sc', ' ss', 's', 'cssc', 'Chủ hộ', '2023-01-01', 'sa', 'Không', 0, 'v c', 'Không');
 
 --
--- Déclencheurs `nhan_khau`
+-- Triggers `nhan_khau`
 --
 DELIMITER $$
 CREATE TRIGGER `trg_them_moi_khai_tu` AFTER UPDATE ON `nhan_khau` FOR EACH ROW BEGIN
@@ -609,7 +611,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `tam_tru`
+-- Table structure for table `tam_tru`
 --
 
 CREATE TABLE `tam_tru` (
@@ -628,7 +630,7 @@ CREATE TABLE `tam_tru` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `tam_tru`
+-- Dumping data for table `tam_tru`
 --
 
 INSERT INTO `tam_tru` (`tam_tru_id`, `ho_ten`, `ngay_sinh`, `so_CMND`, `ngay_cap`, `noi_cap`, `gioi_tinh`, `dia_chi_thuong_tru`, `cho_o_hien_tai`, `ly_do`, `deleted`, `ngay_tam_tru`) VALUES
@@ -641,7 +643,7 @@ INSERT INTO `tam_tru` (`tam_tru_id`, `ho_ten`, `ngay_sinh`, `so_CMND`, `ngay_cap
 -- --------------------------------------------------------
 
 --
--- Structure de la table `tam_vang`
+-- Table structure for table `tam_vang`
 --
 
 CREATE TABLE `tam_vang` (
@@ -656,7 +658,7 @@ CREATE TABLE `tam_vang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `tam_vang`
+-- Dumping data for table `tam_vang`
 --
 
 INSERT INTO `tam_vang` (`tam_vang_id`, `nhan_khau_id`, `ngay_bat_dau`, `ngay_ket_thuc`, `ly_do`, `so_CMND`, `dia_chi_noi_den`, `deleted`) VALUES
@@ -668,15 +670,15 @@ INSERT INTO `tam_vang` (`tam_vang_id`, `nhan_khau_id`, `ngay_bat_dau`, `ngay_ket
 -- --------------------------------------------------------
 
 --
--- Structure de la table `tang_thuong`
+-- Table structure for table `tang_thuong`
 --
 
 CREATE TABLE `tang_thuong` (
-                               `id_dip_tang_thuong` int(11) DEFAULT NULL,
-                               `so_ho_khau` varchar(255) NOT NULL,
-                               `hoc_ky` varchar(256) NOT NULL,
-                               `chi_tiet_phan_qua` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`chi_tiet_phan_qua`)),
-                               `isDeleted` tinyint(1) NOT NULL DEFAULT 0
+  `id_dip_tang_thuong` int(11) DEFAULT NULL,
+  `so_ho_khau` varchar(255) NOT NULL,
+  `hoc_ky` varchar(256) NOT NULL,
+  `chi_tiet_phan_qua` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`chi_tiet_phan_qua`)),
+  `isDeleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -684,15 +686,15 @@ CREATE TABLE `tang_thuong` (
 --
 
 INSERT INTO `tang_thuong` (`id_dip_tang_thuong`, `so_ho_khau`, `hoc_ky`, `chi_tiet_phan_qua`, `isDeleted`) VALUES
-                                                                                                               (30, 'SHK001', '20101', '{\"Trung bình\":1}', 0),
-                                                                                                               (32, 'SHK001', 'Tết thiếu nhi 2009', '{\"Tết thiếu nhi 2009\":2}', 0),
-                                                                                                               (32, 'SHK002', 'Tết thiếu nhi 2009', '{\"Tết thiếu nhi 2009\":2}', 0),
-                                                                                                               (32, 'SHK003', 'Tết thiếu nhi 2009', '{\"Tết thiếu nhi 2009\":3}', 0);
+(30, 'SHK001', '20101', '{\"Trung bình\":1}', 0),
+(32, 'SHK001', 'Tết thiếu nhi 2009', '{\"Tết thiếu nhi 2009\":2}', 0),
+(32, 'SHK002', 'Tết thiếu nhi 2009', '{\"Tết thiếu nhi 2009\":2}', 0),
+(32, 'SHK003', 'Tết thiếu nhi 2009', '{\"Tết thiếu nhi 2009\":3}', 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -704,7 +706,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `is_admin`, `password`) VALUES
@@ -712,24 +714,24 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `is_admin`, `password`) VAL
 (2, 'user1', 'user1@example.com', 0, 'password123');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `chung_cu`
+-- Indexes for table `chung_cu`
 --
 ALTER TABLE `chung_cu`
   ADD KEY `chung_cu_ibfk_1` (`so_ho_khau`);
 
 --
--- Index pour la table `dip_tang_thuong`
+-- Indexes for table `dip_tang_thuong`
 --
 ALTER TABLE `dip_tang_thuong`
-    ADD PRIMARY KEY (`id_dip_tang_thuong`),
+  ADD PRIMARY KEY (`id_dip_tang_thuong`),
   ADD UNIQUE KEY `thanh_tich` (`thanh_tich`,`hoc_ky`,`isDeleted`) USING HASH;
 
 --
--- Index pour la table `dong_gop`
+-- Indexes for table `dong_gop`
 --
 ALTER TABLE `dong_gop`
   ADD PRIMARY KEY (`id_dong_gop`),
@@ -737,7 +739,7 @@ ALTER TABLE `dong_gop`
   ADD KEY `fk_dong_gop_2` (`id_khoan_dong_gop`);
 
 --
--- Index pour la table `dong_phi`
+-- Indexes for table `dong_phi`
 --
 ALTER TABLE `dong_phi`
   ADD PRIMARY KEY (`id_dong_phi`),
@@ -745,14 +747,14 @@ ALTER TABLE `dong_phi`
   ADD KEY `dong_phi_ibfk_2` (`so_ho_khau`);
 
 --
--- Index pour la table `hoc_sinh`
+-- Indexes for table `hoc_sinh`
 --
 ALTER TABLE `hoc_sinh`
-    ADD PRIMARY KEY (`nhan_khau_id`,`hoc_ky`),
+  ADD PRIMARY KEY (`nhan_khau_id`,`hoc_ky`),
   ADD KEY `nhan_khau_id` (`nhan_khau_id`);
 
 --
--- Index pour la table `ho_khau`
+-- Indexes for table `ho_khau`
 --
 ALTER TABLE `ho_khau`
   ADD PRIMARY KEY (`ho_khau_id`),
@@ -760,51 +762,51 @@ ALTER TABLE `ho_khau`
   ADD KEY `fk_chu_ho_nhan_khau` (`chu_ho_id`);
 
 --
--- Index pour la table `ho_khau_log`
+-- Indexes for table `ho_khau_log`
 --
 ALTER TABLE `ho_khau_log`
   ADD PRIMARY KEY (`log_ho_khau_id`),
   ADD KEY `fk_log_ho_khau_ho_khau` (`ho_khau_id`);
 
 --
--- Index pour la table `khai_tu`
+-- Indexes for table `khai_tu`
 --
 ALTER TABLE `khai_tu`
   ADD PRIMARY KEY (`khai_tu_id`);
 
 --
--- Index pour la table `khoan_dong_gop`
+-- Indexes for table `khoan_dong_gop`
 --
 ALTER TABLE `khoan_dong_gop`
   ADD PRIMARY KEY (`id_khoan_dong_gop`);
 
 --
--- Index pour la table `khoan_thu_phi`
+-- Indexes for table `khoan_thu_phi`
 --
 ALTER TABLE `khoan_thu_phi`
   ADD PRIMARY KEY (`id_khoan_thu_phi`);
 
 --
--- Index pour la table `ngan_quy_tang_thuong`
+-- Indexes for table `ngan_quy_tang_thuong`
 --
 ALTER TABLE `ngan_quy_tang_thuong`
-    ADD PRIMARY KEY (`id_ngan_quy_tang_thuong`);
+  ADD PRIMARY KEY (`id_ngan_quy_tang_thuong`);
 
 --
--- Index pour la table `nhan_khau`
+-- Indexes for table `nhan_khau`
 --
 ALTER TABLE `nhan_khau`
   ADD PRIMARY KEY (`nhan_khau_id`),
   ADD UNIQUE KEY `so_CMND` (`so_CMND`);
 
 --
--- Index pour la table `tam_tru`
+-- Indexes for table `tam_tru`
 --
 ALTER TABLE `tam_tru`
   ADD PRIMARY KEY (`tam_tru_id`);
 
 --
--- Index pour la table `tam_vang`
+-- Indexes for table `tam_vang`
 --
 ALTER TABLE `tam_vang`
   ADD PRIMARY KEY (`tam_vang_id`),
@@ -812,132 +814,132 @@ ALTER TABLE `tam_vang`
   ADD KEY `so_CMND` (`so_CMND`);
 
 --
--- Index pour la table `tang_thuong`
+-- Indexes for table `tang_thuong`
 --
 ALTER TABLE `tang_thuong`
-    ADD PRIMARY KEY (`so_ho_khau`,`hoc_ky`);
+  ADD PRIMARY KEY (`so_ho_khau`,`hoc_ky`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `dip_tang_thuong`
+-- AUTO_INCREMENT for table `dip_tang_thuong`
 --
 ALTER TABLE `dip_tang_thuong`
-    MODIFY `id_dip_tang_thuong` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_dip_tang_thuong` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT pour la table `dong_gop`
+-- AUTO_INCREMENT for table `dong_gop`
 --
 ALTER TABLE `dong_gop`
   MODIFY `id_dong_gop` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT pour la table `dong_phi`
+-- AUTO_INCREMENT for table `dong_phi`
 --
 ALTER TABLE `dong_phi`
   MODIFY `id_dong_phi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT pour la table `ho_khau`
+-- AUTO_INCREMENT for table `ho_khau`
 --
 ALTER TABLE `ho_khau`
   MODIFY `ho_khau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT pour la table `ho_khau_log`
+-- AUTO_INCREMENT for table `ho_khau_log`
 --
 ALTER TABLE `ho_khau_log`
   MODIFY `log_ho_khau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT pour la table `khai_tu`
+-- AUTO_INCREMENT for table `khai_tu`
 --
 ALTER TABLE `khai_tu`
   MODIFY `khai_tu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pour la table `khoan_dong_gop`
+-- AUTO_INCREMENT for table `khoan_dong_gop`
 --
 ALTER TABLE `khoan_dong_gop`
   MODIFY `id_khoan_dong_gop` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT pour la table `khoan_thu_phi`
+-- AUTO_INCREMENT for table `khoan_thu_phi`
 --
 ALTER TABLE `khoan_thu_phi`
   MODIFY `id_khoan_thu_phi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT pour la table `nhan_khau`
+-- AUTO_INCREMENT for table `nhan_khau`
 --
 ALTER TABLE `nhan_khau`
   MODIFY `nhan_khau_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
--- AUTO_INCREMENT pour la table `tam_vang`
+-- AUTO_INCREMENT for table `tam_vang`
 --
 ALTER TABLE `tam_vang`
   MODIFY `tam_vang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `chung_cu`
+-- Constraints for table `chung_cu`
 --
 ALTER TABLE `chung_cu`
   ADD CONSTRAINT `chung_cu_ibfk_1` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau` (`so_ho_khau`);
 
 --
--- Contraintes pour la table `dong_gop`
+-- Constraints for table `dong_gop`
 --
 ALTER TABLE `dong_gop`
   ADD CONSTRAINT `fk_dong_gop_1` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau` (`so_ho_khau`),
   ADD CONSTRAINT `fk_dong_gop_2` FOREIGN KEY (`id_khoan_dong_gop`) REFERENCES `khoan_dong_gop` (`id_khoan_dong_gop`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `dong_phi`
+-- Constraints for table `dong_phi`
 --
 ALTER TABLE `dong_phi`
   ADD CONSTRAINT `dong_phi_ibfk_1` FOREIGN KEY (`id_khoan_thu_phi`) REFERENCES `khoan_thu_phi` (`id_khoan_thu_phi`) ON DELETE CASCADE,
   ADD CONSTRAINT `dong_phi_ibfk_2` FOREIGN KEY (`so_ho_khau`) REFERENCES `ho_khau` (`so_ho_khau`);
 
 --
--- Contraintes pour la table `hoc_sinh`
+-- Constraints for table `hoc_sinh`
 --
 ALTER TABLE `hoc_sinh`
-    ADD CONSTRAINT `hoc_sinh_ibfk_1` FOREIGN KEY (`nhan_khau_id`) REFERENCES `nhan_khau` (`nhan_khau_id`);
+  ADD CONSTRAINT `hoc_sinh_ibfk_1` FOREIGN KEY (`nhan_khau_id`) REFERENCES `nhan_khau` (`nhan_khau_id`);
 
 --
--- Contraintes pour la table `ho_khau`
+-- Constraints for table `ho_khau`
 --
 ALTER TABLE `ho_khau`
   ADD CONSTRAINT `fk_chu_ho_nhan_khau` FOREIGN KEY (`chu_ho_id`) REFERENCES `nhan_khau` (`nhan_khau_id`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `ho_khau_log`
+-- Constraints for table `ho_khau_log`
 --
 ALTER TABLE `ho_khau_log`
   ADD CONSTRAINT `fk_log_ho_khau_ho_khau` FOREIGN KEY (`ho_khau_id`) REFERENCES `ho_khau` (`ho_khau_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `ho_khau_log_ibfk_1` FOREIGN KEY (`ho_khau_id`) REFERENCES `ho_khau` (`ho_khau_id`);
 
 --
--- Contraintes pour la table `tam_vang`
+-- Constraints for table `tam_vang`
 --
 ALTER TABLE `tam_vang`
   ADD CONSTRAINT `tam_vang_ibfk_1` FOREIGN KEY (`nhan_khau_id`) REFERENCES `nhan_khau` (`nhan_khau_id`),
