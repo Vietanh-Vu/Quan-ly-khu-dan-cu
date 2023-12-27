@@ -13,21 +13,21 @@ public class TangThuong implements DBActing{
     // Attribute
     private int idDipTangThuong;
     private String soHoKhau;
-    private String hocKy;
+    private String dipThuong;
     private Map<String, Integer> chiTietPhanQua = new HashMap<>();
     private boolean isDeleted = false;
 
     // Constructor
-    public TangThuong(int idDipTangThuong, String soHoKhau, String hocKy) {
+    public TangThuong(int idDipTangThuong, String soHoKhau, String dipThuong) {
         this.idDipTangThuong = idDipTangThuong;
         this.soHoKhau = soHoKhau;
-        this.hocKy = hocKy;
+        this.dipThuong = dipThuong;
     }
 
-    public TangThuong(int idDipTangThuong, String soHoKhau, String hocKy, Map<String, Integer> chiTietPhanQua, boolean isDeleted) {
+    public TangThuong(int idDipTangThuong, String soHoKhau, String dipThuong, Map<String, Integer> chiTietPhanQua, boolean isDeleted) {
         this.idDipTangThuong = idDipTangThuong;
         this.soHoKhau = soHoKhau;
-        this.hocKy = hocKy;
+        this.dipThuong = dipThuong;
         this.chiTietPhanQua = chiTietPhanQua;
         this.isDeleted = isDeleted;
     }
@@ -40,12 +40,12 @@ public class TangThuong implements DBActing{
             String insertQuery = "INSERT INTO `tang_thuong` (\n" +
                     "  `id_dip_tang_thuong`,\n" +
                     "  `so_ho_khau`,\n" +
-                    "  `hoc_ky`,\n" +
+                    "  `dip_thuong`,\n" +
                     "  `chi_tiet_phan_qua`\n" +
                     ") VALUES (\n" +
                     "   " + idDipTangThuong +
                     ", '" + soHoKhau +
-                    "', '" + hocKy +
+                    "', '" + dipThuong +
                     "', '" + WriteToJson.mapToJson(chiTietPhanQua) +
                     "');\n";
 
@@ -72,7 +72,7 @@ public class TangThuong implements DBActing{
                     "SET\n" +
                     " `chi_tiet_phan_qua` = '" + WriteToJson.mapToJson(chiTietPhanQua) +
                     "' WHERE\n" +
-                    "  `hoc_ky` = '" + hocKy +
+                    "  `dip_thuong` = '" + dipThuong +
                     "' AND `so_ho_khau` = '" + soHoKhau + "';";
 
             PreparedStatement edit = connection.prepareStatement(updateQuery);
@@ -96,7 +96,7 @@ public class TangThuong implements DBActing{
 
             String deleteQuery = "DELETE FROM `tang_thuong`\n" +
                     " WHERE\n" +
-                    "  `hoc_ky` = '" + hocKy +
+                    "  `dip_thuong` = '" + dipThuong +
                     "' AND `so_ho_khau` = '" + soHoKhau + "';";
 
             PreparedStatement edit = connection.prepareStatement(deleteQuery);
@@ -118,7 +118,7 @@ public class TangThuong implements DBActing{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TangThuong that = (TangThuong) o;
-        return Objects.equals(soHoKhau, that.soHoKhau) && Objects.equals(hocKy, that.hocKy);
+        return Objects.equals(soHoKhau, that.soHoKhau) && Objects.equals(dipThuong, that.dipThuong);
     }
 
     // Getter and Setter
@@ -139,12 +139,12 @@ public class TangThuong implements DBActing{
         this.soHoKhau = soHoKhau;
     }
 
-    public String getHocKy() {
-        return hocKy;
+    public String getDipThuong() {
+        return dipThuong;
     }
 
-    public void setHocKy(String hocKy) {
-        this.hocKy = hocKy;
+    public void setDipThuong(String dipThuong) {
+        this.dipThuong = dipThuong;
     }
 
     public Map<String, Integer> getChiTietPhanQua() {

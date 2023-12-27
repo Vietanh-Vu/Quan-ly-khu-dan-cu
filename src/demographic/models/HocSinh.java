@@ -11,21 +11,21 @@ public class HocSinh implements DBActing {
     private String truong = " ";
     private String lop = " ";
     private String thanhTich = " ";
-    private String hocKy;
+    private String dipThuong;
     private String hoTen;
     private String soHoKhau;
     private boolean isDeleted;
 
     // Constructor
-    public HocSinh(int nhanKhauId, String hocKy, String hoTen, String soHoKhau) {
+    public HocSinh(int nhanKhauId, String dipThuong, String hoTen, String soHoKhau) {
         this.nhanKhauId = nhanKhauId;
-        this.hocKy = hocKy;
+        this.dipThuong = dipThuong;
         this.hoTen = hoTen;
         this.soHoKhau = soHoKhau;
     }
 
-    public HocSinh(int nhanKhauId, String hocKy, String hoTen, String soHoKhau, String truong, String lop, String thanhTich, boolean isDeleted) {
-        this(nhanKhauId, hocKy, hoTen, soHoKhau);
+    public HocSinh(int nhanKhauId, String dipThuong, String hoTen, String soHoKhau, String truong, String lop, String thanhTich, boolean isDeleted) {
+        this(nhanKhauId, dipThuong, hoTen, soHoKhau);
         this.truong = truong;
         this.lop = lop;
         this.thanhTich = thanhTich;
@@ -43,7 +43,7 @@ public class HocSinh implements DBActing {
                     "  `truong`,\n" +
                     "  `lop`,\n" +
                     "  `thanh_tich`,\n" +
-                    "  `hoc_ky`,\n" +
+                    "  `dip_thuong`,\n" +
                     "  `ho_ten`,\n" +
                     "  `so_ho_khau`\n" +
                     ") VALUES (\n" +
@@ -51,7 +51,7 @@ public class HocSinh implements DBActing {
                     "', '" + truong +
                     "', '" + lop +
                     "', '" + thanhTich +
-                    "', '" + hocKy +
+                    "', '" + dipThuong +
                     "', '" + hoTen +
                     "', '" + soHoKhau +
                     "');\n";
@@ -83,7 +83,7 @@ public class HocSinh implements DBActing {
                     "', `thanh_tich` = '" + thanhTich +
                     "'WHERE\n" +
                     "`nhan_khau_id` = " + nhanKhauId +
-                    " AND `hoc_ky` = '" + hocKy + "';";
+                    " AND `dip_thuong` = '" + dipThuong + "';";
 
             PreparedStatement edit = connection.prepareStatement(updateQuery);
             int row = edit.executeUpdate();
@@ -112,7 +112,7 @@ public class HocSinh implements DBActing {
                     "`isDeleted` = " + (isDeleted ? 1 : 0) +
                     " WHERE\n" +
                     "`nhan_khau_id` = " + nhanKhauId +
-                    " AND `hoc_ky` = '" + hocKy + "';";
+                    " AND `dip_thuong` = '" + dipThuong + "';";
 
             PreparedStatement edit = connection.prepareStatement(updateQuery);
             int row = edit.executeUpdate();
@@ -161,12 +161,12 @@ public class HocSinh implements DBActing {
         this.thanhTich = thanhTich;
     }
 
-    public String getHocKy() {
-        return hocKy;
+    public String getDipThuong() {
+        return dipThuong;
     }
 
-    public void setHocKy(String hocKy) {
-        this.hocKy = hocKy;
+    public void setDipThuong(String dipThuong) {
+        this.dipThuong = dipThuong;
     }
 
     public String getHoTen() {

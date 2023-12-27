@@ -27,7 +27,7 @@ public class ListOfDipTangThuong{
                 DipTangThuong dipTangThuong = new DipTangThuong(
                         resultSet.getInt("id_dip_tang_thuong"),
                         resultSet.getString("thanh_tich"),
-                        resultSet.getString("hoc_ky"),
+                        resultSet.getString("dip_thuong"),
                         resultSet.getString("ngay_tang_thuong"),
                         resultSet.getInt("tong_so_tien"),
                         ReadFromJson.jsonToMap(resultSet.getString("chi_tiet")),
@@ -44,22 +44,22 @@ public class ListOfDipTangThuong{
         }
     }
 
-    // Search by hocKy
-    public List<DipTangThuong> searchByHocKy(String hocKy) {
+    // Search by DipThuong
+    public List<DipTangThuong> searchByDipThuong(String DipThuong) {
         List<DipTangThuong> filteredList = new ArrayList<>();
         for (DipTangThuong dipTangThuong: dipTangThuongList) {
-            if (dipTangThuong.getHocKy().toLowerCase()
-                    .contains(hocKy.toLowerCase()) && !dipTangThuong.isDeleted()) {
+            if (dipTangThuong.getDipThuong().toLowerCase()
+                    .contains(DipThuong.toLowerCase()) && !dipTangThuong.isDeleted()) {
                 filteredList.add(dipTangThuong);
             }
         }
         return filteredList;
     }
 
-    // Method to  DipTangThuong base on hocKy and thanhTich
-    public DipTangThuong getListOfDipTangThuongByHocKyAndThanhTich(String hocKy, String thanhTich) {
+    // Method to  DipTangThuong base on DipThuong and thanhTich
+    public DipTangThuong getListOfDipTangThuongByDipThuongAndThanhTich(String DipThuong, String thanhTich) {
         for (DipTangThuong dipTangThuong: dipTangThuongList) {
-            if (dipTangThuong.getHocKy().contains(hocKy)
+            if (dipTangThuong.getDipThuong().contains(DipThuong)
                     && dipTangThuong.getThanhTich().contains(thanhTich) && !dipTangThuong.isDeleted()) {
                 return dipTangThuong;
             }

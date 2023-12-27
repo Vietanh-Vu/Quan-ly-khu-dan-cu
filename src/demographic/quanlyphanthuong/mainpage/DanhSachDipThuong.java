@@ -24,7 +24,7 @@ public class DanhSachDipThuong extends javax.swing.JFrame {
     private ListOfDipTangThuong listOfDipTangThuong = new ListOfDipTangThuong();
     private DipTangThuong dipTangThuong = null;
     private int dipThuongID = -1;
-    private String HocKy = "";
+    private String dipThuong = "";
     private String thanhTich = "";
     public User user;
     /**
@@ -316,9 +316,9 @@ public class DanhSachDipThuong extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)tDipThuong.getModel();
         int indexRow = tDipThuong.getSelectedRow();
         dipThuongID = Integer.parseInt(model.getValueAt(indexRow, 0).toString());
-        HocKy = String.valueOf(model.getValueAt(indexRow, 1).toString());
+        dipThuong = String.valueOf(model.getValueAt(indexRow, 1).toString());
         thanhTich = String.valueOf(model.getValueAt(indexRow, 3).toString());
-        dipTangThuong = listOfDipTangThuong.getListOfDipTangThuongByHocKyAndThanhTich(HocKy, thanhTich);
+        dipTangThuong = listOfDipTangThuong.getListOfDipTangThuongByDipThuongAndThanhTich(dipThuong, thanhTich);
     }
 
     private void tfDipThuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDipThuongActionPerformed
@@ -328,7 +328,7 @@ public class DanhSachDipThuong extends javax.swing.JFrame {
     private void btnTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimMouseClicked
         // TODO add your handling code here:
         String dipThuong = tfDipThuong.getText();
-        listOfDipTangThuong.setDipTangThuongList(listOfDipTangThuong.searchByHocKy(dipThuong));
+        listOfDipTangThuong.setDipTangThuongList(listOfDipTangThuong.searchByDipThuong(dipThuong));
         display();
     }//GEN-LAST:event_btnTimMouseClicked
 
@@ -340,7 +340,7 @@ public class DanhSachDipThuong extends javax.swing.JFrame {
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
         //kiểm tra xem chọn dịp thưởng chưa
-        if(dipThuongID == -1 || dipTangThuong == null || HocKy.equals("")){
+        if(dipThuongID == -1 || dipTangThuong == null || DipThuong.equals("")){
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một dịp thưởng trong bảng\n"
                 + "để xoá.");
             return;
@@ -369,7 +369,7 @@ public class DanhSachDipThuong extends javax.swing.JFrame {
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
         // TODO add your handling code here:
         //kiểm tra xem chọn dịp thưởng chưa
-        if(dipThuongID == -1 || dipTangThuong == null || HocKy.equals("")){
+        if(dipThuongID == -1 || dipTangThuong == null || DipThuong.equals("")){
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một dịp thưởng trong bảng\n"
                 + "để sửa thông tin về dịp thưởng đó.");
             return;
@@ -433,7 +433,7 @@ public class DanhSachDipThuong extends javax.swing.JFrame {
 
         for(DipTangThuong dipTangThuong: listOfDipTangThuong.getNotDeletedDipTangThuong()){
             String data[] = {Integer.toString(dipTangThuong.getIdDipTangTuong()),
-                dipTangThuong.getHocKy(), dipTangThuong.getNgayTangThuong(),
+                dipTangThuong.getDipThuong(), dipTangThuong.getNgayTangThuong(),
                 dipTangThuong.getThanhTich(), WriteMapToText.writeMapToText(dipTangThuong.getChiTiet()),
                 Integer.toString(dipTangThuong.getTongSoPhanQua()),
                 dipTangThuong.getTongSoTien() + " VND"

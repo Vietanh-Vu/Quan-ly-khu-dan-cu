@@ -74,7 +74,7 @@ public class SuaDipThuong extends javax.swing.JFrame {
         lbChiTiet.setForeground(new java.awt.Color(0, 102, 102));
         lbChiTiet.setText("Chi tiết");
 
-        tfDipThuong.setText(dipTangThuong.getHocKy());
+        tfDipThuong.setText(dipTangThuong.getDipThuong());
 
         btnLuu.setBackground(new java.awt.Color(0, 51, 51));
         btnLuu.setForeground(new java.awt.Color(255, 255, 255));
@@ -243,7 +243,7 @@ public class SuaDipThuong extends javax.swing.JFrame {
         }
 
         dipTangThuong.setThanhTich(thanhTich);
-        dipTangThuong.setHocKy(dipThuong);
+        dipTangThuong.setDipThuong(dipThuong);
         dipTangThuong.setChiTiet(ReadMapFromText.readMapFromText(chiTiet));
         boolean status = dipTangThuong.editRow();
         if (status) {

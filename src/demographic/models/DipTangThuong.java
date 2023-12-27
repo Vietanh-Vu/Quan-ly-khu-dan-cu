@@ -15,7 +15,7 @@ public class DipTangThuong implements DBActing {
     // Attribute
     private int idDipTangThuong;
     private String thanhTich;
-    private String hocKy;
+    private String dipThuong;
     private String ngayTangThuong;
     private int tongSoTien;
     private Map<String, Integer> chiTiet = new HashMap<>();
@@ -25,10 +25,10 @@ public class DipTangThuong implements DBActing {
     private int tongSoPhanQua;
 
     // Constructor
-    public DipTangThuong(String thanhTich, String hocKy,
+    public DipTangThuong(String thanhTich, String dipThuong,
                          Map<String, Integer> chiTiet) {
-        this.thanhTich = thanhTich.isEmpty() ? hocKy : thanhTich;
-        this.hocKy = hocKy;
+        this.thanhTich = thanhTich;
+        this.dipThuong = dipThuong;
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.ngayTangThuong = currentDate.format(formatter);
@@ -38,12 +38,12 @@ public class DipTangThuong implements DBActing {
         calculateTongSoTien();
     }
 
-    public DipTangThuong(int idDipTangThuong, String thanhTich, String hocKy, String ngayTangThuong,
+    public DipTangThuong(int idDipTangThuong, String thanhTich, String dipThuong, String ngayTangThuong,
                          int tongSoTien, Map<String, Integer> chiTiet, boolean isDeleted,
                          ListOfHocSinh listOfHocSinh) {
         this.idDipTangThuong = idDipTangThuong;
         this.thanhTich = thanhTich;
-        this.hocKy = hocKy;
+        this.dipThuong = dipThuong;
         this.ngayTangThuong = ngayTangThuong;
         this.tongSoTien = tongSoTien;
         this.chiTiet = chiTiet;
@@ -74,13 +74,13 @@ public class DipTangThuong implements DBActing {
 
             String insertQuery = "INSERT INTO dip_tang_thuong (\n" +
                     "  `thanh_tich`,\n" +
-                    "  `hoc_ky`,\n" +
+                    "  `dip_thuong`,\n" +
                     "  `ngay_tang_thuong`,\n" +
                     "  `chi_tiet`,\n" +
                     "  `tong_so_tien`\n" +
                     ") VALUES (\n" +
                     "  '" + thanhTich +
-                    "', '" + hocKy +
+                    "', '" + dipThuong +
                     "', '" + ngayTangThuong +
                     "',  '" + WriteToJson.mapToJson(chiTiet) +
                     "',  " + tongSoTien +
@@ -90,7 +90,7 @@ public class DipTangThuong implements DBActing {
             int row = add.executeUpdate();
 
             String selectQuery = "SELECT * FROM dip_tang_thuong WHERE\n" + "`isDeleted` = 0 AND " +
-                    " `thanh_tich` = '" + thanhTich + "' AND `hoc_ky` = '" + hocKy + "';";
+                    " `thanh_tich` = '" + thanhTich + "' AND `dip_thuong` = '" + dipThuong + "';";
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(selectQuery);
@@ -98,12 +98,12 @@ public class DipTangThuong implements DBActing {
             resultSet.next();
             idDipTangThuong = resultSet.getInt("id_dip_tang_thuong");
 
-            nganQuyTangThuong = new NganQuyTangThuong(idDipTangThuong, tongSoTien, "Thưởng " + thanhTich + " học kỳ " + hocKy);
+            nganQuyTangThuong = new NganQuyTangThuong(idDipTangThuong, tongSoTien, "Thưởng " + thanhTich + " học kỳ " + dipThuong);
             nganQuyTangThuong.addNewRow();
 
             for (HocSinh hocSinh: listOfHocSinh) {
                 ListOfTangThuong listOfTangThuong = new ListOfTangThuong();
-                TangThuong tangThuong = new TangThuong(idDipTangThuong, hocSinh.getSoHoKhau(), hocKy);
+                TangThuong tangThuong = new TangThuong(idDipTangThuong, hocSinh.getSoHoKhau(), dipThuong);
                 int index = listOfTangThuong.getTangThuongList().indexOf(tangThuong);
                 if (index >= 0) {
                     tangThuong = listOfTangThuong.getTangThuongList().get(index);
@@ -147,7 +147,7 @@ public class DipTangThuong implements DBActing {
             String updateQuery = "UPDATE `dip_tang_thuong`\n" +
                     "SET\n" +
                     "  `thanh_tich` = '" + thanhTich +
-                    "', `hoc_ky` = '" + hocKy +
+                    "', `dip_thuong` = '" + dipThuong +
                     "', `tong_so_tien` = " + tongSoTien +
                     ", `chi_tiet` = '" + WriteToJson.mapToJson(chiTiet) +
                     "' WHERE\n" +
@@ -156,7 +156,7 @@ public class DipTangThuong implements DBActing {
             PreparedStatement edit = connection.prepareStatement(updateQuery);
             int row = edit.executeUpdate();
 
-            nganQuyTangThuong.setChiTiet("Thuong hoc sinh " + thanhTich + " hoc ky " + hocKy);
+            nganQuyTangThuong.setChiTiet("Thuong hoc sinh " + thanhTich + " hoc ky " + dipThuong);
             nganQuyTangThuong.setSoTienThayDoi(tongSoTien);
             nganQuyTangThuong.editRow();
 
@@ -167,7 +167,7 @@ public class DipTangThuong implements DBActing {
 
             for (HocSinh hocSinh: listOfHocSinh) {
                 listOfTangThuong = new ListOfTangThuong();
-                TangThuong tangThuong = new TangThuong(idDipTangThuong, hocSinh.getSoHoKhau(), hocKy);
+                TangThuong tangThuong = new TangThuong(idDipTangThuong, hocSinh.getSoHoKhau(), dipThuong);
                 int index = listOfTangThuong.getTangThuongList().indexOf(tangThuong);
                 if (index >= 0) {
                     tangThuong = listOfTangThuong.getTangThuongList().get(index);
@@ -203,7 +203,7 @@ public class DipTangThuong implements DBActing {
 
             String updateQuery = "UPDATE `dip_tang_thuong`\n" +
                     "SET\n" +
-                    "  `hoc_ky` = '" + idDipTangThuong +
+                    "  `dip_thuong` = '" + idDipTangThuong +
                     "' `isDeleted` = " + (isDeleted ? 1 : 0) +
                     " WHERE\n" +
                     "  `id_dip_tang_thuong` = " + idDipTangThuong + ";";
@@ -232,12 +232,12 @@ public class DipTangThuong implements DBActing {
     // Filter
     private List<HocSinh> filter(ListOfHocSinh listOfHocSinh) {
         List<HocSinh> hocSinhList;
-        if (hocKy.matches("^\\d{5}$")) {
+        if (dipThuong.matches("^\\d{5}$")) {
             hocSinhList = listOfHocSinh.
-                    getListOfHocSinhByHocKyAndThanhTich(hocKy, thanhTich);
+                    getListOfHocSinhByDipThuongAndThanhTich(dipThuong, thanhTich);
         } else {
             hocSinhList = listOfHocSinh.
-                    getListOfHocSinhByHocKy(hocKy);
+                    getListOfHocSinhByDipThuong(dipThuong);
         }
         return hocSinhList;
     }
@@ -260,12 +260,12 @@ public class DipTangThuong implements DBActing {
         this.thanhTich = thanhTich;
     }
 
-    public String getHocKy() {
-        return hocKy;
+    public String getDipThuong() {
+        return dipThuong;
     }
 
-    public void setHocKy(String hocKy) {
-        this.hocKy = hocKy;
+    public void setDipThuong(String dipThuong) {
+        this.dipThuong = dipThuong;
     }
 
     public String getNgayTangThuong() {
