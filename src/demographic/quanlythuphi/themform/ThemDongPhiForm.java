@@ -184,8 +184,7 @@ public class ThemDongPhiForm extends javax.swing.JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Lỗi\n"
-                        + "Vui lòng kiểm tra lại trường thông tin ngày tháng theo định dạng yyyy-mm-dd\n"
-                        + "Hoặc điền đủ các trường thông tin cần thiết");
+                        + "Vui lòng kiểm tra lại trường thông tin, có thể do thông tin bạn nhập chưa chính xác");
             }
         }
     }//GEN-LAST:event_btnLuuMouseClicked

@@ -734,7 +734,7 @@ public class SuaXoaHoKhauForm extends javax.swing.JFrame {
             st = conn.createStatement();
             String sql ="SELECT nhan_khau_id as 'ID', so_CMND as 'Số CMND', ho_ten as 'Họ và tên', gioi_tinh as 'Giới tính', ngay_sinh as 'Ngày sinh', nghe_nghiep as 'Nghề nghiệp', "
                     + "quan_he_voi_chu_ho as 'Quan hệ với chủ hộ', qua_doi as 'Qua đời' FROM nhan_khau"
-                    + " WHERE so_ho_khau = \'" + hoKhau.getSoHoKhau() + "\';";
+                    + " WHERE so_ho_khau = \'" + hoKhau.getSoHoKhau() + "\' AND deleted = 0;";
             rs = st.executeQuery(sql);
             tNhanKhau.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
